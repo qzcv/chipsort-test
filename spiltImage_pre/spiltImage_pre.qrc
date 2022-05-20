@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>spiltImage_pre_zh.qm</file>
+        <file>spiltImage_pre_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>spiltImage_pre.ini</file>
+        <file>spiltImage_pre.ver</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>pinLength1_zh.qm</file>
+        <file>pinLength1_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>pinLength1.ini</file>
+        <file>pinLength1.ver</file>
+    </qresource>
+</RCC>

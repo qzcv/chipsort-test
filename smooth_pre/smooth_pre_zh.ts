@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_CN">
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Empty image!</source>
+        <translation>无图片传入！</translation>
+    </message>
+    <message>
+        <source>Smooth succeed!</source>
+        <translation>平滑成功！</translation>
+    </message>
+</context>
+<context>
+    <name>smooth_preWdg</name>
+    <message>
+        <source>smooth_preWdg</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>滤波算法</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>高斯滤波</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>均值滤波</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>中值滤波</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>标准方差</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>对比度</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>参数1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>参数2</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>参数3</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>参数4</source>
+        <translation></translation>
+    </message>
+</context>
+</TS>

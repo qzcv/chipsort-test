@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>transform_pre_zh.qm</file>
+        <file>transform_pre_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>transform_pre.ini</file>
+        <file>transform_pre.ver</file>
+    </qresource>
+</RCC>

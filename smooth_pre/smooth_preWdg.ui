@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>smooth_preWdg</class>
+ <widget class="QWidget" name="smooth_preWdg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>188</width>
+    <height>176</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>smooth_preWdg</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>滤波算法</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="cb_filtertype">
+       <item>
+        <property name="text">
+         <string>高斯滤波</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>均值滤波</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>中值滤波</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>标准方差</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>对比度</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lb_param1">
+       <property name="text">
+        <string>参数1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QSpinBox" name="sp_param1"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lb_param2">
+       <property name="text">
+        <string>参数2</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QSpinBox" name="sp_param2"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lb_param3">
+       <property name="text">
+        <string>参数3</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QSpinBox" name="sp_param3"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="lb_param4">
+       <property name="text">
+        <string>参数4</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QDoubleSpinBox" name="sp_param4">
+       <property name="decimals">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <double>19.899999999999999</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>1</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>4</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

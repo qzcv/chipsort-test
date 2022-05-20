@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OrientEditClass</class>
+ <widget class="QDialog" name="OrientEditClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>329</width>
+    <height>337</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Orient Edit</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0,0">
+   <item>
+    <spacer name="verticalSpacer_4">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QCheckBox" name="cb_useDir">
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>启用方向输出：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>角度属性</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_2">
+         <property name="leftMargin">
+          <number>11</number>
+         </property>
+         <property name="topMargin">
+          <number>11</number>
+         </property>
+         <property name="rightMargin">
+          <number>11</number>
+         </property>
+         <property name="bottomMargin">
+          <number>11</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QGroupBox" name="grp_dir">
+           <property name="title">
+            <string/>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_7">
+            <item row="1" column="1">
+             <widget class="QComboBox" name="cb_pin2">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string>None</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out4</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out5</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out6</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out7</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out8</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out9</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out10</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out11</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out12</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out13</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out14</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out15</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out16</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out17</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out18</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out19</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out20</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out21</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out22</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out23</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out24</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out25</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out26</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out27</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out28</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out29</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out30</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out31</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="cb_defaultSig">
+              <property name="layoutDirection">
+               <enum>Qt::RightToLeft</enum>
+              </property>
+              <property name="text">
+               <string>使用默认信号输出</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QRadioButton" name="rb_2D">
+              <property name="text">
+               <string>两方向</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QRadioButton" name="rb_4D">
+              <property name="text">
+               <string>四方向</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="cb_inverse">
+              <property name="layoutDirection">
+               <enum>Qt::RightToLeft</enum>
+              </property>
+              <property name="text">
+               <string>反向</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>左/Pin-1：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="cb_pin1">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string>None</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out4</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out5</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out6</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out7</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out8</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out9</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out10</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out11</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out12</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out13</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out14</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out15</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out16</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out17</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out18</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out19</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out20</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out21</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out22</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out23</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out24</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out25</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out26</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out27</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out28</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out29</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out30</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>out31</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>右/Pin-2：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QCheckBox" name="cb_showAngle">
+              <property name="layoutDirection">
+               <enum>Qt::RightToLeft</enum>
+              </property>
+              <property name="text">
+               <string>显示角度</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="0">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <attribute name="title">
+       <string>信号编辑</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_3">
+         <property name="leftMargin">
+          <number>11</number>
+         </property>
+         <property name="topMargin">
+          <number>11</number>
+         </property>
+         <property name="rightMargin">
+          <number>11</number>
+         </property>
+         <property name="bottomMargin">
+          <number>11</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QGroupBox" name="groupBox_4">
+           <property name="title">
+            <string/>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>90度</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="sp_sig0_1">
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::UpDownArrows</enum>
+              </property>
+              <property name="maximum">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0" rowspan="2">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>180度</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" rowspan="2">
+             <widget class="QSpinBox" name="sp_sig0_2">
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::UpDownArrows</enum>
+              </property>
+              <property name="maximum">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>270度</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>0度</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QSpinBox" name="sp_sig0_0">
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::UpDownArrows</enum>
+              </property>
+              <property name="maximum">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QSpinBox" name="sp_sig1_1">
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::UpDownArrows</enum>
+              </property>
+              <property name="maximum">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QSpinBox" name="sp_sig1_0">
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::UpDownArrows</enum>
+              </property>
+              <property name="maximum">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2" rowspan="2">
+             <widget class="QSpinBox" name="sp_sig1_2">
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::UpDownArrows</enum>
+              </property>
+              <property name="maximum">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QSpinBox" name="sp_sig0_3">
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::UpDownArrows</enum>
+              </property>
+              <property name="maximum">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QSpinBox" name="sp_sig1_3">
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::UpDownArrows</enum>
+              </property>
+              <property name="maximum">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0" colspan="3">
+             <widget class="QCheckBox" name="cb_defaultEdit">
+              <property name="layoutDirection">
+               <enum>Qt::RightToLeft</enum>
+              </property>
+              <property name="text">
+               <string>使用默认信号编辑</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="0">
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="okButton">
+       <property name="text">
+        <string>确认</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="text">
+        <string>取消</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>okButton</sender>
+   <signal>clicked()</signal>
+   <receiver>OrientEditClass</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>206</x>
+     <y>288</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>231</x>
+     <y>300</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cancelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>OrientEditClass</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>294</x>
+     <y>277</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>324</x>
+     <y>253</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

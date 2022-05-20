@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>calib3D5S_new_en.qm</file>
+        <file>calib3D5S_new_zh.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>calib3D5S_new.ini</file>
+        <file>calib3D5S_new.ver</file>
+    </qresource>
+    <qresource prefix="/calib3D5S">
+        <file>dim.png</file>
+    </qresource>
+</RCC>

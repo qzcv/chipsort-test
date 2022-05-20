@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>polar_zh.qm</file>
+        <file>polar_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>polar.ini</file>
+        <file>polar.ver</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>edgeLocation_zh.qm</file>
+        <file>edgeLocation_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>edgeLocation.ini</file>
+        <file>edgeLocation.ver</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>pinWarp_zh.qm</file>
+        <file>pinWarp_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>pinWarp.ini</file>
+        <file>pinWarp.ver</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>orientArea_zh.qm</file>
+        <file>orientArea_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>orientArea.ini</file>
+        <file>orientArea.ver</file>
+    </qresource>
+</RCC>

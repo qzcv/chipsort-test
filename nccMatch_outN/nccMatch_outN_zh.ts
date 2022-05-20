@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_CN">
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Empty image!</source>
+        <translation>无图片传入！</translation>
+    </message>
+    <message>
+        <source>template%1 unset!</source>
+        <translation>模板%1未设置！</translation>
+    </message>
+    <message>
+        <source>The template%1 of outArea is unset!</source>
+        <translation>传出区域模板%1未设置！</translation>
+    </message>
+    <message>
+        <source>template%1:</source>
+        <translation>模板%1：</translation>
+    </message>
+    <message>
+        <source>detected failed</source>
+        <translation>识别失败</translation>
+    </message>
+    <message>
+        <source>detection result:%1</source>
+        <translation>识别结果：%1</translation>
+    </message>
+    <message>
+        <source>accepted value: </source>
+        <translation>接受值：</translation>
+    </message>
+    <message>
+        <source>offset: </source>
+        <translation>偏移值：</translation>
+    </message>
+    <message>
+        <source>relative angle:</source>
+        <translation>相对角度：</translation>
+    </message>
+    <message>
+        <source>Orthogonal angle:</source>
+        <translation>正交角度：</translation>
+    </message>
+    <message>
+        <source>template%1 detected failed</source>
+        <translation>模板%1识别失败</translation>
+    </message>
+    <message>
+        <source>template%1 detected successfully</source>
+        <translation>模板%1识别成功</translation>
+    </message>
+</context>
+<context>
+    <name>nccMatch_outNWdg</name>
+    <message>
+        <source>nccMatch_outNWdg</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>选取模版</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>确认选取</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>取消选取</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>仅选取搜索区域</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>使能</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>相似度：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>搜寻角度：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>测后显示Roi</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>测后显示排除</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>排除区域：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>旋转矩形</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>圆形</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>绘制排除区域</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>确认</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>取消</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>误差范围</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>相对角度：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>接受值: </source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>偏移值：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>正交角度：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>传出区域</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>启用传出区域</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>显示传出区域</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>填充区域</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>选取传出模版</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>目标区域：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>面积：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>阈值测试</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>开操作：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>闭操作：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>temp%1</source>
+        <translation>模板%1</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>警告</translation>
+    </message>
+    <message>
+        <source>The template of outArea is unset!</source>
+        <translation>传出区域模板未设置！</translation>
+    </message>
+    <message>
+        <source>warning</source>
+        <translation>警告</translation>
+    </message>
+    <message>
+        <source>The exclusion area exceeds 90 % of the template area</source>
+        <translation>排除区域面积超过模板区域面积的90%</translation>
+    </message>
+    <message>
+        <source> change from %1 to %2</source>
+        <translation>从%1改变为%2</translation>
+    </message>
+    <message>
+        <source> min val</source>
+        <translation>最小值</translation>
+    </message>
+    <message>
+        <source> max val</source>
+        <translation>最大值</translation>
+    </message>
+    <message>
+        <source>threshold</source>
+        <translation>阈值</translation>
+    </message>
+</context>
+</TS>

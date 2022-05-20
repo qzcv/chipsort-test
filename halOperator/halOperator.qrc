@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>halOperator_en.qm</file>
+        <file>halOperator_zh.qm</file>
+    </qresource>
+	<qresource prefix="/info">
+        <file>halOperator.ini</file>
+        <file>halOperator.ver</file>
+    </qresource>
+</RCC>

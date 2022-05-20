@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>pinDetect1_zh.qm</file>
+        <file>pinDetect1_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>pinDetect1.ini</file>
+        <file>pinDetect1.ver</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>standLocationWdg</class>
+ <widget class="QWidget" name="standLocationWdg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>417</width>
+    <height>473</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>standLocationWdg</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_4">
+   <item row="0" column="1">
+    <spacer name="horizontalSpacer_17">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>1</width>
+       <height>17</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>属性</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <property name="leftMargin">
+         <number>3</number>
+        </property>
+        <property name="topMargin">
+         <number>3</number>
+        </property>
+        <property name="rightMargin">
+         <number>3</number>
+        </property>
+        <property name="bottomMargin">
+         <number>3</number>
+        </property>
+        <property name="spacing">
+         <number>3</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="bt_selectRoi">
+          <property name="text">
+           <string>选择区域</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>管脚数目：</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_21">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>组1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="sp_grp1pinNum">
+            <property name="maximum">
+             <number>15</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>组2</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="sp_grp2pinNum">
+            <property name="maximum">
+             <number>15</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0">
+         <widget class="QRadioButton" name="rb_upDw">
+          <property name="text">
+           <string>上下站高</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QRadioButton" name="rb_lfRt">
+          <property name="text">
+           <string>左右站高</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>3</number>
+         </property>
+         <widget class="QWidget" name="tab">
+          <attribute name="title">
+           <string>上边</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_9"/>
+         </widget>
+         <widget class="QWidget" name="tab_2">
+          <attribute name="title">
+           <string>下边</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_10"/>
+         </widget>
+         <widget class="QWidget" name="tab_3">
+          <attribute name="title">
+           <string>左边</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_11"/>
+         </widget>
+         <widget class="QWidget" name="tab_4">
+          <attribute name="title">
+           <string>右边</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_12"/>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QStackedWidget" name="stackedWidget">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="page">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <property name="leftMargin">
+            <number>1</number>
+           </property>
+           <property name="topMargin">
+            <number>1</number>
+           </property>
+           <property name="rightMargin">
+            <number>1</number>
+           </property>
+           <property name="bottomMargin">
+            <number>1</number>
+           </property>
+           <property name="spacing">
+            <number>1</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="groupBox_9">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_25">
+                <property name="text">
+                 <string>灰度差异:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QSpinBox" name="sp_standoffOffset">
+                <property name="buttonSymbols">
+                 <enum>QAbstractSpinBox::UpDownArrows</enum>
+                </property>
+                <property name="minimum">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QSpinBox" name="sp_minArea">
+                <property name="buttonSymbols">
+                 <enum>QAbstractSpinBox::UpDownArrows</enum>
+                </property>
+                <property name="maximum">
+                 <number>9000</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="label_27">
+                <property name="text">
+                 <string>最小面积:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QLabel" name="label_9">
+                <property name="text">
+                 <string>分割阈值：</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QSpinBox" name="sp_grayval">
+                <property name="buttonSymbols">
+                 <enum>QAbstractSpinBox::UpDownArrows</enum>
+                </property>
+                <property name="maximum">
+                 <number>255</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QSpinBox" name="sp_minGrayDiff">
+                <property name="buttonSymbols">
+                 <enum>QAbstractSpinBox::UpDownArrows</enum>
+                </property>
+                <property name="minimum">
+                 <number>5</number>
+                </property>
+                <property name="maximum">
+                 <number>200</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_43">
+                <property name="toolTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>站高偏移：</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="bt_advance">
+         <property name="text">
+          <string>高级设置</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="grp_advance">
+       <property name="title">
+        <string/>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="1">
+         <widget class="QDoubleSpinBox" name="dsp_packageOffset">
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::UpDownArrows</enum>
+          </property>
+          <property name="decimals">
+           <number>3</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3" colspan="2">
+         <widget class="QPushButton" name="bt_corrTable">
+          <property name="text">
+           <string>补偿参数设置</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_44">
+          <property name="toolTip">
+           <string/>
+          </property>
+          <property name="text">
+           <string>塑封长度补偿</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="cb_LMS">
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="text">
+           <string>LMS</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QDoubleSpinBox" name="dsp_LMSFactor">
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="minimum">
+           <double>1.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>3.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.500000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTabWidget" name="tabWidget_2">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="tab_5">
+        <attribute name="title">
+         <string>管脚误差范围</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_15">
+         <property name="leftMargin">
+          <number>3</number>
+         </property>
+         <property name="topMargin">
+          <number>3</number>
+         </property>
+         <property name="rightMargin">
+          <number>3</number>
+         </property>
+         <property name="bottomMargin">
+          <number>3</number>
+         </property>
+         <property name="spacing">
+          <number>3</number>
+         </property>
+         <item row="1" column="0">
+          <widget class="QFrame" name="frame_2">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="cb_coplanar">
+              <property name="layoutDirection">
+               <enum>Qt::RightToLeft</enum>
+              </property>
+              <property name="text">
+               <string>共面性差异：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="cb_standoff">
+              <property name="layoutDirection">
+               <enum>Qt::RightToLeft</enum>
+              </property>
+              <property name="text">
+               <string>站立度：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="cb_pinWidth">
+              <property name="layoutDirection">
+               <enum>Qt::RightToLeft</enum>
+              </property>
+              <property name="text">
+               <string>管脚宽度：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="cb_pinInterval">
+              <property name="layoutDirection">
+               <enum>Qt::RightToLeft</enum>
+              </property>
+              <property name="text">
+               <string>管脚间距：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="cb_standoffDiff">
+              <property name="layoutDirection">
+               <enum>Qt::RightToLeft</enum>
+              </property>
+              <property name="text">
+               <string>共线性差异：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="bt_table">
+              <property name="text">
+               <string>管脚参数设置</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>18</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_CN">
+<context>
+    <name>QObject</name>
+    <message>
+        <source>mid</source>
+        <translation>中</translation>
+    </message>
+    <message>
+        <source>left</source>
+        <translation>左</translation>
+    </message>
+    <message>
+        <source>right</source>
+        <translation>右</translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation>上</translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation>下</translation>
+    </message>
+    <message>
+        <source>%1:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Image Size= %1      Pixel Size= %2</source>
+        <translation>图像尺寸= %1      像素大小= %2</translation>
+    </message>
+    <message>
+        <source> Failed to calculate the pixel size of region %1
+</source>
+        <translation> 区域%1像素大小计算失败
+</translation>
+    </message>
+    <message>
+        <source>%1&apos;s angle = %2
+</source>
+        <translation>%1 角度 = %2
+</translation>
+    </message>
+    <message>
+        <source>Image offset= %1      Actual offset= %2</source>
+        <translation>图像槽深= %1      识别槽深= %2</translation>
+    </message>
+    <message>
+        <source>projected scale= %1</source>
+        <translation>投影比例= %1</translation>
+    </message>
+    <message>
+        <source> Failed to calculate the projected scale of region %1 </source>
+        <translation> 区域%1投影比例失败 </translation>
+    </message>
+    <message>
+        <source>Calibration is successful!</source>
+        <translation>标定成功!</translation>
+    </message>
+    <message>
+        <source>Calibration is failed</source>
+        <translation>标定失败</translation>
+    </message>
+</context>
+<context>
+    <name>calib3D5SWdg</name>
+    <message>
+        <source>calib3D5SWdg</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>像素大小</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>实际尺寸/mm</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>图像尺寸</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>H</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>325.02</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>L1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>L2</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>L3</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>L4</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>横向H</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>纵向H</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>立体角度</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>A4</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>A2</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>A1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>A3</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>投影比例</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>S1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>S2</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>实际槽深</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>图像槽深</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>识别槽深</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>S3</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>S4</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>识别区域</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>确定</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>取消</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>slot%1</source>
+        <translation>槽%1</translation>
+    </message>
+    <message>
+        <source>拍照</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>标定</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Calibration is successful!</source>
+        <translation>标定成功!</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Calibration is failed!</source>
+        <translation>标定失败!</translation>
+    </message>
+</context>
+</TS>

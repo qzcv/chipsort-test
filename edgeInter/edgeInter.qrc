@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>edgeInter_zh.qm</file>
+        <file>edgeInter_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>edgeInter.ini</file>
+        <file>edgeInter.ver</file>
+    </qresource>
+</RCC>

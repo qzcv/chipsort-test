@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>edgeWarp_zh.qm</file>
+        <file>edgeWarp_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>edgeWarp.ini</file>
+        <file>edgeWarp.ver</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>angleFilter_zh.qm</file>
+        <file>angleFilter_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>angleFilter.ini</file>
+        <file>angleFilter.ver</file>
+    </qresource>
+</RCC>

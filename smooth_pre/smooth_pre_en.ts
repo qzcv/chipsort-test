@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="en_US">
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Empty image!</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Smooth succeed!</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>smooth_preWdg</name>
+    <message>
+        <source>smooth_preWdg</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>滤波算法</source>
+        <translation>Filter</translation>
+    </message>
+    <message>
+        <source>高斯滤波</source>
+        <translation>Gauss</translation>
+    </message>
+    <message>
+        <source>均值滤波</source>
+        <translation>Mean</translation>
+    </message>
+    <message>
+        <source>中值滤波</source>
+        <translation>Median</translation>
+    </message>
+    <message>
+        <source>标准方差</source>
+        <translation>Sigma</translation>
+    </message>
+    <message>
+        <source>对比度</source>
+        <translation>Contrast</translation>
+    </message>
+    <message>
+        <source>参数1</source>
+        <translation>param1</translation>
+    </message>
+    <message>
+        <source>参数2</source>
+        <translation>param2</translation>
+    </message>
+    <message>
+        <source>参数3</source>
+        <translation>param3</translation>
+    </message>
+    <message>
+        <source>参数4</source>
+        <translation>param4</translation>
+    </message>
+</context>
+</TS>

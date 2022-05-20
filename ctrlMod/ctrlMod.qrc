@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>ctrlMod_en.qm</file>
+        <file>ctrlMod_zh.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>ctrlMod.ver</file>
+        <file>ctrl.ini</file>
+    </qresource>
+</RCC>

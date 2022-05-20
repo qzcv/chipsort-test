@@ -1,0 +1,1363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>nccMatch_fourDirWdg</class>
+ <widget class="QWidget" name="nccMatch_fourDirWdg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>421</width>
+    <height>726</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>nccMatch_fourDirWdg</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_10">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QWidget" name="widget_pattern" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>140</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>140</width>
+            <height>140</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_verticalLayout1">
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="spacing">
+            <number>2</number>
+           </property>
+           <property name="leftMargin">
+            <number>2</number>
+           </property>
+           <property name="topMargin">
+            <number>2</number>
+           </property>
+           <property name="rightMargin">
+            <number>2</number>
+           </property>
+           <property name="bottomMargin">
+            <number>2</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="bt_selectPattern">
+             <property name="text">
+              <string>选取模版</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="bt_ensureSelect">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="text">
+              <string>确认选取</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="bt_cancelSelect">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="text">
+              <string>取消选取</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>显示模板</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="cob_pattern">
+               <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
+               </property>
+               <item>
+                <property name="text">
+                 <string>  0°</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>  90°</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>  180°</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>  270°</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="4" column="0">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="5" column="0">
+         <widget class="QPushButton" name="bt_editSignal">
+          <property name="text">
+           <string>信号编辑</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1" rowspan="7">
+         <widget class="QStackedWidget" name="stackedWidget">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="page">
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="0" column="0">
+             <widget class="QGroupBox" name="groupBox_3">
+              <property name="title">
+               <string>角度属性</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <property name="leftMargin">
+                <number>5</number>
+               </property>
+               <property name="topMargin">
+                <number>5</number>
+               </property>
+               <property name="rightMargin">
+                <number>5</number>
+               </property>
+               <property name="bottomMargin">
+                <number>5</number>
+               </property>
+               <property name="spacing">
+                <number>5</number>
+               </property>
+               <item row="1" column="3">
+                <widget class="QComboBox" name="cb_pin1">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>out0</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out1</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out2</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out3</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out4</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out5</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out6</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out7</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out8</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out9</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out10</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out11</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out12</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out13</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out14</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out15</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out16</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out17</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out18</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out19</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out20</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out21</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out22</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out23</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out24</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out25</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out26</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out27</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out28</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out29</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out30</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out31</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QRadioButton" name="rb_2D">
+                 <property name="text">
+                  <string>两方向</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="3">
+                <widget class="QRadioButton" name="rb_4D">
+                 <property name="text">
+                  <string>四方向</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="4">
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="6" column="1">
+                <widget class="QCheckBox" name="cb_defaultSig">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>默认输出</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QCheckBox" name="cb_useDir">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>启用</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_13">
+                 <property name="text">
+                  <string>左/Pin-1：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_14">
+                 <property name="text">
+                  <string>右/Pin-2：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_12">
+                 <property name="text">
+                  <string>方向输出：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QComboBox" name="cb_pin2">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>out0</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out1</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out2</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out3</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out4</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out5</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out6</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out7</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out8</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out9</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out10</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out11</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out12</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out13</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out14</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out15</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out16</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out17</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out18</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out19</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out20</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out21</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out22</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out23</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out24</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out25</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out26</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out27</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out28</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out29</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out30</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>out31</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <spacer name="horizontalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="5" column="1">
+                <widget class="QLabel" name="label_7">
+                 <property name="text">
+                  <string>起始角度</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="3">
+                <widget class="QComboBox" name="cob_startAngle">
+                 <item>
+                  <property name="text">
+                   <string>  0°</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>  90°</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>  180°</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>  270°</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="page_2">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>18</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_4">
+              <property name="title">
+               <string>信号编辑</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_6">
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>90度</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QSpinBox" name="sp_sig0_1">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                 <property name="maximum">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" rowspan="2">
+                <widget class="QLabel" name="label_4">
+                 <property name="text">
+                  <string>180度</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1" rowspan="2">
+                <widget class="QSpinBox" name="sp_sig0_2">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                 <property name="maximum">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>270度</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>0度</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QSpinBox" name="sp_sig0_0">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                 <property name="maximum">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QSpinBox" name="sp_sig1_1">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                 <property name="maximum">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QSpinBox" name="sp_sig1_0">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                 <property name="maximum">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2" rowspan="2">
+                <widget class="QSpinBox" name="sp_sig1_2">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                 <property name="maximum">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QSpinBox" name="sp_sig0_3">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                 <property name="maximum">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="2">
+                <widget class="QSpinBox" name="sp_sig1_3">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                 <property name="maximum">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0" colspan="3">
+                <widget class="QCheckBox" name="cb_defaultEdit">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>使用默认信号编辑</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>18</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="cb_useRefer">
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="text">
+           <string>使用参考区域: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QGroupBox" name="grp_mirror">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QRadioButton" name="rb_hor">
+             <property name="text">
+              <string>左右镜像</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="rb_ver">
+             <property name="text">
+              <string>上下镜像</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QCheckBox" name="cb_mirror">
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="text">
+           <string>镜像型两方向</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_verticalLayout2">
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="3">
+          <widget class="QSpinBox" name="sb_seekingAngle">
+           <property name="minimum">
+            <number>5</number>
+           </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
+           <property name="singleStep">
+            <number>10</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>搜寻角度：</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="sb_similarity">
+           <property name="minimum">
+            <number>20</number>
+           </property>
+           <property name="singleStep">
+            <number>5</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>相似度：</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>误差范围</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QGroupBox" name="groupBox">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QGridLayout" name="gridLayout">
+               <item row="0" column="2">
+                <spacer name="horizontalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>51</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1">
+                <widget class="QSpinBox" name="sb_acceptValue">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="minimum">
+                  <number>30</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QSpinBox" name="sb_maxRelative">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="maximum">
+                  <number>360</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QSpinBox" name="sb_minRelative">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="minimum">
+                  <number>0</number>
+                 </property>
+                 <property name="maximum">
+                  <number>360</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="cb_acceptValue">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>接受值：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="cb_relativeAngle">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>相对角度：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="3">
+                <layout class="QHBoxLayout" name="horizontalLayout_8">
+                 <item>
+                  <widget class="QCheckBox" name="cb_matchAngle">
+                   <property name="layoutDirection">
+                    <enum>Qt::RightToLeft</enum>
+                   </property>
+                   <property name="text">
+                    <string>启用一致性判断：</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="cob_matchAngle">
+                   <item>
+                    <property name="text">
+                     <string>  0°</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>  90°</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>  180°</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>  270°</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>113</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>传出区域</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="0" column="0">
+           <widget class="QGroupBox" name="groupBox_5">
+            <property name="title">
+             <string/>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_8">
+             <property name="leftMargin">
+              <number>5</number>
+             </property>
+             <property name="topMargin">
+              <number>5</number>
+             </property>
+             <property name="rightMargin">
+              <number>5</number>
+             </property>
+             <property name="bottomMargin">
+              <number>5</number>
+             </property>
+             <property name="spacing">
+              <number>5</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="cb_useOutArea">
+               <property name="layoutDirection">
+                <enum>Qt::RightToLeft</enum>
+               </property>
+               <property name="text">
+                <string>启用传出区域</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" colspan="2">
+              <widget class="QGroupBox" name="groupBox_outArea">
+               <property name="title">
+                <string/>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_9">
+                <property name="leftMargin">
+                 <number>5</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>5</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>5</number>
+                </property>
+                <item row="0" column="0" colspan="3">
+                 <layout class="QHBoxLayout" name="horizontalLayout_6">
+                  <item>
+                   <widget class="QCheckBox" name="cb_showOutArea">
+                    <property name="layoutDirection">
+                     <enum>Qt::RightToLeft</enum>
+                    </property>
+                    <property name="text">
+                     <string>显示传出区域</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="cb_fillUp">
+                    <property name="layoutDirection">
+                     <enum>Qt::RightToLeft</enum>
+                    </property>
+                    <property name="text">
+                     <string>填充区域</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_10">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item row="1" column="0" colspan="4">
+                 <layout class="QHBoxLayout" name="horizontalLayout_7">
+                  <item>
+                   <widget class="QPushButton" name="bt_selectOutPat">
+                    <property name="text">
+                     <string>选取传出模版</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="bt_outPatOk">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                    <property name="text">
+                     <string>确认选取</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="bt_cancelOutPat">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                    <property name="text">
+                     <string>取消选取</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_13">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="label_9">
+                  <property name="text">
+                   <string>目标区域：</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QSpinBox" name="sp_outArea">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="2">
+                 <widget class="QLabel" name="label_10">
+                  <property name="text">
+                   <string>排除区域：</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="3">
+                 <widget class="QSpinBox" name="sp_deleteArea">
+                  <property name="maximum">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="label_15">
+                  <property name="text">
+                   <string>面积：</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QSpinBox" name="sp_minArea">
+                  <property name="buttonSymbols">
+                   <enum>QAbstractSpinBox::UpDownArrows</enum>
+                  </property>
+                  <property name="maximum">
+                   <number>999999</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="2">
+                 <widget class="QSpinBox" name="sp_maxArea">
+                  <property name="buttonSymbols">
+                   <enum>QAbstractSpinBox::UpDownArrows</enum>
+                  </property>
+                  <property name="maximum">
+                   <number>999999</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="3">
+                 <spacer name="horizontalSpacer_11">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>43</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QPushButton" name="bt_threTest">
+                  <property name="text">
+                   <string>阈值测试</string>
+                  </property>
+                  <property name="checkable">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QSpinBox" name="sp_threMin">
+                  <property name="maximum">
+                   <number>255</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="2">
+                 <widget class="QSpinBox" name="sp_threMax">
+                  <property name="maximum">
+                   <number>255</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="3">
+                 <spacer name="horizontalSpacer_12">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>43</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <spacer name="horizontalSpacer_14">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>245</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>13</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <spacer name="horizontalSpacer_6">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>1</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

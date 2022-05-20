@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>arithmetic_pre_zh.qm</file>
+        <file>arithmetic_pre_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>arithmetic_pre.ini</file>
+        <file>arithmetic_pre.ver</file>
+    </qresource>
+</RCC>

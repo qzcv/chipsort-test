@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>pinWarpWdg</class>
+ <widget class="QWidget" name="pinWarpWdg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>431</width>
+    <height>693</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>pinWarpWdg</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_13">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>属性</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_12">
+        <item row="0" column="0">
+         <widget class="QPushButton" name="bt_selectRoi">
+          <property name="text">
+           <string>选择区域</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="cob_currentGrp">
+          <item>
+           <property name="text">
+            <string>管脚组1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>管脚组2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>管脚组3</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>管脚组4</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QCheckBox" name="cb_enableGrp">
+            <property name="text">
+             <string>使能</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QGroupBox" name="groupBox_9">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_11">
+           <item row="9" column="0" colspan="3">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>正常管脚偏离底线范围：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="4">
+            <widget class="QDoubleSpinBox" name="dsp_normalOffMax">
+             <property name="minimum">
+              <double>-100.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>999.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="3">
+            <widget class="QDoubleSpinBox" name="dsp_normalOffMin">
+             <property name="minimum">
+              <double>-100.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>999.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QSpinBox" name="sp_leadGrayDiff">
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::UpDownArrows</enum>
+             </property>
+             <property name="minimum">
+              <number>5</number>
+             </property>
+             <property name="maximum">
+              <number>150</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="5">
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QLabel" name="label_20">
+               <property name="text">
+                <string>底线边缘灰度：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_10">
+               <property name="title">
+                <string/>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_3">
+                <item>
+                 <widget class="QRadioButton" name="rb_blackToWhite">
+                  <property name="text">
+                   <string>黑-白</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="rb_whiteToBlack">
+                  <property name="text">
+                   <string>白-黑</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="0" colspan="3">
+            <widget class="QCheckBox" name="cb_baseSameWithLead">
+             <property name="text">
+              <string>管脚在底线搜寻方向</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_21">
+             <property name="text">
+              <string>扩大搜寻线:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QSpinBox" name="sp_extendSearchLine">
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::UpDownArrows</enum>
+             </property>
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>200</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="5">
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <widget class="QLabel" name="label_26">
+                 <property name="text">
+                  <string>底线搜寻方向:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_7">
+               <property name="title">
+                <string/>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_2">
+                <item>
+                 <widget class="QRadioButton" name="rb_LfToRt">
+                  <property name="text">
+                   <string>左-右</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="rb_RtToLf">
+                  <property name="text">
+                   <string>右-左</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="rb_UpToDw">
+                  <property name="text">
+                   <string>上-下</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="rb_DwToUp">
+                  <property name="text">
+                   <string>下-上</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_25">
+             <property name="text">
+              <string>管脚灰度差:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="4">
+            <widget class="QCheckBox" name="cb_whitePin">
+             <property name="text">
+              <string>白色管脚</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2" colspan="2">
+            <widget class="QLabel" name="label_14">
+             <property name="text">
+              <string>拟合系数：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="4">
+            <widget class="QDoubleSpinBox" name="dsp_factor">
+             <property name="decimals">
+              <number>1</number>
+             </property>
+             <property name="minimum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>3.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.500000000000000</double>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QSpinBox" name="sp_searchLineGap">
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::UpDownArrows</enum>
+             </property>
+             <property name="minimum">
+              <number>1</number>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_22">
+             <property name="text">
+              <string>扫描间距：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="4">
+            <widget class="QSpinBox" name="sp_baseGrayDiff">
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::UpDownArrows</enum>
+             </property>
+             <property name="minimum">
+              <number>5</number>
+             </property>
+             <property name="maximum">
+              <number>150</number>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="label_29">
+             <property name="text">
+              <string>检脚范围：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QSpinBox" name="sp_leadSearchLength">
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::UpDownArrows</enum>
+             </property>
+             <property name="minimum">
+              <number>0</number>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="2" colspan="2">
+            <widget class="QLabel" name="label_28">
+             <property name="text">
+              <string>底线灰度差：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="4">
+            <widget class="QGroupBox" name="groupBox_11">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="0" column="1">
+               <widget class="QRadioButton" name="rb_detectBase">
+                <property name="text">
+                 <string>检测底线</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QRadioButton" name="rb_noBase">
+                <property name="text">
+                 <string>不检底线</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>噪点最大数:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QSpinBox" name="sp_noiseMax"/>
+           </item>
+           <item row="7" column="2" colspan="2">
+            <widget class="QLabel" name="label_23">
+             <property name="text">
+              <string>比例因子：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2" colspan="2">
+            <widget class="QLabel" name="label_27">
+             <property name="text">
+              <string>去头尾：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="4">
+            <widget class="QDoubleSpinBox" name="dsp_ratio">
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::UpDownArrows</enum>
+             </property>
+             <property name="decimals">
+              <number>3</number>
+             </property>
+             <property name="minimum">
+              <double>-10.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>10.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.001000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="4">
+            <widget class="QSpinBox" name="sp_deleteEdge">
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::UpDownArrows</enum>
+             </property>
+             <property name="minimum">
+              <number>0</number>
+             </property>
+             <property name="maximum">
+              <number>20</number>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="4">
+            <widget class="QCheckBox" name="cb_inputRatio">
+             <property name="text">
+              <string>传入比例</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_3">
+       <property name="title">
+        <string>管脚误差范围</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_10">
+        <item row="0" column="0">
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="tab">
+           <attribute name="title">
+            <string>管脚组1</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="0" column="0">
+             <widget class="QFrame" name="frame_2">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_2">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="cb_totalWidth_0">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>管脚总宽： </string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QDoubleSpinBox" name="dsp_TotalWidthMin_0">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="maximum">
+                  <double>999.990000000000009</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QDoubleSpinBox" name="dsp_TotalWidthMax_0">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="maximum">
+                  <double>999.990000000000009</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="cb_errWarp_0">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>翘曲范围： </string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QDoubleSpinBox" name="dsp_ErrWarp_0">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="maximum">
+                  <double>999.990000000000009</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_2">
+           <attribute name="title">
+            <string>管脚组2</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_7">
+            <item row="0" column="0">
+             <widget class="QFrame" name="frame_3">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="cb_totalWidth_1">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>管脚总宽： </string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QDoubleSpinBox" name="dsp_TotalWidthMin_1">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="maximum">
+                  <double>999.990000000000009</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QDoubleSpinBox" name="dsp_TotalWidthMax_1">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="maximum">
+                  <double>999.990000000000009</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="cb_errWarp_1">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>翘曲范围： </string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QDoubleSpinBox" name="dsp_ErrWarp_1">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="maximum">
+                  <double>999.990000000000009</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_3">
+           <attribute name="title">
+            <string>管脚组3</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_8">
+            <item row="0" column="0">
+             <widget class="QFrame" name="frame_4">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="cb_totalWidth_2">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>管脚总宽： </string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QDoubleSpinBox" name="dsp_TotalWidthMin_2">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="maximum">
+                  <double>999.990000000000009</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QDoubleSpinBox" name="dsp_TotalWidthMax_2">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="maximum">
+                  <double>999.990000000000009</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="cb_errWarp_2">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>翘曲范围： </string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QDoubleSpinBox" name="dsp_ErrWarp_2">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="maximum">
+                  <double>999.990000000000009</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_4">
+           <attribute name="title">
+            <string>管脚组4</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_9">
+            <item row="0" column="0">
+             <widget class="QFrame" name="frame_5">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="cb_totalWidth_3">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>管脚总宽： </string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QDoubleSpinBox" name="dsp_TotalWidthMin_3">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="maximum">
+                  <double>999.990000000000009</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QDoubleSpinBox" name="dsp_TotalWidthMax_3">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="maximum">
+                  <double>999.990000000000009</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="cb_errWarp_3">
+                 <property name="layoutDirection">
+                  <enum>Qt::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>翘曲范围： </string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QDoubleSpinBox" name="dsp_ErrWarp_3">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="maximum">
+                  <double>999.990000000000009</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>30</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

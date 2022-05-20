@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>smooth_pre_zh.qm</file>
+        <file>smooth_pre_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>smooth_pre.ini</file>
+        <file>smooth_pre.ver</file>
+    </qresource>
+</RCC>

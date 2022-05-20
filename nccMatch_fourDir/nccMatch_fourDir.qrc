@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>nccMatch_fourDir_zh.qm</file>
+        <file>nccMatch_fourDir_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>nccMatch_fourDir.ini</file>
+        <file>nccMatch_fourDir.ver</file>
+    </qresource>
+</RCC>

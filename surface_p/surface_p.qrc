@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>surface_p_zh.qm</file>
+        <file>surface_p_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>surface_p.ini</file>
+        <file>surface_p.ver</file>
+    </qresource>
+</RCC>

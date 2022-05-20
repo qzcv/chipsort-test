@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>composeND_pre_zh.qm</file>
+        <file>composeND_pre_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>composeND_pre.ini</file>
+        <file>composeND_pre.ver</file>
+    </qresource>
+</RCC>

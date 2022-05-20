@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>dimensionMeasure_zh.qm</file>
+        <file>dimensionMeasure_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>dimensionMeasure.ini</file>
+        <file>dimensionMeasure.ver</file>
+    </qresource>
+</RCC>

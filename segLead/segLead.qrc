@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>segLead_zh.qm</file>
+        <file>segLead_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>segLead.ini</file>
+        <file>segLead.ver</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>imageSegment_pre_zh.qm</file>
+        <file>imageSegment_pre_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>imageSegment_pre.ini</file>
+        <file>imageSegment_pre.ver</file>
+    </qresource>
+</RCC>
