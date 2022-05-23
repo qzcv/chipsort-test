@@ -5,7 +5,6 @@
 edgeLocationFact :: edgeLocationFact()
 	: ModuleFactory(FactoryName, 0)
 {
-
 	getModSetWidgetStyles();
 }
 

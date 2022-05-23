@@ -1674,7 +1674,7 @@ void pinLength1Mod::textResult(ResultText *text, const QString &funName)
 			indexL = leadIndex;
 		}
 		text->setTextColor(QColor(255, 0, 0));
-		text->append(tr("found group%1 lead%2 failed").arg(grp).arg(indexL));
+		text->append(QObject::tr("found group%1 lead%2 failed").arg(grp).arg(indexL));
 		return;
 	}
 
@@ -1692,16 +1692,16 @@ void pinLength1Mod::textResult(ResultText *text, const QString &funName)
 				else
 					text->setTextColor(QColor(0, 0, 0));
 				if (poinsok[0].I() == 1) {
-					text->append(tr("Group%1-Lead%2:width's edgePoints found failed").arg(QString::number(g + 1)).arg(QString::number(i + 1)));
+					text->append(QObject::tr("Group%1-Lead%2:width's edgePoints found failed").arg(QString::number(g + 1)).arg(QString::number(i + 1)));
 				}
 				else if (poinsok[0].I() == 2) {
-					text->append(tr("Group%1-Lead%2:lead's top Points found failed").arg(QString::number(g + 1)).arg(QString::number(i + 1)));
+					text->append(QObject::tr("Group%1-Lead%2:lead's top Points found failed").arg(QString::number(g + 1)).arg(QString::number(i + 1)));
 				}
 				else if (poinsok[0].I() == 3) {
-					text->append(tr("Group%1-Lead%2:lead's span Points found failed").arg(QString::number(g + 1)).arg(QString::number(i + 1)));
+					text->append(QObject::tr("Group%1-Lead%2:lead's span Points found failed").arg(QString::number(g + 1)).arg(QString::number(i + 1)));
 				}
 				else if (poinsok[0].I() == 4) {
-					text->append(tr("Group%1-Lead%2:lead's bottom edge Points found failed").arg(QString::number(g + 1)).arg(QString::number(i + 1)));
+					text->append(QObject::tr("Group%1-Lead%2:lead's bottom edge Points found failed").arg(QString::number(g + 1)).arg(QString::number(i + 1)));
 				}
 
 			}
@@ -1726,7 +1726,7 @@ void pinLength1Mod::textResult(ResultText *text, const QString &funName)
 				sprintf(Gname, "Down");
 			}
 		}
-		text->append(tr("Group:%1 ").arg(Gname));
+		text->append(QObject::tr("Group:%1 ").arg(Gname));
 
 		for (int i = 0;i < m_param->pinCont[g];i++)
 		{
@@ -1738,17 +1738,17 @@ void pinLength1Mod::textResult(ResultText *text, const QString &funName)
 			else
 				text->setTextColor(QColor(0, 0, 0));
 			char namebuf[64];
-			text->append(tr("Lead%1: ").arg(QString::number(i + 1)));
+			text->append(QObject::tr("Lead%1: ").arg(QString::number(i + 1)));
 			if (m_param->errWidthValid[g]) {
 				HTuple width;
 				getDispOutData(LeadWidth, g, i, width);
-				text->insertPlainText(tr("width:%1(%2,%3)  ").arg(QString::number(width[0].D(), 'f', 4)).
+				text->insertPlainText(QObject::tr("width:%1(%2,%3)  ").arg(QString::number(width[0].D(), 'f', 4)).
 					arg(QString::number(m_param->errWidthMin[g][i], 'f', 4)).arg(QString::number(m_param->errWidthMax[g][i], 'f', 4)));//QString::number(12.5, 'f', 3);
 			}
 			if (m_param->errLengthValid[g]) {
 				HTuple length;
 				getDispOutData(LeadLength, g, i, length);
-				text->insertPlainText(tr("length:%1(%2,%3)  ").arg(QString::number(length[0].D(), 'f', 4)).
+				text->insertPlainText(QObject::tr("length:%1(%2,%3)  ").arg(QString::number(length[0].D(), 'f', 4)).
 					arg(QString::number(m_param->errLengthMin[g][i], 'f', 4)).arg(QString::number(m_param->errLengthMax[g][i], 'f', 4)));
 			}
 			if (m_param->errInterValid[g] && i < m_param->pinCont[g] - 1) {
@@ -1760,9 +1760,9 @@ void pinLength1Mod::textResult(ResultText *text, const QString &funName)
 				}
 				else
 					text->setTextColor(QColor(0, 0, 0));
-				text->append(tr("interval %1(Lead%2-Lead%3): ").arg(QString::number(i + 1)).arg(QString::number(i + 2)).
+				text->append(QObject::tr("interval %1(Lead%2-Lead%3): ").arg(QString::number(i + 1)).arg(QString::number(i + 2)).
 					arg(QString::number(i + 1)));
-				text->insertPlainText(tr("%1(%2,%3)").arg(QString::number(inter[0].D(), 'f', 4)).
+				text->insertPlainText(QObject::tr("%1(%2,%3)").arg(QString::number(inter[0].D(), 'f', 4)).
 					arg(QString::number(m_param->errInterMin[g][i], 'f', 4)).arg(QString::number(m_param->errInterMax[g][i], 'f', 4)));
 			}
 		} //end of loop i
@@ -1776,12 +1776,12 @@ void pinLength1Mod::textResult(ResultText *text, const QString &funName)
 			}
 			else if (maxdiffok[0].I() == 1)
 				text->setTextColor(QColor(0, 0, 0));
-			text->append(tr("Group%1's Leads Max Length Diff: %2").arg(g + 1).arg(QString::number(maxdiff[0].D(), 'f', 4)));
+			text->append(QObject::tr("Group%1's Leads Max Length Diff: %2").arg(g + 1).arg(QString::number(maxdiff[0].D(), 'f', 4)));
 			if (maxdiffok[0].I() == 0) {
-				text->insertPlainText(tr(">(%1)Ng").arg(QString::number(m_param->errMaxDiff[g], 'f', 4)));
+				text->insertPlainText(QObject::tr(">(%1)Ng").arg(QString::number(m_param->errMaxDiff[g], 'f', 4)));
 			}
 			else if (maxdiffok[0].I() == 1)
-				text->insertPlainText(tr("<(%1)Pass").arg(QString::number(m_param->errMaxDiff[g], 'f', 4)));
+				text->insertPlainText(QObject::tr("<(%1)Pass").arg(QString::number(m_param->errMaxDiff[g], 'f', 4)));
 		}
 	}
 	if (m_param->errAllMaxDiffValid)
@@ -1794,7 +1794,7 @@ void pinLength1Mod::textResult(ResultText *text, const QString &funName)
 		}
 		else if (maxdiffok[0].I() == 1)
 			text->setTextColor(QColor(0, 0, 0));
-		text->append(tr("maxdiff of length of all leads: %1").arg(QString::number(maxdiff[0].D(), 'f', 4)));
+		text->append(QObject::tr("maxdiff of length of all leads: %1").arg(QString::number(maxdiff[0].D(), 'f', 4)));
 		if (maxdiffok[0].I() == 0) {
 			text->insertPlainText(QString::fromLocal8Bit(">(%1)Ng").arg(QString::number(m_param->errAllMaxDiff, 'f', 4)));
 		}
@@ -1804,7 +1804,7 @@ void pinLength1Mod::textResult(ResultText *text, const QString &funName)
 	if (m_param->errSpanValid) {
 		if (((m_param->pinCont[0] != m_param->pinCont[1]) && (m_param->leadLossIndex > m_param->pinCont[0] && m_param->leadLossIndex > m_param->pinCont[1]))) {
 			text->setTextColor(QColor(255, 0, 0));
-			text->append(tr("the index of missing lead is wrong,please check and reset it! "));
+			text->append(QObject::tr("the index of missing lead is wrong,please check and reset it! "));
 			return;
 		}
 		int maxleadnum;
@@ -1818,7 +1818,7 @@ void pinLength1Mod::textResult(ResultText *text, const QString &funName)
 			}
 			else if (spanok[0].I() == 1)
 				text->setTextColor(QColor(0, 0, 0));
-			text->append(tr("span%4: %1(%2,%3): ").arg(QString::number(spanval[0].D(), 'f', 4)).arg(QString::number(m_param->errSpanMin[i], 'f', 4)).
+			text->append(QObject::tr("span%4: %1(%2,%3): ").arg(QString::number(spanval[0].D(), 'f', 4)).arg(QString::number(m_param->errSpanMin[i], 'f', 4)).
 				arg(QString::number(m_param->errSpanMax[i], 'f', 4)).arg(i + 1));
 		}
 	}

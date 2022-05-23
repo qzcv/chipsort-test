@@ -2,10 +2,89 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>PositionSetClass</name>
+    <message>
+        <source>Position Set</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>管脚区域参考：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>管脚边界参考: </source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>管脚边界类型</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>SOT/SOP</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>QFN/DFN</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>QFN/DFN属性</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>边界参考对调</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>间距参考边界角度</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>管脚组-1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>管脚组-2</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>参考角度且不对齐:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>启用</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>边界偏移值：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>上：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>下：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>左：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>右：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>确定</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Empty image!</source>
-        <translation>无图片传入！</translation>
+        <translation type="vanished">无图片传入！</translation>
     </message>
     <message>
         <source>found group%1 lead%2 failed</source>
@@ -17,7 +96,7 @@
     </message>
     <message>
         <source>Group%1-Lead%2:lead&apos;s topPoints found failed</source>
-        <translation>管脚组%1-管脚%2：脚尖的边界点查找失败</translation>
+        <translation type="vanished">管脚组%1-管脚%2：脚尖的边界点查找失败</translation>
     </message>
     <message>
         <source>Group:%1 </source>
@@ -37,7 +116,7 @@
     </message>
     <message>
         <source>interval %1(Lead%2-Lead%3): </source>
-        <translation type="unfinished">间距%1(脚%2-脚%3):</translation>
+        <translation>间距%1(脚%2-脚%3):</translation>
     </message>
     <message>
         <source>%1(%2,%3)</source>
@@ -66,6 +145,18 @@
     <message>
         <source>span%4: %1(%2,%3): </source>
         <translation>跨距%4: %1(%2,%3): </translation>
+    </message>
+    <message>
+        <source>Group%1-Lead%2:lead&apos;s top Points found failed</source>
+        <translation>管脚组%1-管脚%2：管脚的脚尖点查找失败</translation>
+    </message>
+    <message>
+        <source>Group%1-Lead%2:lead&apos;s span Points found failed</source>
+        <translation>管脚组%1-管脚%2：管脚的span值边界点查找失败</translation>
+    </message>
+    <message>
+        <source>Group%1-Lead%2:lead&apos;s bottom edge Points found failed</source>
+        <translation>管脚组%1-管脚%2：管脚的根部长度点查找失败</translation>
     </message>
 </context>
 <context>
@@ -190,6 +281,14 @@
         <source>确定</source>
         <translation></translation>
     </message>
+    <message>
+        <source>穿越值：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>边界厚度:</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>pinLength1Wdg</name>
@@ -206,42 +305,6 @@
         <translation></translation>
     </message>
     <message>
-        <source>上：</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>下：</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>左：</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>右：</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>使用参考边界角度</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>管脚边界参考: </source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>边界偏移值：</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>管脚区域参考：</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>边界参考对调</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>管脚属性</source>
         <translation></translation>
     </message>
@@ -255,10 +318,6 @@
     </message>
     <message>
         <source>对比度</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>  面积：</source>
         <translation></translation>
     </message>
     <message>
@@ -519,19 +578,19 @@
     </message>
     <message>
         <source>Left%1</source>
-        <translation>左%1</translation>
+        <translation type="vanished">左%1</translation>
     </message>
     <message>
         <source>Up%1</source>
-        <translation>上%1</translation>
+        <translation type="vanished">上%1</translation>
     </message>
     <message>
         <source>Right%1</source>
-        <translation>右%1</translation>
+        <translation type="vanished">右%1</translation>
     </message>
     <message>
         <source>Down%1</source>
-        <translation>下%1</translation>
+        <translation type="vanished">下%1</translation>
     </message>
     <message>
         <source> Check</source>
@@ -563,11 +622,11 @@
     </message>
     <message>
         <source>exit locate</source>
-        <translation>退出定位设置</translation>
+        <translation type="vanished">退出定位设置</translation>
     </message>
     <message>
         <source>locate set</source>
-        <translation>定位设置</translation>
+        <translation type="vanished">定位设置</translation>
     </message>
     <message>
         <source>lead%1 of group%2: </source>
@@ -580,6 +639,50 @@
     <message>
         <source> max val</source>
         <translation>最大值</translation>
+    </message>
+    <message>
+        <source>  最小面积：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>LeftLead%1</source>
+        <translation>左%1</translation>
+    </message>
+    <message>
+        <source>UpLead%1</source>
+        <translation>上%1</translation>
+    </message>
+    <message>
+        <source>RightLead%1</source>
+        <translation>右%1</translation>
+    </message>
+    <message>
+        <source>DownLead%1</source>
+        <translation>下%1</translation>
+    </message>
+    <message>
+        <source> of group 1</source>
+        <translation>-管脚组1</translation>
+    </message>
+    <message>
+        <source> of group 2</source>
+        <translation>-管脚组2</translation>
+    </message>
+    <message>
+        <source>Lf-%1</source>
+        <translation>左%1</translation>
+    </message>
+    <message>
+        <source>Up-%1</source>
+        <translation>上%1</translation>
+    </message>
+    <message>
+        <source>Rt-%1</source>
+        <translation>右%1</translation>
+    </message>
+    <message>
+        <source>Dw-%1</source>
+        <translation>下%1</translation>
     </message>
 </context>
 </TS>

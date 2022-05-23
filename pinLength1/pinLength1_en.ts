@@ -2,21 +2,92 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
-    <name>QObject</name>
+    <name>PositionSetClass</name>
     <message>
-        <source>Empty image!</source>
+        <source>Position Set</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>管脚区域参考：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>管脚边界参考: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>管脚边界类型</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SOT/SOP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QFN/DFN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QFN/DFN属性</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>边界参考对调</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>间距参考边界角度</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>管脚组-1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>管脚组-2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>参考角度且不对齐:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>启用</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>边界偏移值：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>上：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>下：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>左：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>右：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>确定</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
     <message>
         <source>found group%1 lead%2 failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Group%1-Lead%2:width&apos;s edgePoints found failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Group%1-Lead%2:lead&apos;s topPoints found failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -65,6 +136,18 @@
     </message>
     <message>
         <source>span%4: %1(%2,%3): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group%1-Lead%2:lead&apos;s top Points found failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group%1-Lead%2:lead&apos;s span Points found failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group%1-Lead%2:lead&apos;s bottom edge Points found failed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -190,6 +273,14 @@
         <source>确定</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>穿越值：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>边界厚度:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>pinLength1Wdg</name>
@@ -206,42 +297,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>上：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>下：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>左：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>右：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>使用参考边界角度</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>管脚边界参考: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>边界偏移值：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>管脚区域参考：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>边界参考对调</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>管脚属性</source>
         <translation type="unfinished"></translation>
     </message>
@@ -255,10 +310,6 @@
     </message>
     <message>
         <source>对比度</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>  面积：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -518,22 +569,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Left%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Up%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Down%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source> Check</source>
         <translation type="unfinished"></translation>
     </message>
@@ -562,14 +597,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>exit locate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>locate set</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>lead%1 of group%2: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -579,6 +606,50 @@
     </message>
     <message>
         <source> max val</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>  最小面积：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LeftLead%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UpLead%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RightLead%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DownLead%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> of group 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> of group 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lf-%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up-%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rt-%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dw-%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
