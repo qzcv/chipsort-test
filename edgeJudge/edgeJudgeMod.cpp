@@ -104,7 +104,7 @@ int edgeJudgeMod::run(const QString &funName)
 		allok = false;
 		setDetectOutData(AllOK, allok);
 		setDetectOutData(ImageFull, false);
-		return allok;
+		return allok ? 0 : -1;
 	}
 	else {
 		setDetectOutData(ImageFull, true);
@@ -429,7 +429,7 @@ int edgeJudgeMod::run(const QString &funName)
 		if (!roiFound[i]) {
 			allok = false;
 			setDetectOutData(AllOK, allok);
-			return allok;
+			return allok ? 0 : -1;
 		}
 	}
 	float EveryAngle[4];
@@ -455,7 +455,7 @@ int edgeJudgeMod::run(const QString &funName)
 			setDetectOutData(MaxAngleOK, false);
 			setDetectOutData(MaxAngle, EveryAngle[i] / M_PI*180.0);
 			setDetectOutData(AllOK, allok);
-			return allok;
+			return allok ? 0 : -1;
 		}
 	}
 	setDetectOutData(MaxAngleOK, true);
@@ -532,7 +532,7 @@ int edgeJudgeMod::run(const QString &funName)
 			interok[i] = 0;
 			allok = false;
 			setDetectOutData(AllOK, allok);
-			return allok;
+			return allok ? 0 : -1;
 		}
 		else {
 			interok[i] = 1;
@@ -545,7 +545,7 @@ int edgeJudgeMod::run(const QString &funName)
 	if (isparel[0].I()) {
 		allok = false;
 		setDetectOutData(AllOK, allok);
-		return allok;
+		return allok ? 0 : -1;
 	}
 	setDetectOutData(CenterRow, centerRoww);
 	setDetectOutData(CenterCol, centerColl);
@@ -701,7 +701,7 @@ int edgeJudgeMod::run(const QString &funName)
 		if (subNum <= 0) {
 			setDetectOutData(DiffNotExist, 1);
 			setDetectOutData(AllOK, allok);
-			return allok;
+			return allok ? 0 : -1;
 		}
 		else {
 			setDetectOutData(DiffNotExist, 0);
@@ -728,7 +728,7 @@ int edgeJudgeMod::run(const QString &funName)
 		}
 	}
 	setDetectOutData(AllOK, allok);
-	return allok;
+	return allok ? 0 : -1;
 }
 
 void edgeJudgeMod::viewResult(ImageView *iv, const QString &funName, int)

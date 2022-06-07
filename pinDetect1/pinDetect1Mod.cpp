@@ -99,10 +99,6 @@ using namespace std;
 #define pixelSize "pixelSize"  //5,中左右上下
 #define ImageFull "Imagefull"  //图片是否ok
 
-//GRR
-#define LengthEnable "LengthOutEnable"  
-#define OutLength    "outLength"
-
 #define DelReion "delRegion"
 
 pinDetect1Mod::pinDetect1Mod()
@@ -146,17 +142,14 @@ void pinDetect1Mod::load(const QString &dirPath, QvsParamLevel level)
 int pinDetect1Mod::run(const QString &funName)
 {
 	p_outLead->clear();
-
-	if (p_im->empty())
-		return -1;
-	HalOpenCV::cv2halImg(*p_im, m_image, false);
+	p_outLen->clear();
 
 	for (int i = 0;i < MAX_TESTITEMS_NUM;i++) {
 		m_testItemsStatus[i] = 1;
 	}
 
 	bool allok = true;
-	if (!m_image || m_image->Id() == H_EMPTY_REGION) {
+	if (p_im->empty()) {
 		allok = false;
 		setDetectOutData(AllOK, allok);
 		setDetectOutData(ImageFull, false);
@@ -166,20 +159,21 @@ int pinDetect1Mod::run(const QString &funName)
 	}
 	else {
 		setDetectOutData(ImageFull, true);
+		HalOpenCV::cv2halImg(*p_im, m_image, false);
 	}
 
 	double mk[GRP_NUM];
 	for (int i = 0;i < GRP_NUM;i++) {
 		if (m_param->IsInputRatio[i]) {
-			try {	//此处使用了double类型管脚。无需使用try catch，后续需要对这部分进行简化。
-				HTuple k;
-				//getDetectInData(pixelSize, k);
-				k = **p_pixelSize;
-				mk[i] = k[0].D();
-			}
-			catch (HException& ex) {
-				mk[i] = m_param->sizeRatio[i];
-			}
+// 			try {
+// 				HTuple k;
+// 				getDetectInData(pixelSize, k);
+// 				mk[i] = k[0].D();
+// 			}
+// 			catch (HException& ex) {
+// 				mk[i] = m_param->sizeRatio[i];
+// 			}
+			mk[i] = *p_pixelSize;
 		}
 		else {
 			mk[i] = m_param->sizeRatio[i];
@@ -240,17 +234,17 @@ int pinDetect1Mod::run(const QString &funName)
 			setDetectOutData(TmpSearchReferCol, roirefercol);
 		}
 		else {
-			if (p_SearchHomMat2D->size() == cv::Size(2, 3))//是否直接NG掉会比较好？
-				HalOpenCV::cv2HalHomMat2D(*p_SearchHomMat2D, &searchHommat);
-			else
-				hom_mat2d_identity(&searchHommat);
 // 			try {
-// 				//getDetectInData(SearchHomMat2D, searchHommat);
+// 				getDetectInData(SearchHomMat2D, searchHommat);
 // 				double tv = searchHommat[0].D();
 // 			}
 // 			catch (HException& ex) {
 // 				hom_mat2d_identity(&searchHommat);
 // 			}
+			if (p_SearchHomMat2D->size() == cv::Size(2, 3))
+				HalOpenCV::cv2HalHomMat2D(*p_SearchHomMat2D, &searchHommat);
+			else 
+				hom_mat2d_identity(&searchHommat);
 			setDetectOutData(TmpSearchHomMat2D, searchHommat);
 		}
 
@@ -258,17 +252,17 @@ int pinDetect1Mod::run(const QString &funName)
 	HTuple hommat;
 	for (int i = 0;i < GRP_NUM;i++) {
 		if (m_param->IsRefer[i]) {
-			if (p_homMat2d[i]->size() == cv::Size(2, 3))//是否直接NG掉会比较好？
-				HalOpenCV::cv2HalHomMat2D(*p_homMat2d[i], &hommat);
-			else
-				hom_mat2d_identity(&hommat);
 // 			try {
-// 				//getDetectInData(m_outHomDefine[i], hommat);
+// 				getDetectInData(m_outHomDefine[i], hommat);
 // 				double tv = hommat[0].D();
 // 			}
 // 			catch (HException& ex) {
 // 				hom_mat2d_identity(&hommat);
 // 			}
+			if (p_homMat2d[i]->size() == cv::Size(2, 3))
+				HalOpenCV::cv2HalHomMat2D(*p_homMat2d[i], &hommat);
+			else
+				hom_mat2d_identity(&hommat);
 			setDetectOutData(m_tmpHomDefine[i], hommat);
 		}
 		for (int j = 0;j < m_param->grpPinNum[i] + 1;j++) {
@@ -325,7 +319,7 @@ int pinDetect1Mod::run(const QString &funName)
 
 
 	HTuple outLength;  //传出用的长度变量
-
+	HTuple outLeadRow, outLeadCol; //传输到外部的管脚尖坐标
 	HTuple referrow, refercol;
 	if (m_param->IsDetBase == 2) {
 		//getDetectInData(ReferRow, referrow);
@@ -545,6 +539,12 @@ int pinDetect1Mod::run(const QString &funName)
 							if (e > 1) {
 								break;
 							}
+							if (m_param->CrossGrayValid[i])
+							{
+								if (!checkCrossGray(m_image, meaAngle, rowEdge[e].D(), colEdge[e].D(), m_param->crossGray[i], m_param->crossStep[i], edge))
+									continue;
+							}
+
 							if (m_param->IsDelOffSearchRoi) {
 								if (!IsPointInRegion(&ToSearchRoi, rowEdge[e].D(), colEdge[e].D())) {
 									continue;
@@ -586,6 +586,11 @@ int pinDetect1Mod::run(const QString &funName)
 						for (int e = 0;e < aa;e++) {
 							if (e > 1) {
 								break;
+							}
+							if (m_param->CrossGrayValid[i])
+							{
+								if (!checkCrossGray(m_image, meaAngle, rowEdge[e].D(), colEdge[e].D(), m_param->crossGray[i], m_param->crossStep[i], edge))
+									continue;
 							}
 							if (m_param->IsDelOffSearchRoi) {
 								if (!IsPointInRegion(&ToSearchRoi, rowEdge[e].D(), colEdge[e].D())) {
@@ -869,6 +874,7 @@ int pinDetect1Mod::run(const QString &funName)
 			double edgex, edgey, edgelen; //边界向量
 			double leadx, leady; //管脚垂直边界的向量
 			bool shoulderFound = true;
+			double edgeAngle;
 			if (m_param->errPinSweepValid[i]) {  //求肩部点
 				if (m_param->IsDetBase == 2 || (m_param->IsDetBase == 1 && !roiFound[i][0])) {
 					edgey = RowEnd[i][0][0].D() - RowBegin[i][0][0].D();
@@ -888,7 +894,7 @@ int pinDetect1Mod::run(const QString &funName)
 					leady = abs(leady)*(roirow[i][j] - interr[0].D()) / abs(roirow[i][j] - interr[0].D());
 					interRow = interr[0].D() + m_param->shoulderShift[i] * leady;
 					interCol = interc[0].D() + m_param->shoulderShift[i] * leadx;
-					double edgeAngle;
+
 					edgeAngle = atan2(-edgey, edgex);
 					Hlong shoulderHandle;
 					HTuple shoulderRowFirst, shoulderColFirst, shoulderRowEnd, shoulderColEnd;
@@ -897,6 +903,7 @@ int pinDetect1Mod::run(const QString &funName)
 					HTuple af, ae, dis;
 					measure_pos(*m_image, shoulderHandle, 1, m_param->WidthGrayDiff[i], edge1, "all", &shoulderRowFirst, &shoulderColFirst, &af, &dis);
 					measure_pos(*m_image, shoulderHandle, 1, m_param->WidthGrayDiff[i], edge2, "all", &shoulderRowEnd, &shoulderColEnd, &ae, &dis);
+
 					close_measure(shoulderHandle);
 					int fir = shoulderRowFirst.Num();
 					int sec = shoulderRowEnd.Num();
@@ -927,7 +934,13 @@ int pinDetect1Mod::run(const QString &funName)
 							bestSecInx = sec - 1;
 						}
 					}
-
+					if (shoulderFound && 0/*m_param->CrossGrayValid[i]*/)
+					{
+						if (!checkCrossGray(m_image, edgeAngle, shoulderRowFirst[bestFirInx].D(), shoulderColFirst[bestFirInx].D(), m_param->crossGray[i], m_param->crossStep[i], edge1))
+							shoulderFound = false;
+						if (!checkCrossGray(m_image, edgeAngle, shoulderRowEnd[bestSecInx].D(), shoulderColEnd[bestSecInx].D(), m_param->crossGray[i], m_param->crossStep[i], edge2))
+							shoulderFound = false;
+					}
 					if (shoulderFound/*fir+sec>1*/) {
 						double rowb = shoulderRowFirst[bestFirInx].D();
 						double colb = shoulderColFirst[bestFirInx].D();
@@ -966,6 +979,7 @@ int pinDetect1Mod::run(const QString &funName)
 					}
 					measure_pos(/*detImg*/*m_image, measureHandle, 1, m_param->WidthGrayDiff[i], edge1, "all", &rowEdgeFirst, &colEdgeFirst, &Ampfir, &Dis);
 					measure_pos(/*detImg*/*m_image, measureHandle, 1, m_param->WidthGrayDiff[i], edge2, "all", &rowEdgeSecond, &colEdgeSecond, &AmpSec, &Dis);
+
 					int fir = rowEdgeFirst.Num();
 					int sec = rowEdgeSecond.Num();
 					int bestFirInx, bestSecInx;
@@ -986,7 +1000,7 @@ int pinDetect1Mod::run(const QString &funName)
 									needDel = true;
 								}
 							}
-							if (IsPointInRegion(&detDelRoi, rowEdgeFirst[b].D(), colEdgeFirst[b].D(), 1)) {
+							if (IsPointInRegion(&detDelRoi, rowEdgeFirst[b].D(), colEdgeFirst[b].D(), 3)) {
 								needDel = true;
 							}
 							if (!needDel) {
@@ -1003,7 +1017,7 @@ int pinDetect1Mod::run(const QString &funName)
 									needDel = true;
 								}
 							}
-							if (IsPointInRegion(&detDelRoi, rowEdgeSecond[b].D(), colEdgeSecond[b].D(), 1)) {
+							if (IsPointInRegion(&detDelRoi, rowEdgeSecond[b].D(), colEdgeSecond[b].D(), 3)) {
 								needDel = true;
 							}
 							if (!needDel) {
@@ -1045,6 +1059,15 @@ int pinDetect1Mod::run(const QString &funName)
 							colEdgeSecond = newSecCol;
 						}
 					}
+
+					if (meaOk && m_param->CrossGrayValid[i])
+					{
+						if (!checkCrossGray(m_image, edgeAngle, rowEdgeFirst[bestFirInx].D(), colEdgeFirst[bestFirInx].D(), m_param->crossGray[i], m_param->crossStep[i], edge1))
+							shoulderFound = false;
+						if (!checkCrossGray(m_image, edgeAngle, rowEdgeSecond[bestSecInx].D(), colEdgeSecond[bestSecInx].D(), m_param->crossGray[i], m_param->crossStep[i], edge2))
+							shoulderFound = false;
+					}
+
 					if (meaOk/*fir+sec>1*/) {
 						double rowb = rowEdgeFirst[bestFirInx].D();
 						double colb = colEdgeFirst[bestFirInx].D();
@@ -1177,10 +1200,9 @@ int pinDetect1Mod::run(const QString &funName)
 					gen_region_points(&tmpobj, m_rowEdge[j], m_colEdge[j]);
 					union2(pointsobj[i], tmpobj, &pointsobj[i]);
 					setDetectOutData(PinTopRow, RowTop[i][j], i, j);
-					setDetectOutData(PinTopCol, ColTop[i][j], i, j);
-					double x = ColTop[i][j][0].D();
-					double y = RowTop[i][j][0].D();
-					p_outLead->push_back(cv::Point2d(x, y));
+					setDetectOutData(PinTopCol, ColTop[i][j], i, j);				
+					outLeadRow.Append(RowTop[i][j][0].D());
+					outLeadCol.Append(ColTop[i][j][0].D());
 					setDetectOutData(MaxWidthBeginRow, RowWidMaxBegin[i][j], i, j);
 					setDetectOutData(MaxWidthBeginCol, ColWidMaxBegin[i][j], i, j);
 					setDetectOutData(MaxWidthEndRow, RowWidMaxEnd[i][j], i, j);
@@ -1379,18 +1401,25 @@ int pinDetect1Mod::run(const QString &funName)
 		if (m_param->IsDetBase == 0) {
 			enable = false;
 		}
-		setDetectOutData(LengthEnable, enable);
-		setDetectOutData(OutLength, outLength);
+//		setDetectOutData(LengthEnable, enable);
+//		setDetectOutData(OutLength, outLength);
+// 		setDetectOutData(OutLeadRow, outLeadRow);
+// 		setDetectOutData(OutLeadCol, outLeadCol);
+		*p_outLenEn = enable;
+		for (auto i = 0;i < outLength.Num();++i)
+			p_outLen->push_back(outLength[i].D());
+		for (auto i = 0;i < outLeadCol.Num();++i)
+		{
+			double x = outLeadCol[i].D();
+			double y = outLeadRow[i].D();
+			p_outLead->push_back(cv::Point2d(x, y));
+		}
 	}
-
-	return allok ? 0 : -1;
+	return allok;
 }
 
 void pinDetect1Mod::viewResult(ImageView *iv, const QString &funName, int)
 {
-	if (p_im->empty())
-		return;
-
 	HTuple imagefull;
 	getDispOutData(ImageFull, imagefull);
 	if (!imagefull[0].I()) {
@@ -1403,14 +1432,14 @@ void pinDetect1Mod::viewResult(ImageView *iv, const QString &funName, int)
 	if (imgok[0].I() == 1) {
 		iv->setColor(0, 255, 0);
 		Hlong num;
-		count_obj(*getDispObject(DispPointsImg), &num);
+		Hobject obj = *getDispObject(DispPointsImg);
+		count_obj(obj, &num);
 		if (num > 0) {
-			const Hobject *dispReg = getDispObject(DispPointsImg);
-			Hobject dispR;
-			union1(*dispReg, &dispR);
-			RlRegion reg;
-			HalOpenCV::hal2cvRegion(dispR, &reg);
-			iv->dispRegion(&reg);
+			if (num > 1)
+				union1(obj, &obj);
+			RlRegion dispReg;
+			HalOpenCV::hal2cvRegion(obj, &dispReg);
+			iv->dispRegion(&dispReg);
 		}
 		else {
 			return;
@@ -1443,9 +1472,9 @@ void pinDetect1Mod::viewResult(ImageView *iv, const QString &funName, int)
 		//difference(imgRec,rec2reg,&rec2reg);
 		iv->setFilled(false);
 		//iv->setColor(m_param->backGray[0],m_param->backGray[0],m_param->backGray[0]);
-		RlRegion reg;
-		HalOpenCV::hal2cvRegion(rec2reg, &reg);
-		iv->dispRegion(&reg);
+		RlRegion dispReg;
+		HalOpenCV::hal2cvRegion(rec2reg, &dispReg);
+		iv->dispRegion(&dispReg);
 		//iv->setFilled(false);
 	}
 	for (int i = 0;i < GRP_NUM;i++) {
@@ -1472,9 +1501,9 @@ void pinDetect1Mod::viewResult(ImageView *iv, const QString &funName, int)
 					if (m_param->IsRefer[i]) {
 						affine_trans_region(rec, &rec, mat, "false");
 					}
-					RlRegion reg;
-					HalOpenCV::hal2cvRegion(rec, &reg);
-					iv->dispRegion(&reg);
+					RlRegion rlreg;
+					HalOpenCV::hal2cvRegion(rec, &rlreg);
+					iv->dispRegion(&rlreg);
 				}
 			}
 		}
@@ -1496,10 +1525,10 @@ void pinDetect1Mod::viewResult(ImageView *iv, const QString &funName, int)
 					if (m_param->IsShowBlack) {
 						iv->setColor(30, 30, 30);
 						iv->setFilled(true);
-						const Hobject *dispReg = getDispObject(DelReion, i, j);
-						RlRegion reg;
-						HalOpenCV::hal2cvRegion(*dispReg, &reg);
-						iv->dispRegion(&reg);
+						const Hobject *delReg = getDispObject(DelReion, i, j);
+						RlRegion rlReg;
+						HalOpenCV::hal2cvRegion(*delReg, &rlReg);
+						iv->dispRegion(&rlReg);
 					}
 					HTuple regionok;
 					getDispOutData(RegionSingleOk, i, j - 1, regionok);
@@ -1578,12 +1607,6 @@ void pinDetect1Mod::viewResult(ImageView *iv, const QString &funName, int)
 
 void pinDetect1Mod::textResult(ResultText *text, const QString &funName)
 {
-	if (p_im->empty())
-	{
-		text->setTextColor(Qt::red);
-		text->append("Empty image!\n");
-		return;
-	}
 	HTuple imagefull;
 	getDispOutData(ImageFull, imagefull);
 	if (!imagefull[0].I()) {
@@ -1667,8 +1690,7 @@ void pinDetect1Mod::textResult(ResultText *text, const QString &funName)
 					else
 						text->setTextColor(QColor(0, 0, 0));
 
-					text->append(QObject::tr("sweep:(%1,%2) %3(%4,%5)  ")
-						.arg(QString::number(sweepmin[0].D(), 'f', 4)).arg(QString::number(sweepmax[0].D(), 'f', 4))
+					text->append(QObject::tr("sweep:(%1,%2) %3(%4,%5)  ").arg(QString::number(sweepmin[0].D(), 'f', 4)).arg(QString::number(sweepmax[0].D(), 'f', 4))
 						.arg(QString::fromLocal8Bit(unit)).arg(QString::number(m_param->errPinSweepMin[i][j], 'f', 4))
 						.arg(QString::number(m_param->errPinSweepMax[i][j], 'f', 4))
 					);
@@ -1709,8 +1731,8 @@ void pinDetect1Mod::textResult(ResultText *text, const QString &funName)
 					}
 					else
 						text->setTextColor(QColor(0, 0, 0));
-					text->append(QObject::tr("lead pitch%1(lead%2-lead%3): ").arg(QString::number(j + 1)).arg(QString::number(j + 1)).
-						arg(QString::number(j + 2)));
+					text->append(QObject::tr("lead pitch%1(lead%2-lead%3): ").arg(QString::number(i + 1)).arg(QString::number(i + 1)).
+						arg(QString::number(i + 2)));
 					text->insertPlainText(QString::fromLocal8Bit("%1 %4(%2,%3)").arg(QString::number(inter[0].D(), 'f', 4)).
 						arg(QString::number(m_param->errPinGapMin[i][j], 'f', 4)).arg(QString::number(m_param->errPinGapMax[i][j], 'f', 4)).arg(QString::fromLocal8Bit(unit)));
 				}
@@ -1756,6 +1778,8 @@ void pinDetect1Mod::createPins()
 	addPin(&p_SearchHomMat2D, "searchHm2d");
 	addPin(&p_SearchCorners, "searchCors");
 
+	addPin(&p_outLenEn, "lenEn");
+	addPin(&p_outLen, "length");
 	addPin(&p_outLead, "outLead");
 
 	//addPin(&p_lenEn, "lenEn");
@@ -1763,6 +1787,10 @@ void pinDetect1Mod::createPins()
 
 	p_SearchHomMat2D.setVisible(false);
 	p_SearchCorners.setVisible(false);
+
+	p_outLenEn.setVisible(false);
+	p_outLen.setVisible(false);
+	p_outLead.setVisible(false);
 }
 
 bool pinDetect1Mod::IsPointInRegion(const Hobject * InputReg, double row, double col, int Larger)

@@ -61,7 +61,7 @@ int dimensionMeasureMod::run(const QString &funName)
 	m_allok = 0;
 	if (p_im->empty())
 		return -1;
-	if (m_param->IsReferSection&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->IsReferSection&&p_homMat2d->size() != cv::Size(3, 2))
 		return -1;
 
 	HalOpenCV::cv2halImg(*p_im, m_image, false);
@@ -418,7 +418,7 @@ void dimensionMeasureMod::viewResult(ImageView *iv, const QString &funName, int)
 {
 	if (p_im->empty())
 		return;
-	if (m_param->IsReferSection&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->IsReferSection&&p_homMat2d->size() != cv::Size(3, 2))
 		return;
 
 	for (int i = 0;i < m_param->regionCount;i++) {
@@ -639,7 +639,7 @@ void dimensionMeasureMod::textResult(ResultText *text, const QString &funName)
 		text->append(QObject::tr("Empty image!"));
 		return;
 	}
-	if (m_param->IsReferSection&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->IsReferSection&&p_homMat2d->size() != cv::Size(3, 2))
 	{
 		text->setTextColor(Qt::red);
 		text->append(QObject::tr("Input matrix's size != 2*3!"));

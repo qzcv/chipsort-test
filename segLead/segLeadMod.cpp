@@ -50,7 +50,7 @@ int segLeadMod::run(const QString &funName)
 // 	}
 	if (p_im->empty())
 		return -1;
-	if (m_param->referSection&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->referSection&&p_homMat2d->size() != cv::Size(3, 2))
 		return -1;
 	else
 		HalOpenCV::cv2HalHomMat2D(*p_homMat2d, &m_homMat2d);
@@ -417,7 +417,7 @@ void segLeadMod::viewResult(ImageView *iv, const QString &funName, int)
 {
 	if (p_im->empty())
 		return;
-	if (m_param->referSection&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->referSection&&p_homMat2d->size() != cv::Size(3, 2))
 		return;
 
 	bool FoundOK = true;
@@ -590,7 +590,7 @@ void segLeadMod::textResult(ResultText *text, const QString &funName)
 		text->append(QObject::tr("Empty image!"));
 		return;
 	}
-	if (m_param->referSection&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->referSection&&p_homMat2d->size() != cv::Size(3, 2))
 	{
 		text->setTextColor(Qt::red);
 		text->append(QObject::tr("Input matrix's size !=6"));

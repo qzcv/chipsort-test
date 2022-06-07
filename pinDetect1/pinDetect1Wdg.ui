@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>405</width>
-    <height>522</height>
+    <height>557</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -101,7 +101,7 @@
               </size>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="tab_2">
               <attribute name="title">
@@ -123,6 +123,93 @@
               <string/>
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
+              <item row="2" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_13">
+                <item>
+                 <widget class="QLabel" name="lb_minGrayDiff">
+                  <property name="text">
+                   <string>站高灰度差:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="hs_minGrayDiff">
+                  <property name="minimum">
+                   <number>5</number>
+                  </property>
+                  <property name="maximum">
+                   <number>120</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="tickPosition">
+                   <enum>QSlider::NoTicks</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSpinBox" name="sp_minGrayDiff">
+                  <property name="buttonSymbols">
+                   <enum>QAbstractSpinBox::UpDownArrows</enum>
+                  </property>
+                  <property name="minimum">
+                   <number>5</number>
+                  </property>
+                  <property name="maximum">
+                   <number>120</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_8">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_4">
+                <item>
+                 <widget class="QLabel" name="lb_pinNum">
+                  <property name="text">
+                   <string>管脚数目：</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSpinBox" name="sp_pinNum">
+                  <property name="minimum">
+                   <number>0</number>
+                  </property>
+                  <property name="maximum">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_4">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
               <item row="3" column="0">
                <layout class="QVBoxLayout" name="verticalLayout">
                 <item>
@@ -187,6 +274,26 @@
                      </property>
                     </widget>
                    </item>
+                   <item row="0" column="5" colspan="2">
+                    <widget class="QSpinBox" name="sp_pinArea">
+                     <property name="buttonSymbols">
+                      <enum>QAbstractSpinBox::UpDownArrows</enum>
+                     </property>
+                     <property name="minimum">
+                      <number>5</number>
+                     </property>
+                     <property name="maximum">
+                      <number>100000</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0" colspan="2">
+                    <widget class="QLabel" name="lb_deleteEdge">
+                     <property name="text">
+                      <string>去头尾：</string>
+                     </property>
+                    </widget>
+                   </item>
                    <item row="1" column="2">
                     <widget class="QSpinBox" name="sp_noiseGray">
                      <property name="toolTip">
@@ -206,30 +313,10 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="0" column="0" colspan="2">
-                    <widget class="QLabel" name="lb_deleteEdge">
-                     <property name="text">
-                      <string>去头尾：</string>
-                     </property>
-                    </widget>
-                   </item>
                    <item row="0" column="3" colspan="2">
                     <widget class="QLabel" name="lb_pinArea">
                      <property name="text">
                       <string>最小面积：</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="5" colspan="2">
-                    <widget class="QSpinBox" name="sp_pinArea">
-                     <property name="buttonSymbols">
-                      <enum>QAbstractSpinBox::UpDownArrows</enum>
-                     </property>
-                     <property name="minimum">
-                      <number>5</number>
-                     </property>
-                     <property name="maximum">
-                      <number>100000</number>
                      </property>
                     </widget>
                    </item>
@@ -246,13 +333,6 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="1" column="3" colspan="2">
-                    <widget class="QLabel" name="lb_multGray">
-                     <property name="text">
-                      <string>多组灰度:</string>
-                     </property>
-                    </widget>
-                   </item>
                    <item row="1" column="5" colspan="2">
                     <widget class="QSpinBox" name="sp_multGray">
                      <property name="toolTip">
@@ -266,6 +346,47 @@
                      </property>
                      <property name="maximum">
                       <number>5</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="3" colspan="2">
+                    <widget class="QLabel" name="lb_multGray">
+                     <property name="text">
+                      <string>多组灰度:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QCheckBox" name="cb_crossGray">
+                     <property name="layoutDirection">
+                      <enum>Qt::RightToLeft</enum>
+                     </property>
+                     <property name="text">
+                      <string>穿越值：</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="2">
+                    <widget class="QSpinBox" name="sp_crossGray">
+                     <property name="maximum">
+                      <number>255</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="3">
+                    <widget class="QLabel" name="lb_crossStep">
+                     <property name="text">
+                      <string>边界厚度:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="5" colspan="2">
+                    <widget class="QSpinBox" name="sp_crossStep">
+                     <property name="minimum">
+                      <number>1</number>
+                     </property>
+                     <property name="maximum">
+                      <number>10</number>
                      </property>
                     </widget>
                    </item>
@@ -289,7 +410,7 @@
                    <number>5</number>
                   </property>
                   <property name="maximum">
-                   <number>255</number>
+                   <number>120</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
@@ -308,99 +429,12 @@
                    <number>5</number>
                   </property>
                   <property name="maximum">
-                   <number>255</number>
+                   <number>120</number>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <spacer name="horizontalSpacer_2">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
-              <item row="2" column="0">
-               <layout class="QHBoxLayout" name="horizontalLayout_13">
-                <item>
-                 <widget class="QLabel" name="lb_minGrayDiff">
-                  <property name="text">
-                   <string>站高灰度差:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QSlider" name="hs_minGrayDiff">
-                  <property name="minimum">
-                   <number>5</number>
-                  </property>
-                  <property name="maximum">
-                   <number>255</number>
-                  </property>
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="tickPosition">
-                   <enum>QSlider::NoTicks</enum>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QSpinBox" name="sp_minGrayDiff">
-                  <property name="buttonSymbols">
-                   <enum>QAbstractSpinBox::UpDownArrows</enum>
-                  </property>
-                  <property name="minimum">
-                   <number>5</number>
-                  </property>
-                  <property name="maximum">
-                   <number>255</number>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_8">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
-              <item row="0" column="0">
-               <layout class="QHBoxLayout" name="horizontalLayout_4">
-                <item>
-                 <widget class="QLabel" name="lb_pinNum">
-                  <property name="text">
-                   <string>管脚数目：</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QSpinBox" name="sp_pinNum">
-                  <property name="minimum">
-                   <number>0</number>
-                  </property>
-                  <property name="maximum">
-                   <number>10</number>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_4">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -420,38 +454,38 @@
           </layout>
          </widget>
         </item>
-        <item row="2" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <property name="leftMargin">
-           <number>20</number>
-          </property>
-          <property name="rightMargin">
-           <number>20</number>
-          </property>
-          <item>
-           <spacer name="horizontalSpacer_5">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="bt_advance">
-            <property name="text">
-             <string>高级设置</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
        </layout>
       </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="leftMargin">
+        <number>20</number>
+       </property>
+       <property name="rightMargin">
+        <number>20</number>
+       </property>
+       <item>
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="bt_advance">
+         <property name="text">
+          <string>高级设置</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
       <widget class="QGroupBox" name="groupBox_2">
@@ -474,13 +508,6 @@
         <property name="spacing">
          <number>3</number>
         </property>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="bt_table">
-          <property name="text">
-           <string>管脚参数设置</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0">
          <widget class="QFrame" name="frame_2">
           <property name="frameShape">
@@ -509,7 +536,7 @@
               <enum>Qt::RightToLeft</enum>
              </property>
              <property name="text">
-              <string>间距：</string>
+              <string>管脚间距：</string>
              </property>
             </widget>
            </item>
@@ -519,7 +546,7 @@
               <enum>Qt::RightToLeft</enum>
              </property>
              <property name="text">
-              <string>长度：</string>
+              <string>长度： </string>
              </property>
             </widget>
            </item>
@@ -552,7 +579,7 @@
               <enum>Qt::RightToLeft</enum>
              </property>
              <property name="text">
-              <string>宽度：</string>
+              <string>管脚宽度：</string>
              </property>
             </widget>
            </item>
@@ -567,6 +594,13 @@
             </widget>
            </item>
           </layout>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="bt_table">
+          <property name="text">
+           <string>管脚参数设置</string>
+          </property>
          </widget>
         </item>
        </layout>

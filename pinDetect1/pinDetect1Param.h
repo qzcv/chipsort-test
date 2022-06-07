@@ -63,6 +63,10 @@ public:
 	double sizeRatio[GRP_NUM];       //尺寸比例因子
 	int IsInputRatio[GRP_NUM];       //是否传入尺寸比例因子
 
+	int CrossGrayValid[GRP_NUM];     //启用穿越值
+	int crossGray[GRP_NUM];
+	int crossStep[GRP_NUM];          //边界厚度
+
 									 //区域判定
 	int minArea[GRP_NUM];   //管脚最小面积，实际上是杂点的最大面积
 	int noiseGray[GRP_NUM]; //噪点灰度值，反光等杂点的最小灰度

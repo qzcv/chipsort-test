@@ -346,7 +346,7 @@ void segLeadWdg::testVal()
 		return;
 
 	HTuple homMat2d;
-	if (m_param->referSection&&m_module->p_homMat2d->size() == cv::Size(2, 3))
+	if (m_param->referSection&&m_module->p_homMat2d->size() == cv::Size(3, 2))
 		HalOpenCV::cv2HalHomMat2D(*m_module->p_homMat2d, &homMat2d);
 	else
 		hom_mat2d_identity(&homMat2d);
@@ -916,7 +916,7 @@ void segLeadWdg::slider_valueChanged(int val)
 	m_param->autoLeadThre = val;
 	connectSlots(false);
 	ui->sp_threshold->setValue(val);
-	connectSlots(false);
+	connectSlots(true);
 	if (ui->bt_autoLead->isChecked()) {
 		autoThreshold();
 	}

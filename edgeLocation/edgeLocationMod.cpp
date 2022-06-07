@@ -134,7 +134,7 @@ int edgeLocationMod::run(const QString &funName)
 // 		catch (HException& ex) {
 // 			hom_mat2d_identity(&hommat2d);
 // 		}
-		if (p_homMat2d->size() == cv::Size(2, 3))
+		if (p_homMat2d->size() == cv::Size(3, 2))
 			HalOpenCV::cv2HalHomMat2D(*p_homMat2d, &hommat2d);
 		else
 			hom_mat2d_identity(&hommat2d);

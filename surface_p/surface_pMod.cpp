@@ -75,7 +75,7 @@ int surface_pMod::run(const QString &funName)
 		m_detRes = emptyImg;
 		return -1;
 	}		
-	if (m_param->referSection&&p_homMat2D->size() != cv::Size(2, 3))
+	if (m_param->referSection&&p_homMat2D->size() != cv::Size(3, 2))
 	{
 		m_detRes = wrongMat;
 		return -1;

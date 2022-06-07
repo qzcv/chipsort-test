@@ -52,6 +52,8 @@ private:
 	UnitInputPin<cv::Mat> p_SearchHomMat2D;
 	UnitInputPin<QList<cv::Point2d>> p_SearchCorners;
 
+	UnitOutputPin<bool> p_outLenEn;
+	UnitOutputPin<QList<double>> p_outLen;
 	UnitOutputPin<QList<cv::Point2d>> p_outLead;//传出管脚尖坐标
 
 	//UnitOutputPin<bool> p_lenEn;

@@ -65,7 +65,7 @@ int angleFilterMod::run(const QString &funName)
 
 	if (p_im->empty())
 		return -1;
-	if (m_param->isMatrixRefer&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->isMatrixRefer&&p_homMat2d->size() != cv::Size(3, 2))
 		return -1;
 
 	m_allok = 0;
@@ -206,7 +206,7 @@ void angleFilterMod::viewResult(ImageView *iv, const QString &funName, int)
 {
 	if (p_im->empty())
 		return;
-	if (m_param->isMatrixRefer&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->isMatrixRefer&&p_homMat2d->size() != cv::Size(3, 2))
 		return;
 	if (!m_param->isDispAfterDet)
 		return;
@@ -344,7 +344,7 @@ void angleFilterMod::textResult(ResultText *text, const QString &funName)
 		text->append(QObject::tr("Empty image!"));
 		return;
 	}
-	if (m_param->isMatrixRefer&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->isMatrixRefer&&p_homMat2d->size() != cv::Size(3, 2))
 	{
 		text->setTextColor(Qt::red);
 		text->append(QObject::tr("Input matrix's size != 6!"));

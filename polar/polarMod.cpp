@@ -48,7 +48,7 @@ int polarMod::run(const QString &funName)
 {
 	if (p_im->empty())
 		return -1;
-	if (m_param->isMatrixRefer&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->isMatrixRefer&&p_homMat2d->size() != cv::Size(3, 2))
 		return -1;
 
 	if (m_param->isDefaultSig)
@@ -217,7 +217,7 @@ void polarMod::viewResult(ImageView *iv, const QString &funName, int)
 {
 	if (p_im->empty())
 		return;
-	if (m_param->isMatrixRefer&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->isMatrixRefer&&p_homMat2d->size() != cv::Size(3, 2))
 		return;
 
 	iv->clear();
@@ -276,7 +276,7 @@ void polarMod::textResult(ResultText *text, const QString &funName)
 		text->append(QObject::tr("Empty image!"));
 		return;
 	}
-	if (m_param->isMatrixRefer&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->isMatrixRefer&&p_homMat2d->size() != cv::Size(3, 2))
 	{
 		text->setTextColor(Qt::red);
 		text->append(QObject::tr("Input matrix's size != 2*3!"));

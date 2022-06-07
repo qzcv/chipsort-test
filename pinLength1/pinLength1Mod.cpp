@@ -273,7 +273,7 @@ int pinLength1Mod::run(const QString &funName)
 		setDetectOutData(TmpReferCol, tmpcol);
 	}
 	if (m_param->PinAreaRefer) {
-		if (p_homMat2D->size() != cv::Size(2, 3))
+		if (p_homMat2D->size() != cv::Size(3, 2))
 			hom_mat2d_identity(&m_homeMat2D);
 		else
 			HalOpenCV::cv2HalHomMat2D(*p_homMat2D, &m_homeMat2D);

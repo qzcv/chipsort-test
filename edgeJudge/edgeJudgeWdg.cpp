@@ -258,7 +258,7 @@ void edgeJudgeWdg::on_bt_selectRoi_toggled(bool check)
 			//}
 			else if (i > 0) {
 				if ((i > beforeNum[grpIndex] - 1) && (i < (beforeNum[grpIndex] + m_param->roiNum[grpIndex]))) {
-					title << tr("%s_%d").arg(regionName[grpIndex]).arg(i - beforeNum[grpIndex]);
+					title << tr("%1_%2").arg(regionName[grpIndex]).arg(i - beforeNum[grpIndex]);
 					//sprintf(buf[i], "%s_%d", tr(regionName[grpIndex]).toLocal8Bit().constData(), i - beforeNum[grpIndex] + 1);
 					if (i == (beforeNum[grpIndex] + m_param->roiNum[grpIndex] - 1)) {
 						grpIndex++;

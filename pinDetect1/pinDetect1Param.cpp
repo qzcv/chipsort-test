@@ -26,7 +26,7 @@ void pinDetect1Param::readWriteParam(bool r, const QString& dirPath, int level)
 	RW_VALUE(r, IsShowBlack);
 	RW_VALUE(r, IsSameValid);
 	RW_VALUE(r, currentGrp);
-	//RWParam(r,onlyUseEdge1);
+	//RW_VALUE(r,onlyUseEdge1);
 	RW_VALUE(r, IsDelOffSearchRoi);
 
 	RW_VALUE(r, SearchEdgeRoi.row);
@@ -56,14 +56,18 @@ void pinDetect1Param::readWriteParam(bool r, const QString& dirPath, int level)
 		RW_VALUE1(r, AutoThreReg[i].row2, i);
 		RW_VALUE1(r, AutoThreReg[i].col2, i);
 
-		//RWParam1(r,IsDetBase[i],i);
+		//RW_VALUE1(r,IsDetBase[i],i);
 		RW_VALUE1(r, IsRefer[i], i);
 		RW_VALUE1(r, InputBaseIndex[i], i);
 		RW_VALUE1(r, baseLineOffset[i], i);
 		RW_VALUE1(r, IsBaseInvert[i], i);
 
+		RW_VALUE1(r, CrossGrayValid[i], i);
+		RW_VALUE1(r, crossStep[i], i);
+		RW_VALUE1(r, crossGray[i], i);
+
 		RW_VALUE1(r, IsAmpBest[i], i);
-		//RWParam1(r,grpEnable[i],i);
+		//RW_VALUE1(r,grpEnable[i],i);
 		RW_VALUE1(r, grpPinNum[i], i);
 		RW_VALUE1(r, whiteBlackDir[i], i);
 		RW_VALUE1(r, searchDir[i], i);
@@ -83,7 +87,7 @@ void pinDetect1Param::readWriteParam(bool r, const QString& dirPath, int level)
 			widLineOffset[i] = abs(widLineOffset[i]);
 		}
 		RW_VALUE1(r, widOffsetRange[i], i);
-		//RWParam1(r,standoffOffset[i],i);
+		//RW_VALUE1(r,standoffOffset[i],i);
 		RW_VALUE1(r, clipfactor[i], i);
 
 		RW_VALUE1(r, lengthCorr[i], i);
@@ -209,6 +213,9 @@ void pinDetect1Param::iniData()
 		WidthGrayDiff[i] = 20;
 		widSearchLength[i] = 10;
 
+		crossStep[i] = 2;
+		CrossGrayValid[i] = 0;
+		crossGray[i] = 150;
 		//
 		minArea[i] = 500;
 		noiseGray[i] = 80;

@@ -333,19 +333,7 @@
         <translation></translation>
     </message>
     <message>
-        <source>间距：</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>长度：</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>管脚Sweep：</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>宽度：</source>
         <translation></translation>
     </message>
     <message>
@@ -491,6 +479,26 @@
     <message>
         <source>Search ROI</source>
         <translation>选择搜索区域</translation>
+    </message>
+    <message>
+        <source>穿越值：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>边界厚度:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>管脚间距：</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>长度： </source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>管脚宽度：</source>
+        <translation></translation>
     </message>
 </context>
 </TS>
