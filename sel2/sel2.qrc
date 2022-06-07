@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>sel2_zh.qm</file>
+        <file>sel2_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>sel2.ini</file>
+        <file>sel2.ver</file>
+    </qresource>
+</RCC>

@@ -37,8 +37,11 @@ public:
 	int lineOffset[4];      //边线偏移
 	double clipfactor[4];   //边缘线拟合的系数，1.0,1.5,2.0,2.5,3.0
 
-	int IsFixWidth[4];      //是否采用固定长度
-	int fixWidth[4];        //固定长度
+	int IsFixWidth[4];      //是否采用固定长度,即长度为与roi的相关交点
+	int fixWidth;        //固定长度
+	int IsSideNoDetect;    //是否部分边不检测
+	int SideDetectType;    //0-上下，1-左右，2单边
+	int onlyOneSideIndex;  //唯一不检测边
 
 	double TmpCenterRow;
 	double TmpCenterCol;   //模板中心的坐标
@@ -59,6 +62,10 @@ public:
 	double errWidthDiff;
 	int IsErrHeightDiff;
 	double errHeightDiff;
+
+	int CrossGrayValid[4];     //启用穿越值
+	int crossGray[4];
+	int crossStep[4];          //边界厚度
 
 	vector<RoiRegion> RoiRegionVector;  //[0]为搜索范围,[1]-[4]为上右下左的搜1索框
 

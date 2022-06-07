@@ -62,7 +62,7 @@ int edgeLineMod::run(const QString &funName)
 
 	if (p_im->empty())
 		return -1;
-	if (m_param->IsRefer&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->IsRefer&&p_homMat2d->size() != cv::Size(3, 2))
 		return -1;
 
 	cv::Mat im;
@@ -465,7 +465,7 @@ void edgeLineMod::viewResult(ImageView *iv, const QString &funName, int)
 {
 	if (p_im->empty())
 		return;
-	if (m_param->IsRefer&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->IsRefer&&p_homMat2d->size() != cv::Size(3, 2))
 		return;
 
 	for (int i = 0;i < 4;i++) {
@@ -596,7 +596,7 @@ void edgeLineMod::textResult(ResultText *text, const QString &funName)
 		text->append(QObject::tr("Empty image!"));
 		return;
 	}
-	if (m_param->IsRefer&&p_homMat2d->size() != cv::Size(2, 3))
+	if (m_param->IsRefer&&p_homMat2d->size() != cv::Size(3, 2))
 	{
 		text->setTextColor(Qt::red);
 		text->append(QObject::tr("Input matrix's size != 2*3!"));

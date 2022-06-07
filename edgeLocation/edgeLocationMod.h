@@ -2,7 +2,6 @@
 #include <moduleClass.h>
 #include <imageModule.h>
 #include "fitEdge.h"
-#include "HalconCpp.h"
 #include "chipMod.h"
 
 #define MAX_TESTITEMS_NUM 16
@@ -11,12 +10,10 @@
 
 using namespace qzcv;
 using namespace danke;
-using namespace Halcon;
 class edgeLocationParam;
 
-static fitEdgeLine::Orient m_dir[2][4] = {
-	{ fitEdgeLine::ToUp,fitEdgeLine::ToRight,fitEdgeLine::ToDown,fitEdgeLine::ToLeft },
-	{ fitEdgeLine::ToDown,fitEdgeLine::ToLeft,fitEdgeLine::ToUp,fitEdgeLine::ToRight } };
+static fitEdgeLine::Orient m_dir[2][4] = { { fitEdgeLine::ToUp,fitEdgeLine::ToRight,fitEdgeLine::ToDown,fitEdgeLine::ToLeft }
+,{ fitEdgeLine::ToDown,fitEdgeLine::ToLeft,fitEdgeLine::ToUp,fitEdgeLine::ToRight } };
 
 class edgeLocationMod : public ChipMod
 {
@@ -39,15 +36,16 @@ private:
 private:
 	edgeLocationParam* m_param;
 	friend class edgeLocationWdg;
-	fitEdgeLine *m_edgeLine[4];
-	bool m_testItemsStatus[MAX_TESTITEMS_NUM];
 	Hobject *m_image;
+	fitEdgeLine* m_edgeLine[4];
+	bool m_testItemsStatus[MAX_TESTITEMS_NUM];
 private:
 	UnitInputPin<cv::Mat> p_im;
 	UnitInputPin<cv::Mat> p_homMat2d;
-	UnitInputPin<double> p_pixelSize;
+	UnitInputPin<double> p_pixSize;
 
+	UnitOutputPin<bool> p_allok;
 	UnitOutputPin<QList<cv::Point2d>> p_corners;
-	UnitOutputPin<cv::Point2d> p_OFFCenter;
+	UnitOutputPin<cv::Point2d> p_offCenter;
 };
 

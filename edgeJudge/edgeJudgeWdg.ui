@@ -586,7 +586,7 @@
         <item row="0" column="1">
          <widget class="QSpinBox" name="sp_errOffAreaMin">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::UpDownArrows</enum>
@@ -670,7 +670,7 @@
         <item row="2" column="1">
          <widget class="QSpinBox" name="sp_errAngle">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::UpDownArrows</enum>
@@ -716,7 +716,7 @@
         <item row="0" column="1">
          <widget class="QDoubleSpinBox" name="dsp_errWidthMin">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::UpDownArrows</enum>
@@ -732,7 +732,7 @@
         <item row="0" column="2">
          <widget class="QDoubleSpinBox" name="dsp_errWidthMax">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::UpDownArrows</enum>
@@ -748,7 +748,7 @@
         <item row="1" column="1">
          <widget class="QDoubleSpinBox" name="dsp_errHeightMin">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::UpDownArrows</enum>
@@ -764,7 +764,7 @@
         <item row="1" column="2">
          <widget class="QDoubleSpinBox" name="dsp_errHeightMax">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::UpDownArrows</enum>
@@ -780,7 +780,7 @@
         <item row="2" column="3">
          <widget class="QDoubleSpinBox" name="dsp_errCenterOffset">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::UpDownArrows</enum>

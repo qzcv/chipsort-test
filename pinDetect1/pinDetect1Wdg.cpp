@@ -45,8 +45,6 @@ void pinDetect1Wdg::connectSlots(bool link)
 		return;
 	m_hasConnect=link;
 
-	connectOrNot(link, ui->bt_selectRoi, SIGNAL(toggled(bool)), SLOT(bt_selectRoi_toggled(bool)));
-
 	connectOrNot(link, m_autoThreDialog->ui.bt_selAutoThre, SIGNAL(toggled(bool)), SLOT(autoThre_bt_toggled(bool)));
 	connectOrNot(link, m_autoThreDialog->ui.bt_selectPin, SIGNAL(toggled(bool)), SLOT(autoThre_bt_toggled(bool)));
 	connectOrNot(link, m_autoThreDialog->ui.bt_selSearchRoi, SIGNAL(toggled(bool)), SLOT(autoThre_bt_toggled(bool)));
@@ -59,6 +57,7 @@ void pinDetect1Wdg::connectSlots(bool link)
 	connectOrNot(link, m_autoThreDialog->ui.cb_whitePin, SIGNAL(toggled(bool)), SLOT(checkBox_toggled(bool)));
 	connectOrNot(link, m_autoThreDialog->ui.cb_useInputRegion, SIGNAL(toggled(bool)), SLOT(checkBox_toggled(bool)));
 
+	connectOrNot(link, ui->cb_crossGray, SIGNAL(toggled(bool)), SLOT(checkBox_toggled(bool)));
 	connectOrNot(link, ui->cb_length, SIGNAL(toggled(bool)), SLOT(checkBox_toggled(bool)));
 	connectOrNot(link, ui->cb_pinInterval, SIGNAL(toggled(bool)), SLOT(checkBox_toggled(bool)));
 	connectOrNot(link, ui->cb_pinWidth, SIGNAL(toggled(bool)), SLOT(checkBox_toggled(bool)));
@@ -87,6 +86,8 @@ void pinDetect1Wdg::connectSlots(bool link)
 	connectOrNot(link, ui->sp_pinArea, SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
 	connectOrNot(link, ui->sp_noiseGray, SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
 	connectOrNot(link, ui->sp_multGray, SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
+	connectOrNot(link, ui->sp_crossGray, SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
+	connectOrNot(link, ui->sp_crossStep, SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
 
 	connectOrNot(link, ui->sp_deleteEdge, SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
 	connectOrNot(link, m_autoThreDialog->ui.sp_leadSize, SIGNAL(valueChanged(int)), SLOT(spinBox_valueChanged(int)));
@@ -388,6 +389,7 @@ void pinDetect1Wdg::setCurrentGrp(int index)
 	ui->cb_pinWidth->setChecked(m_param->errPinWidthValid[index]);
 	ui->cb_pinSweep->setChecked(m_param->errPinSweepValid[index]);
 	ui->cb_standoffDiff->setChecked(m_param->errPinStandOffDiffValid[index]);
+	ui->cb_crossGray->setChecked(m_param->CrossGrayValid[index]);
 	m_advDialog->ui.cb_baseInvert->setChecked(m_param->IsBaseInvert[index]);
 	m_advDialog->ui.cb_useRefer->setChecked(m_param->IsRefer[index]);
 	m_advDialog->ui.cb_inputRatio->setChecked(m_param->IsInputRatio[index]);
@@ -405,6 +407,8 @@ void pinDetect1Wdg::setCurrentGrp(int index)
 	ui->sp_pinArea->setValue(m_param->minArea[index]);
 	ui->sp_noiseGray->setValue(m_param->noiseGray[index]);
 	ui->sp_multGray->setValue(m_param->multGrayTimes[index]);
+	ui->sp_crossGray->setValue(m_param->crossGray[index]);
+	ui->sp_crossStep->setValue(m_param->crossStep[index]);
 	ui->sp_deleteEdge->setValue(m_param->deleteEdge[index]);
 
 	m_advDialog->ui.sp_widSearchLength->setValue(m_param->widSearchLength[index]);
@@ -638,6 +642,9 @@ void pinDetect1Wdg::checkBox_toggled(bool check)
 	else if (cb == m_autoThreDialog->ui.cb_useInputRegion) {
 		m_param->IsUseInputRegion = check;
 	}
+	else if (cb == ui->cb_crossGray) {
+		m_param->CrossGrayValid[m_param->currentGrp] = check;
+	}
 	m_module->setParamChanged(ProductLevel);
 	//log(LogL1, str0 + QString(" ") + cb->text() + str1);
 }
@@ -781,6 +788,16 @@ void pinDetect1Wdg::spinBox_valueChanged(int val)
 		str1 = tr(" change from %1 to %2").arg(QString::number(m_param->noiseGray[m_param->currentGrp])).arg(QString::number(val));
 		m_param->noiseGray[m_param->currentGrp] = val;
 		areaPaint();
+	}
+	else if (sp == ui->sp_crossGray) {
+		str0 = ui->tabWidget_lead->tabText(m_param->currentGrp) + QString(" ") + ui->cb_crossGray->text();
+		str1 = tr(" change from %1 to %2").arg(QString::number(m_param->crossGray[m_param->currentGrp])).arg(QString::number(val));
+		m_param->crossGray[m_param->currentGrp] = val;
+	}
+	else if (sp == ui->sp_crossStep) {
+		str0 = ui->tabWidget_lead->tabText(m_param->currentGrp) + QString(" ") + ui->lb_crossStep->text();
+		str1 = tr(" change from %1 to %2").arg(QString::number(m_param->crossStep[m_param->currentGrp])).arg(QString::number(val));
+		m_param->crossStep[m_param->currentGrp] = val;
 	}
 	else if (sp == ui->sp_multGray) {
 		str0 = ui->tabWidget_lead->tabText(m_param->currentGrp) + QString(" ") + ui->lb_multGray->text();

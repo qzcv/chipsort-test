@@ -1213,6 +1213,7 @@ void pinLength1Wdg::slider_valueChanged(int val)
 	disconnect(ui->sp_threshold, SIGNAL(valueChanged(int)), this, SLOT(spinBox_valueChanged(int)));
 	ui->sp_threshold->setValue(val);
 	connect(ui->sp_threshold, SIGNAL(valueChanged(int)), this, SLOT(spinBox_valueChanged(int)));
+	currentView()->finishDraw();
 	currentView()->clearLayer(m_layerIdx);
 	if (m_param->IsThreshold&&ui->bt_selectPin->isChecked()) {
 		for (int g = 0;g < 2;g++) {
@@ -1225,6 +1226,7 @@ void pinLength1Wdg::slider_valueChanged(int val)
 			currentView()->dispRect1(
 				m_param->segRegionVector[g].row1, m_param->segRegionVector[g].col1,
 				m_param->segRegionVector[g].row2, m_param->segRegionVector[g].col2);  //°Ñ±³¾°Í¿ºÚ
+			HalOpenCV::cv2halImg(*m_module->p_im, m_image, false);
 			reduce_domain(*m_image, threRect, &tmpImage);
 			if (m_param->IsWhitePin) {
 				threshold(tmpImage, &tmpImage, m_param->threValue, 255);

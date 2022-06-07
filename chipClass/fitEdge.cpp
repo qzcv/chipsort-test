@@ -231,6 +231,13 @@ void fitEdgeLine::setPolarAndOrient(Polarity pol,Orient orient)
 	m_orient=orient;
 }
 
+void fitEdgeLine::setCrossGrayValid(bool valid,int crossGray,int crossStep)
+{
+	m_crossGrayValid=valid;
+	m_crossGray=crossGray;
+	m_crossStep=crossStep;
+}
+
 void fitEdgeLine::setThreshold(int thre)
 {
 	m_threshold=thre;
@@ -405,9 +412,17 @@ bool fitEdgeLine::measureEdgePoints(const Hobject* img,bool isPair)
 			measure_pos(*m_image,measureHandle,1,m_threshold,edge,"first",&rowEdge,&colEdge,&amp,&distance);
 			Hlong aa=rowEdge.Num();
 			if (aa>0){
-				m_edgeRow1[usefulPoint]=rowEdge[0];
-				m_edgeCol1[usefulPoint]=colEdge[0];
-				usefulPoint++;
+				bool crossok=true;
+				if (m_crossGrayValid)
+				{
+					crossok=checkCrossGray(m_image,detAngle,rowEdge[0].D(),colEdge[0].D(),m_crossGray,m_crossStep,edge);
+				}
+				if (crossok)
+				{
+					m_edgeRow1[usefulPoint]=rowEdge[0];
+					m_edgeCol1[usefulPoint]=colEdge[0];
+					usefulPoint++;
+				}
 			}
 			pointN++;
 		} //采集边界点结束
@@ -528,6 +543,73 @@ bool fitEdgeLine::sortEdgePointsGroup()
 
 	}
 	return resOk;
+}
+
+bool fitEdgeLine::checkCrossGray(const Hobject* image, double Angle,double edgeRow,double edgeCol, int crossGray, int step,const char* polar)
+{
+	if (image==NULL || image->Id()==H_EMPTY_REGION)
+	{
+		return false;
+	}
+	Hlong imgWidth,imgHeight;
+	get_image_size(*image,&imgWidth,&imgHeight);
+
+	double stepRow,stepCol;
+	if (step<=0 )
+	{
+		return false;
+	}
+	bool negOK[2]={false,false},posOk[2]={false,false};
+	for (int i=0;i<step;i++)
+	{
+		int polVal[2]={1,-1};
+		for (int j=0;j<2;j++)  //分别对应正负两个方向
+		{
+			stepRow=edgeRow-polVal[j]*(i+1)*sin(Angle);
+			stepCol=edgeCol+polVal[j]*(i+1)*cos(Angle);
+			int tmpRow,tmpCol;
+			tmpRow=stepRow+0.5;
+			tmpCol=stepCol+0.5;
+			if (tmpRow<0 || tmpRow>(imgHeight-1) || tmpCol<0 || tmpCol>(imgWidth-1))
+			{
+				return false;
+			}
+			HTuple grayval;
+			get_grayval(*image,tmpRow,tmpCol,&grayval);
+			int grayValue=grayval[0].I();
+			if(  strcmp(polar,"positive")==0 || strcmp(polar,"all")==0  )
+			{
+				if (j==0){
+					if (!posOk[j])
+						posOk[j]=grayValue>=crossGray;
+				}
+				else{
+					if(!posOk[j])
+						posOk[j]=grayValue<=crossGray;
+				}
+			}
+			if ( strcmp(polar,"negative")==0 || strcmp(polar,"all")==0 )
+			{
+				if (j==0){
+					if(!negOK[j])
+						negOK[j]=grayValue<=crossGray;
+				}
+				else{
+					if(!negOK[j])
+						negOK[j]=grayValue>=crossGray;
+				}
+			}
+		}
+	}
+	bool allok=true;
+	if (strcmp(polar,"positive")==0)
+		allok=(posOk[0]&&posOk[1]);
+	else if (strcmp(polar,"negative")==0)
+		allok=(negOK[0]&&negOK[1]);
+	else{
+		allok= (posOk[0]&&posOk[1])||(negOK[0]&&negOK[1]);
+	}//polar=="all"
+	return allok;
 }
 
 }

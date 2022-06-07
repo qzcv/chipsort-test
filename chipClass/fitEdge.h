@@ -34,6 +34,7 @@ public:
 	void setRefer(HTuple hommat);
 	void setEdgeReferAngle(bool referValid,double angle=0); //是否启用角度以及参考角度
 	void setPolarAndOrient(Polarity pol,Orient orient);
+	void setCrossGrayValid(bool valid,int crossGray,int crossStep); //是否启用穿越值
 	void setThreshold(int thre);
 	void setSearchParam(int searchGap,int searchWidth);
 	void setFitFactor(double factor);
@@ -49,6 +50,8 @@ private:
 	bool measureEdgePoints(const Hobject* img,bool isPairEdge=0); //计算边界点,第二个参数决定是否采用两个边界
 	bool fitEdgePoints();  //整理边界点，进行边界拟合
 	bool sortEdgePointsGroup(); //对边界点集进行分组，分成多组边界的边界点集
+	bool checkCrossGray(const Hobject* image, double Angle,double edgeRow,double edgeCol, int crossGray, int step,const char* polar);
+	
 	HTuple m_edgeRow1,m_edgeCol1; //收录的所有边界点
 	HTuple m_edgeRow2,m_edgeCol2; //收录的所有边界点
 	HTuple m_lineRow[2],m_lineCol[2]; //收录的所有边界线的端点
@@ -70,6 +73,9 @@ private:
 	CvRect *m_roiRect;  //将存储进来的roi全部以此方式存储
 	double *m_roiAngle;
 
+	bool m_crossGrayValid;
+	int m_crossGray;
+	int m_crossStep;
 
 	int m_threshold;    //灰度差异
 	double m_factor;    //拟合因素

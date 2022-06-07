@@ -19,6 +19,9 @@ void edgeLocationParam::readWriteParam(bool r, const QString& dirPath, int level
 	if (r&&level != ProductLevel)
 		return;
 
+	RW_VALUE(r, onlyOneSideIndex);
+	RW_VALUE(r, IsSideNoDetect);
+	RW_VALUE(r, SideDetectType);
 	RW_VALUE(r, IsCsp);
 	IsCsp = 0;
 	RW_VALUE(r, IsShowRegionAfterDet);
@@ -26,6 +29,7 @@ void edgeLocationParam::readWriteParam(bool r, const QString& dirPath, int level
 	RW_VALUE(r, IsRefer);
 	RW_VALUE(r, IsInputPixel);
 	RW_VALUE(r, pixSize);
+	RW_VALUE(r, fixWidth);
 	for (int i = 0;i < 4;i++)
 	{
 		RW_VALUE1(r, whiteBlackDir[i], i);
@@ -38,7 +42,11 @@ void edgeLocationParam::readWriteParam(bool r, const QString& dirPath, int level
 		RW_VALUE1(r, lineOffset[i], i);
 		RW_VALUE1(r, clipfactor[i], i);
 		RW_VALUE1(r, IsFixWidth[i], i);
-		RW_VALUE1(r, fixWidth[i], i);
+
+
+		RW_VALUE1(r, CrossGrayValid[i], i);
+		RW_VALUE1(r, crossStep[i], i);
+		RW_VALUE1(r, crossGray[i], i);
 	}
 	RW_VALUE(r, IsErrHeight);
 	RW_VALUE(r, IsErrWidth);
@@ -90,11 +98,15 @@ void edgeLocationParam::readWriteParam(bool r, const QString& dirPath, int level
 void edgeLocationParam::iniData()
 {
 	IsCsp = 0;
+	IsSideNoDetect = 0;
+	SideDetectType = 2;
+	onlyOneSideIndex = 0;
 	IsShowRegionAfterDet = 1;
 	maxAngle = 10;
 	IsRefer = 0;
 	IsInputPixel = 0;
 	pixSize = 1.0;
+	fixWidth = 20;
 	for (int i = 0;i < 4;i++)
 	{
 		whiteBlackDir[i] = 0;
@@ -105,12 +117,14 @@ void edgeLocationParam::iniData()
 		lineOffset[i] = 0;
 		clipfactor[i] = 1.0;
 		IsFixWidth[i] = 0;
-		fixWidth[i] = 0;
 		roiNum[i] = 1;
+		crossStep[i] = 2;
+		CrossGrayValid[i] = 0;
+		crossGray[i] = 150;
 	}
 	IsErrHeight = IsErrWidth = IsErrAngle = IsErrCenterOffset = IsErrWidthDiff = IsErrHeightDiff = 0;
 	errWidthMin = errHeightMin = 0;
-	errWidthMax = errHeightmax = 1000;
+	errWidthMax = errHeightmax = 5000;
 	errWidthDiff = errHeightDiff = 0;
 	errAngle = 0;
 	errCenterOffset = 0;

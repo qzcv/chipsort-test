@@ -333,19 +333,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>间距：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>长度：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>管脚Sweep：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>宽度：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -490,6 +478,26 @@
     </message>
     <message>
         <source>Search ROI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>穿越值：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>边界厚度:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>管脚间距：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>长度： </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>管脚宽度：</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

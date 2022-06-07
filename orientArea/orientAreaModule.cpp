@@ -79,7 +79,7 @@ int orientAreaModule::run(const QString &funName)
 	hom_mat2d_identity(&tmpHm2d);
 	if (m_param->referSection)
 	{
-		if (p_homMat2d->size() != cv::Size(2, 3))
+		if (p_homMat2d->size() != cv::Size(3, 2))
 		{
 			m_detRes = wrongMat;
 			return -1;
