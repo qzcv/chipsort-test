@@ -3,7 +3,7 @@ FILE(GLOB SRC_FILES "*.cpp" "*.c" "*.h")
 #提取出当前文件夹的名称
 STRING( REGEX REPLACE ".*/(.*)" "\\1" CURRENT_FOLDER ${CMAKE_CURRENT_SOURCE_DIR} )
 #message("${SRC_FILES}")
-set(subDirConfigPattern "${CMAKE_CURRENT_SOURCE_DIR}/subDirConfig.cmake")
+
 #message("noUi=${noUi}")
 #如果目录下存在代码文件
 if(SRC_FILES)	
