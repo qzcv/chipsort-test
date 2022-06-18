@@ -149,3 +149,18 @@ bool ChipMod::checkCrossGray(const Hobject * image, double Angle, double edgeRow
 	}//polar=="all"
 	return allok;
 }
+
+void ChipMod::toHtuple(const UnitInputPin<QList<double>>& p, HTuple &htuple)
+{
+	htuple.Reset();
+	for (auto i = 0; i < p->size(); ++i)
+		htuple[i] = p->at(i);
+}
+
+QList<QVariant> ChipMod::toQList(const HTuple & htuple)
+{
+	QList<QVariant> p;
+	for (auto i = 0; i < htuple.Num(); ++i)
+		p.push_back(htuple[i].D());
+	return p;
+}

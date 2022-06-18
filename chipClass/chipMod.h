@@ -12,6 +12,11 @@ public:
 	explicit ChipMod();
 	~ChipMod();
 
+protected:
+	void toHtuple(const UnitInputPin<QList<double>> &p, HTuple &htuple);
+
+	QList<QVariant> toQList(const HTuple &htuple);
+
 	void setDetectOutData(const QString &key, const HTuple& val);
 	void setDetectOutData(const QString &key, const HTuple& val, int index);
 	void setDetectOutData(const QString &key, const HTuple& val, int index0, int index1);
@@ -33,4 +38,6 @@ public:
 private:
 	QMap<QString, HTuple> m_mapHtup;
 	QMap<QString, Hobject> m_mapHobj;
+
+
 };

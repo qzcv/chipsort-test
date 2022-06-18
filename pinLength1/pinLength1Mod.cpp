@@ -70,6 +70,11 @@
 
 #define  ImageFull "imageFull"
 
+#define LENGTH "length"
+#define WIDTH "width"
+#define PITCH "pitch"
+#define LENGTHDIFF "lengthDiff"
+
 pinLength1Mod::pinLength1Mod()
 {
 	iniData();
@@ -110,11 +115,11 @@ void pinLength1Mod::load(const QString &dirPath, QvsParamLevel level)
 
 int pinLength1Mod::run(const QString &funName)
 {
-	p_outLen->clear();
-	p_outWid->clear();
-	p_outPitch->clear();
-	p_outLenDiff->clear();
-	p_outCount->clear();
+// 	p_outLen->clear();
+// 	p_outWid->clear();
+// 	p_outPitch->clear();
+// 	p_outLenDiff->clear();
+// 	p_outCount->clear();
 
 	for (int i = 0;i < MAX_TESTITEMS_NUM;i++) {
 		m_testItemsStatus[i] = 1;
@@ -124,7 +129,7 @@ int pinLength1Mod::run(const QString &funName)
 		allok = false;
 		setDetectOutData(AllOk, allok);
 		setDetectOutData(ImageFull, false);
-		*p_resultOk = false;
+		//*p_resultOk = false;
 		m_testItemsStatus[0] = 0;
 		return -1;
 		//setDetectOutData(ResultOk, false);
@@ -460,7 +465,7 @@ int pinLength1Mod::run(const QString &funName)
 				int leadIndex = g*m_param->pinCont[0] + i;
 				setDetectOutData(EmptyLead, leadIndex);
 				setDetectOutData(AllOk, false);
-				*p_resultOk = false;
+				//*p_resultOk = false;
 				return -1;
 				//setDetectOutData(ResultOk, false);
 				//return false;
@@ -596,7 +601,7 @@ int pinLength1Mod::run(const QString &funName)
 				int leadIndex = g*m_param->pinCont[0] + i;
 				setDetectOutData(EmptyLead, leadIndex);
 				setDetectOutData(AllOk, false);
-				*p_resultOk = false;
+				//*p_resultOk = false;
 				return -1;
 				//setDetectOutData(ResultOk, false);
 				//return false;
@@ -1054,7 +1059,7 @@ int pinLength1Mod::run(const QString &funName)
 	if (!allpointsOk) {
 		setDetectOutData(AllOk, false);
 		m_testItemsStatus[0] = 0;
-		*p_resultOk = false;
+		//*p_resultOk = false;
 		return -1;
 		//setDetectOutData(ResultOk, false);
 		//return false;
@@ -1321,7 +1326,7 @@ int pinLength1Mod::run(const QString &funName)
 	}
 
 	setDetectOutData(AllOk, allok);
-	*p_resultOk = allok;
+	//*p_resultOk = allok;
 	//setDetectOutData(ResultOk, allok);
 	if (allok) {
 		if (m_param->errMaxDiffValid) {
@@ -1333,33 +1338,33 @@ int pinLength1Mod::run(const QString &funName)
 				Outputlengthdiff[1] = 0;
 			}
 			tuple_concat(Outputlengthdiff[0], Outputlengthdiff[1], &diffout);
-			toQList(diffout, p_outLenDiff);
+			p_item->insert(LENGTHDIFF, toQList(diffout));
 			//setDetectOutData(LeadOutDiff, diffout);
 		}
 		if (m_param->errLengthValid) {
 			HTuple offout;
 			tuple_concat(Outputlength[0], Outputlength[1], &offout);
-			toQList(offout, p_outLen);
+			p_item->insert(LENGTH, toQList(offout));
 			//setDetectOutData(OutLength, offout);
 		}
 		if (m_param->errWidthValid) {
 			HTuple offout;
 			tuple_concat(OutputPinwidth[0], OutputPinwidth[1], &offout);
-			toQList(offout, p_outWid);
+			p_item->insert(WIDTH, toQList(offout));
 			//setDetectOutData(LeadOutWidth, offout);
 		}
 		if (m_param->errInterValid) {
 			HTuple offout;
 			tuple_concat(OutputPininterval[0], OutputPininterval[1], &offout);
-			toQList(offout, p_outPitch);
+			p_item->insert(PITCH, toQList(offout));
 			//setDetectOutData(LeadOutPitch, offout);
 		}
-		*p_lenEnable = m_param->errLengthValid[0] && m_param->errLengthValid[1];
-		*p_widEnable = m_param->errWidthValid[0] && m_param->errWidthValid[1];
-		*p_pitchEnable = m_param->errInterValid[0] && m_param->errInterValid[1];
-		*p_lenDiffEnable = m_param->errMaxDiffValid[0] && m_param->errMaxDiffValid[1];
-		p_outCount->push_back(m_param->pinCont[0]);
-		p_outCount->push_back(m_param->pinCont[1]);
+// 		*p_lenEnable = m_param->errLengthValid[0] && m_param->errLengthValid[1];
+// 		*p_widEnable = m_param->errWidthValid[0] && m_param->errWidthValid[1];
+// 		*p_pitchEnable = m_param->errInterValid[0] && m_param->errInterValid[1];
+// 		*p_lenDiffEnable = m_param->errMaxDiffValid[0] && m_param->errMaxDiffValid[1];
+// 		p_outCount->push_back(m_param->pinCont[0]);
+// 		p_outCount->push_back(m_param->pinCont[1]);
 		//setDetectOutData(LengthEnable, m_param->errLengthValid[0] && m_param->errLengthValid[1]);
 		//setDetectOutData(WidthEnable, m_param->errWidthValid[0] && m_param->errWidthValid[1]);
 		//setDetectOutData(InterEnable, m_param->errInterValid[0] && m_param->errInterValid[1]);
@@ -1848,31 +1853,39 @@ void pinLength1Mod::createPins()
 	addPin(&p_searchHomMat2D, "searchHm2d");
 	addPin(&p_searchCorners, "searchCor");
 
-	addPin(&p_resultOk, "resultOk");
-	addPin(&p_lenEnable, "lenEn");
-	addPin(&p_outLen, "outLen");
-	addPin(&p_widEnable, "widEn");
-	addPin(&p_outWid, "outWid");
-	addPin(&p_pitchEnable, "pitchEn");
-	addPin(&p_outPitch, "outPitch");
-	addPin(&p_lenDiffEnable, "lenDiffEn");
-	addPin(&p_outLenDiff, "outLenDiff");
-	addPin(&p_outCount, "outCnt");
+	addPin(&p_item, "item");
+
+// 	addPin(&p_resultOk, "resultOk");
+// 	addPin(&p_lenEnable, "lenEn");
+// 	addPin(&p_outLen, "outLen");
+// 	addPin(&p_widEnable, "widEn");
+// 	addPin(&p_outWid, "outWid");
+// 	addPin(&p_pitchEnable, "pitchEn");
+// 	addPin(&p_outPitch, "outPitch");
+// 	addPin(&p_lenDiffEnable, "lenDiffEn");
+// 	addPin(&p_outLenDiff, "outLenDiff");
+// 	addPin(&p_outCount, "outCnt");
 
 	p_inputIdx.setVisible(false);
 	p_searchHomMat2D.setVisible(false);
 	p_searchCorners.setVisible(false);
 
-	p_resultOk.setVisible(false);
-	p_lenEnable.setVisible(false);
-	p_outLen.setVisible(false);
-	p_widEnable.setVisible(false);
-	p_outWid.setVisible(false);
-	p_pitchEnable.setVisible(false);
-	p_outPitch.setVisible(false);
-	p_lenDiffEnable.setVisible(false);
-	p_outLenDiff.setVisible(false);
-	p_outCount.setVisible(false);
+	p_item.setVisible(false);
+	p_item->insert(LENGTH, "length");
+	p_item->insert(WIDTH, "width");
+	p_item->insert(PITCH, "pitch");
+	p_item->insert(LENGTHDIFF, "lengthDiff");
+
+// 	p_resultOk.setVisible(false);
+// 	p_lenEnable.setVisible(false);
+// 	p_outLen.setVisible(false);
+// 	p_widEnable.setVisible(false);
+// 	p_outWid.setVisible(false);
+// 	p_pitchEnable.setVisible(false);
+// 	p_outPitch.setVisible(false);
+// 	p_lenDiffEnable.setVisible(false);
+// 	p_outLenDiff.setVisible(false);
+// 	p_outCount.setVisible(false);
 }
 
 bool pinLength1Mod::IsPointInRegion(const Hobject * InputReg, double row, double col)
@@ -1889,18 +1902,4 @@ bool pinLength1Mod::IsPointInRegion(const Hobject * InputReg, double row, double
 	else {
 		return 0;
 	}
-}
-
-void pinLength1Mod::toHtuple(const UnitInputPin<QList<double>>& p, HTuple &htuple)
-{
-	htuple.Reset();
-	for (auto i = 0;i < p->size();++i)
-		htuple[i] = p->at(i);
-}
-
-void pinLength1Mod::toQList(const HTuple & htuple, UnitOutputPin<QList<double>>& p)
-{
-	p->clear();
-	for (auto i = 0;i < htuple.Num();++i)
-		p->push_back(htuple[i].D());
 }

@@ -26,7 +26,14 @@
 #define StandOffDiff "standoffDiff"  //管脚站高差1距
 #define StandCoplanar "standcoplanar"//共面性
 
+#define ResultOutOk "resultOutOk"
+
 #define ImageFull "Imagefull"  //图片是否ok
+
+#define STANDOFF "standOff"
+#define WIDTH "width"
+#define PITCH "pitch"
+#define STANDDIFF "standDiff"
 
 standLocationMod::standLocationMod()
 {
@@ -68,11 +75,11 @@ void standLocationMod::load(const QString &dirPath, QvsParamLevel level)
 
 int standLocationMod::run(const QString &funName)
 {
-	p_PinWidthOut->clear();
-	p_StandOffOut->clear();
-	p_PinInterValOut->clear();
-	p_StandOffDiffOut->clear();
-	p_PinCountOut->clear();
+// 	p_PinWidthOut->clear();
+// 	p_StandOffOut->clear();
+// 	p_PinInterValOut->clear();
+// 	p_StandOffDiffOut->clear();
+// 	p_PinCountOut->clear();
 
 	for (int i = 0;i < MAX_TESTITEMS_NUM;i++) {
 		m_testItemsStatus[i] = 1;
@@ -90,8 +97,8 @@ int standLocationMod::run(const QString &funName)
 		allok = false;
 		setDetectOutData(AllOK, allok);
 		setDetectOutData(ImageFull, false);
-		//setDetectOutData(ResultOutOk, false);
-		*p_ResultOutOk = false;
+		setDetectOutData(ResultOutOk, false);
+		//*p_ResultOutOk = false;
 		m_testItemsStatus[0] = 0;
 		return allok;
 	}
@@ -745,8 +752,8 @@ int standLocationMod::run(const QString &funName)
 		setDetectOutData(CoplanarOk, coplanarOk[1], 1);
 	}
 	setDetectOutData(AllOK, allok);
-	*p_ResultOutOk = resultOutOK;
-	//setDetectOutData(ResultOutOk, resultOutOK);
+	//*p_ResultOutOk = resultOutOK;
+	setDetectOutData(ResultOutOk, resultOutOK);
 	if (resultOutOK) {
 
 		if (m_param->errPinStandOffDiffValid) {
@@ -758,33 +765,37 @@ int standLocationMod::run(const QString &funName)
 				OutStandoffdiff[index[1]] = 0;
 			}
 			tuple_concat(OutStandoffdiff[index[0]], OutStandoffdiff[index[1]], &diffout);
-			toQList(diffout, p_StandOffDiffOut);
+			p_item->insert(STANDDIFF, toQList(diffout));
+			//toQList(diffout, p_StandOffDiffOut);
 			//setDetectOutData(StandOffDiffOut, diffout);
 		}
 		if (m_param->errPinStandOffValid) {
 			HTuple offout;
 			tuple_concat(OutStandoff[index[0]], OutStandoff[index[1]], &offout);
-			toQList(offout, p_StandOffOut);
+			p_item->insert(STANDOFF, toQList(offout));
+			//toQList(offout, p_StandOffOut);
 			//setDetectOutData(StandOffOut, offout);
 		}
 		if (m_param->errPinWidthValid) {
 			HTuple widout;
 			tuple_concat(OutPinwidth[index[0]], OutPinwidth[index[1]], &widout);
-			toQList(widout, p_PinWidthOut);
+			p_item->insert(WIDTH, toQList(widout));
+			//toQList(widout, p_PinWidthOut);
 			//setDetectOutData(PinWidthOut, widout);
 		}
 		if (m_param->errPinGapValid) {
 			HTuple interout;
 			tuple_concat(OutPininterval[index[0]], OutPininterval[index[1]], &interout);
-			toQList(interout, p_PinInterValOut);
+			p_item->insert(PITCH, toQList(interout));
+			//toQList(interout, p_PinInterValOut);
 			//setDetectOutData(PinInterValOut, interout);
 		}
-		*p_StandOffEnable = m_param->errPinStandOffValid;
-		*p_PinWidthEnable = m_param->errPinWidthValid;
-		*p_PinInterValEnable = m_param->errPinGapValid;
-		*p_StandOffDiffEnable = m_param->errPinStandOffDiffValid;
-		p_PinCountOut->push_back(m_param->grpPinNum[0]);
-		p_PinCountOut->push_back(m_param->grpPinNum[1]);
+		//*p_StandOffEnable = m_param->errPinStandOffValid;
+		//*p_PinWidthEnable = m_param->errPinWidthValid;
+		//*p_PinInterValEnable = m_param->errPinGapValid;
+		//*p_StandOffDiffEnable = m_param->errPinStandOffDiffValid;
+		//p_PinCountOut->push_back(m_param->grpPinNum[0]);
+		//p_PinCountOut->push_back(m_param->grpPinNum[1]);
 
 		//setDetectOutData(StandOffEnable, m_param->errPinStandOffValid);
 		//setDetectOutData(PinWidthEnable, m_param->errPinWidthValid);
@@ -1033,8 +1044,8 @@ void standLocationMod::textResult(ResultText *text, const QString &funName)
 		}
 	}
 	HTuple resultok;
-	resultok = **p_ResultOutOk;
-	//getDispOutData(ResultOutOk, resultok);
+	//resultok = **p_ResultOutOk;
+	getDispOutData(ResultOutOk, resultok);
 	if (resultok[0].I() && m_param->errCoplanarValid)
 	{
 		HTuple maxdiff;
@@ -1073,40 +1084,34 @@ void standLocationMod::createPins()
 	addPin(&p_edgeColEnd, "edgeColE");
 	addPin(&p_leadLen, "leadLen");
 
-	addPin(&p_StandOffEnable, "standOffEn");
-	addPin(&p_StandOffOut, "standOffOut");
-	addPin(&p_PinWidthEnable, "pinWidthEn");
-	addPin(&p_PinWidthOut, "pinWidthOut");
-	addPin(&p_PinInterValEnable, "pinInterEn");
-	addPin(&p_PinInterValOut, "pinInterValOut");
-	addPin(&p_StandOffDiffEnable, "standOffDiffEn");
-	addPin(&p_StandOffDiffOut, "standOffDiffOut");
-	addPin(&p_ResultOutOk, "resultOutOk");
-	addPin(&p_PinCountOut, "pinCountOut");
+	addPin(&p_item, "item");
+	p_item.setVisible(false);
 
-	p_StandOffEnable.setVisible(false);
-	p_StandOffOut.setVisible(false);
-	p_PinWidthEnable.setVisible(false);
-	p_PinWidthOut.setVisible(false);
-	p_PinInterValEnable.setVisible(false);
-	p_PinInterValOut.setVisible(false);
-	p_StandOffDiffEnable.setVisible(false);
-	p_StandOffDiffOut.setVisible(false);
-	p_ResultOutOk.setVisible(false);
-	p_PinCountOut.setVisible(false);
-}
+	p_item->insert(STANDOFF, 0);
+	p_item->insert(WIDTH, 0);
+	p_item->insert(PITCH, 0);
+	p_item->insert(STANDDIFF, 0);
 
-void standLocationMod::toHtuple(const UnitInputPin<QList<double>>& p, HTuple &htuple)
-{
-	htuple.Reset();
-	for (auto i = 0;i < p->size();++i)
-		htuple[i] = p->at(i);
-}
+// 	addPin(&p_StandOffEnable, "standOffEn");
+// 	addPin(&p_StandOffOut, "standOffOut");
+// 	addPin(&p_PinWidthEnable, "pinWidthEn");
+// 	addPin(&p_PinWidthOut, "pinWidthOut");
+// 	addPin(&p_PinInterValEnable, "pinInterEn");
+// 	addPin(&p_PinInterValOut, "pinInterValOut");
+// 	addPin(&p_StandOffDiffEnable, "standOffDiffEn");
+// 	addPin(&p_StandOffDiffOut, "standOffDiffOut");
+// 	addPin(&p_ResultOutOk, "resultOutOk");
+// 	addPin(&p_PinCountOut, "pinCountOut");
 
-void standLocationMod::toQList(const HTuple & htuple, UnitOutputPin<QList<double>>& p)
-{
-	p->clear();
-	for (auto i = 0;i < htuple.Num();++i)
-		p->push_back(htuple[i].D());
+// 	p_StandOffEnable.setVisible(false);
+// 	p_StandOffOut.setVisible(false);
+// 	p_PinWidthEnable.setVisible(false);
+// 	p_PinWidthOut.setVisible(false);
+// 	p_PinInterValEnable.setVisible(false);
+// 	p_PinInterValOut.setVisible(false);
+// 	p_StandOffDiffEnable.setVisible(false);
+// 	p_StandOffDiffOut.setVisible(false);
+// 	p_ResultOutOk.setVisible(false);
+// 	p_PinCountOut.setVisible(false);
 }
 

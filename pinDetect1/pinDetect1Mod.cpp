@@ -101,6 +101,8 @@ using namespace std;
 
 #define DelReion "delRegion"
 
+#define LENGTH "length"
+
 pinDetect1Mod::pinDetect1Mod()
 {
 	iniData();
@@ -142,7 +144,7 @@ void pinDetect1Mod::load(const QString &dirPath, QvsParamLevel level)
 int pinDetect1Mod::run(const QString &funName)
 {
 	p_outLead->clear();
-	p_outLen->clear();
+	//p_outLen->clear();
 
 	for (int i = 0;i < MAX_TESTITEMS_NUM;i++) {
 		m_testItemsStatus[i] = 1;
@@ -1405,9 +1407,8 @@ int pinDetect1Mod::run(const QString &funName)
 //		setDetectOutData(OutLength, outLength);
 // 		setDetectOutData(OutLeadRow, outLeadRow);
 // 		setDetectOutData(OutLeadCol, outLeadCol);
-		*p_outLenEn = enable;
-		for (auto i = 0;i < outLength.Num();++i)
-			p_outLen->push_back(outLength[i].D());
+		//*p_outLenEn = enable;
+		p_item->insert(LENGTH, toQList(outLength));
 		for (auto i = 0;i < outLeadCol.Num();++i)
 		{
 			double x = outLeadCol[i].D();
@@ -1778,8 +1779,9 @@ void pinDetect1Mod::createPins()
 	addPin(&p_SearchHomMat2D, "searchHm2d");
 	addPin(&p_SearchCorners, "searchCors");
 
-	addPin(&p_outLenEn, "lenEn");
-	addPin(&p_outLen, "length");
+	//addPin(&p_outLenEn, "lenEn");
+	//addPin(&p_outLen, "length");
+	addPin(&p_item, "item");
 	addPin(&p_outLead, "outLead");
 
 	//addPin(&p_lenEn, "lenEn");
@@ -1788,9 +1790,12 @@ void pinDetect1Mod::createPins()
 	p_SearchHomMat2D.setVisible(false);
 	p_SearchCorners.setVisible(false);
 
-	p_outLenEn.setVisible(false);
-	p_outLen.setVisible(false);
+	//p_outLenEn.setVisible(false);
+	//p_outLen.setVisible(false);
+	p_item.setVisible(false);
 	p_outLead.setVisible(false);
+
+	p_item->insert(LENGTH, "length");
 }
 
 bool pinDetect1Mod::IsPointInRegion(const Hobject * InputReg, double row, double col, int Larger)

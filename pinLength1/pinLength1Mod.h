@@ -46,19 +46,17 @@ private:
 	UnitInputPin<int> p_inputIdx;
 	UnitInputPin<QList<cv::Point2d>> p_searchCorners;
 
-	UnitOutputPin<bool> p_resultOk;
-	UnitOutputPin<bool> p_lenEnable;
-	UnitOutputPin<QList<double>> p_outLen;
-	UnitOutputPin<bool> p_widEnable;
-	UnitOutputPin<QList<double>> p_outWid;
-	UnitOutputPin<bool> p_pitchEnable;
-	UnitOutputPin<QList<double>> p_outPitch;
-	UnitOutputPin<bool> p_lenDiffEnable;
-	UnitOutputPin<QList<double>> p_outLenDiff;
-	UnitOutputPin<QList<int>> p_outCount;
+	UnitOutputPin<QMap<QString, QVariant>> p_item;
 
-	void toHtuple(const UnitInputPin<QList<double>> &p, HTuple &htuple);
-
-	void toQList(const HTuple &htuple, UnitOutputPin<QList<double>> &p);
+// 	UnitOutputPin<bool> p_resultOk;
+// 	UnitOutputPin<bool> p_lenEnable;
+// 	UnitOutputPin<QList<double>> p_outLen;
+// 	UnitOutputPin<bool> p_widEnable;
+// 	UnitOutputPin<QList<double>> p_outWid;
+// 	UnitOutputPin<bool> p_pitchEnable;
+// 	UnitOutputPin<QList<double>> p_outPitch;
+// 	UnitOutputPin<bool> p_lenDiffEnable;
+// 	UnitOutputPin<QList<double>> p_outLenDiff;
+// 	UnitOutputPin<QList<int>> p_outCount;
 };
 

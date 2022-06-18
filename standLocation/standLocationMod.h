@@ -67,23 +67,22 @@ private:
 	UnitInputPin<QList<double>> p_edgeColEnd;
 	UnitInputPin<QList<double>> p_leadLen;
 
-	UnitOutputPin<bool> p_StandOffEnable;
-	UnitOutputPin<QList<double>> p_StandOffOut;
+	UnitOutputPin<QMap<QString, QVariant>> p_item;
 
-	UnitOutputPin<bool> p_PinWidthEnable;
-	UnitOutputPin<QList<double>> p_PinWidthOut;
 
-	UnitOutputPin<bool> p_PinInterValEnable;
-	UnitOutputPin<QList<double>> p_PinInterValOut;
-
-	UnitOutputPin<bool> p_StandOffDiffEnable;
-	UnitOutputPin<QList<double>> p_StandOffDiffOut;
-
-	UnitOutputPin<bool> p_ResultOutOk;
-	UnitOutputPin<QList<int>> p_PinCountOut;
-
-	void toHtuple(const UnitInputPin<QList<double>> &p, HTuple &htuple);
-
-	void toQList(const HTuple &htuple, UnitOutputPin<QList<double>> &p);
+// 	UnitOutputPin<bool> p_StandOffEnable;
+// 	UnitOutputPin<QList<double>> p_StandOffOut;
+// 
+// 	UnitOutputPin<bool> p_PinWidthEnable;
+// 	UnitOutputPin<QList<double>> p_PinWidthOut;
+// 
+// 	UnitOutputPin<bool> p_PinInterValEnable;
+// 	UnitOutputPin<QList<double>> p_PinInterValOut;
+// 
+// 	UnitOutputPin<bool> p_StandOffDiffEnable;
+// 	UnitOutputPin<QList<double>> p_StandOffDiffOut;
+// 
+// 	UnitOutputPin<bool> p_ResultOutOk;
+// 	UnitOutputPin<QList<int>> p_PinCountOut;
 };
 
