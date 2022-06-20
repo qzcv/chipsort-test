@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>report_en.qm</file>
+        <file>report_zh.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>report.ini</file>
+        <file>report.ver</file>
+    </qresource>
+</RCC>

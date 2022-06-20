@@ -1,4 +1,4 @@
-#include "GRRreportParam.h"
+#include "reportParam.h"
 #include <iniParam.h>
 #include "qvglobal.h"
 

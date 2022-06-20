@@ -1,5 +1,6 @@
-#include "GRRreportWdg.h"
-#include "GRRreportMod.h"
+#include "reportWdg.h"
+#include "reportMod.h"
+#include "ui_calibreportwdg.h"
 #include "ui_GRRreportWdg.h"
 #include <QMessageBox>
 #include <QInputDialog>
@@ -233,6 +234,7 @@ void GRRreportWdg::iniUi()
 	ui->tree_item->setHeaderLabels(titles);
 	ui->tree_item->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 	ui->tree_item->header()->setStretchLastSection(false);
+	ui->tree_item->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
 void GRRreportWdg::setUiValue()
@@ -354,6 +356,8 @@ void GRRreportWdg::setSubItem()
 				spLsl->setMaximum(99);
 				spUsl->setDecimals(3);
 				spLsl->setDecimals(3);
+				spUsl->setButtonSymbols(QAbstractSpinBox::NoButtons);
+				spLsl->setButtonSymbols(QAbstractSpinBox::NoButtons);
 				connect(spUsl, SIGNAL(valueChanged(double)), SLOT(dsp_valueChanged(double)));
 				connect(spLsl, SIGNAL(valueChanged(double)), SLOT(dsp_valueChanged(double)));
 			}
@@ -408,5 +412,88 @@ bool GRRreportWdg::needUpdateTreeItem(int idx)
 				return true;
 		}
 	}
+}
+
+
+calibReportWdg::calibReportWdg(int i) :
+	ModSetWidget(), ui(new Ui::calibReportWdg), m_widgetType(i)
+{
+	m_hasConnect = false;
+	ui->setupUi(this);
+	iniUi();
+	m_module = nullptr;
+}
+
+calibReportWdg::~calibReportWdg()
+{
+	delete ui;
+}
+void calibReportWdg::setModule(UnitModule* module)
+{
+	m_module = dynamic_cast<calibReportMod*>(module);
+	connectSlots(false);
+	setUiValue();
+	connectSlots(true);
+}
+
+void calibReportWdg::showEvent(QShowEvent * event)
+{
+	connectSlots(false);
+	setUiValue();
+	connectSlots(true);
+}
+
+void calibReportWdg::rb_clicked()
+{
+	QRadioButton *rb = qobject_cast<QRadioButton *>(sender());
+	if (rb == ui->rb_st_normal)
+		m_module->m_is3D = false;
+	else if (rb == ui->rb_st_3D)
+		m_module->m_is3D = true;
+	m_module->setParamChanged(ProductLevel);
+}
+
+void calibReportWdg::bt_clicked()
+{
+	QPushButton *bt = qobject_cast<QPushButton *>(sender());
+	if (bt == ui->bt_genCalibReport)
+	{
+		m_module->m_name = ui->le_name->text();
+		auto select = QMessageBox::information(this, tr("information"),
+			tr("The default output is a csv file. Should it be changed to an html file (read-only)?"),
+			QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+		if (select == QMessageBox::Yes)
+			m_module->genCalibReport_html(!m_module->m_is3D);
+		else if (select == QMessageBox::No)
+			m_module->genCalibReport_xlsx(!m_module->m_is3D);
+	}
+	m_module->setParamChanged(ProductLevel);
+}
+
+void calibReportWdg::connectSlots(bool link)
+{
+	if (m_hasConnect == link)
+		return;
+	m_hasConnect = link;
+
+	connectOrNot(link, ui->rb_st_normal, SIGNAL(clicked()), SLOT(rb_clicked()));
+	connectOrNot(link, ui->rb_st_3D, SIGNAL(clicked()), SLOT(rb_clicked()));
+	connectOrNot(link, ui->bt_genCalibReport, SIGNAL(clicked()), SLOT(bt_clicked()));
+}
+
+void calibReportWdg::iniUi()
+{
+
+}
+
+void calibReportWdg::setUiValue()
+{
+	ui->rb_st_3D->setVisible(m_widgetType == 1);
+	ui->rb_st_normal->setVisible(m_widgetType == 1);
+
+	ui->rb_st_normal->setChecked(!m_module->m_is3D);
+	ui->rb_st_3D->setChecked(m_module->m_is3D);
+
+	ui->le_name->setText(m_module->m_name);
 }
 

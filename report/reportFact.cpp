@@ -1,9 +1,11 @@
-#include "GRRreportFact.h"
-#include "GRRreportWdg.h"
-#include "GRRreportMod.h"
+#include "reportFact.h"
+#include "reportWdg.h"
+#include "reportMod.h"
+
+const QString FILE_NAME = "report";
 
 GRRreportFact :: GRRreportFact()
-	: ModuleFactory(FactoryName, 0)
+	: ModuleFactory(FILE_NAME, 0)
 {
 
 	getModSetWidgetStyles();
@@ -46,17 +48,59 @@ qzcv::ModSetWidget* GRRreportFact::createModSetWidget(const QString &style)
 	return new GRRreportWdg;
 }
 
+calibReportFact::calibReportFact()
+	: ModuleFactory(FILE_NAME, 1)
+{
+	getModSetWidgetStyles();
+}
+
+calibReportFact :: ~calibReportFact()
+{
+
+}
+
+qzcv::UnitModule* calibReportFact::createModule()
+{
+	return new calibReportMod;
+}
+
+qzcv::UnitModule* calibReportFact::createModule(const QString& dirPath)
+{
+	return new calibReportMod(dirPath);
+}
+
+QStringList calibReportFact::getModSetWidgetStyles()
+{
+	m_styleList << "simple" << "normal";
+	return m_styleList;
+}
+
+qzcv::ModSetWidget* calibReportFact::createModSetWidget()
+{
+	return new calibReportWdg;
+}
+
+qzcv::ModSetWidget* calibReportFact::createModSetWidget(const QString &style)
+{
+	for (int i = 0; i < m_styleList.size(); i++)
+	{
+		if (style == m_styleList.at(i))
+			return new calibReportWdg(i);
+	}
+	return new calibReportWdg;
+}
+
 extern "C" Q_DECL_EXPORT int getFactoryCnt()
 {
-	return 1;
+	return 2;
 }
 
 extern "C" Q_DECL_EXPORT void* createModuleFactory(int index)
 {
-	if(0==index)
-	{
+	if (0 == index)
 		return new GRRreportFact;
-	}
+	else if (1 == index)
+		return new calibReportFact;
 	else
 		return NULL;
 }

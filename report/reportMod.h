@@ -1,7 +1,7 @@
 #pragma once
 #include <moduleClass.h>
 #include <imageModule.h>
-#include "GRRreportParam.h"
+#include "reportParam.h"
 
 using namespace qzcv;
 
@@ -68,3 +68,32 @@ private:
 	QList<UnitInputPin<QMap<QString, QVariant>> *> p_it;
 };
 
+class calibReportMod :public UnitModule
+{
+public:
+	explicit calibReportMod();
+	explicit calibReportMod(const QString&);
+	~calibReportMod();
+	int command(int cmdID, void* dataIn, void* dataOut);
+	virtual int afterSetProperty(MetaProperty*);
+protected:
+	virtual void save(const QString& dirPath);
+	virtual void load(const QString& dirPath, QvsParamLevel level);
+	virtual int run(const QString& funName) { return 0; };
+	virtual void viewResult(ImageView* iv, const QString& funName, int) {};
+	virtual void textResult(ResultText* text, const QString& funName) {};
+private:
+	void iniData();
+	void createPins();
+	void RWParam(bool r, QString dirPath, int level);
+
+	void genCalibReport_html(int ispix);
+	void genCalibReport_xlsx(int ispix);
+private:
+	friend class calibReportWdg;
+
+	bool m_is3D;
+	QString m_name;
+private:
+	UnitInputPin<QList<double>> p_calibInfo;
+};

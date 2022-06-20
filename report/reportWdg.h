@@ -1,9 +1,14 @@
 #pragma once
 #include <moduleClass.h>
-#include "GRRreportParam.h"
+#include "reportParam.h"
 
-namespace Ui {class GRRreportWdg;}
+namespace Ui 
+{
+	class GRRreportWdg;
+	class calibReportWdg;
+}
 class GRRreportMod;
+class calibReportMod;
 class QDoubleSpinBox;
 class QTreeWidgetItem;
 using namespace qzcv;
@@ -48,3 +53,26 @@ private:
 	QList<QList<QDoubleSpinBox *>> sp_LSL;
 };
 
+class calibReportWdg : public ModSetWidget
+{
+	Q_OBJECT
+
+public:
+	explicit calibReportWdg(int idx = 0);
+	~calibReportWdg();
+	virtual void setModule(UnitModule* moudle);
+protected:
+	void showEvent(QShowEvent * event);
+	public slots:
+	void rb_clicked();
+	void bt_clicked();
+private:
+	void connectSlots(bool link);
+	void iniUi();
+	void setUiValue();
+private:
+	Ui::calibReportWdg *ui;
+	bool m_hasConnect;
+	calibReportMod* m_module;
+	int m_widgetType;
+};

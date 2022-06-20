@@ -1,5 +1,5 @@
-#include "GRRreportMod.h"
-#include "GRRreportParam.h"
+#include "reportMod.h"
+#include "reportParam.h"
 #include <QObject>
 #include <ImageView.h>
 #include <resultText.h>
@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iomanip>
 #include <QTextCodec>
+#include "iniParam.h"
 
 using namespace std;
 
@@ -697,3 +698,313 @@ QList<QVariant> GRRreportMod::transToList(QVariant var)
 		return QList<QVariant>({ var.toDouble() });
 }
 
+
+calibReportMod::calibReportMod()
+{
+	iniData();
+}
+
+calibReportMod::calibReportMod(const QString& dirPath)
+{
+	iniData();
+	load(dirPath, StructLevel);
+}
+
+calibReportMod::~calibReportMod()
+{
+}
+
+int calibReportMod::command(int cmdID, void* dataIn, void* dataOut)
+{
+	return 0;
+}
+
+int calibReportMod::afterSetProperty(MetaProperty*)
+{
+	return 0;
+}
+
+void calibReportMod::save(const QString &dirPath)
+{
+	RWParam(false, dirPath, StructLevel);
+	resetParamChanged();
+}
+
+void calibReportMod::load(const QString &dirPath, QvsParamLevel level)
+{
+	RWParam(true, dirPath, level);
+}
+
+void calibReportMod::iniData()
+{
+	m_is3D = false;
+	m_name = QString("");
+	createPins();
+}
+
+void calibReportMod::createPins()
+{
+	addPin(&p_calibInfo, "info");
+}
+
+void calibReportMod::RWParam(bool r, QString dirPath, int level)
+{
+	SETTING_INIT(dirPath + "/GRRreport.ini");
+
+	if (r&&level != ProductLevel)
+		return;
+
+	RW_VALUE(r, m_is3D);
+	RW_VALUE(r, m_name);
+}
+
+void calibReportMod::genCalibReport_html(int ispix)
+{
+	if ((m_is3D&&p_calibInfo->size() != 17) || (!m_is3D&&p_calibInfo->size() != 1))
+	{
+		QMessageBox::warning(nullptr, tr("Warning!"), tr(" Data Stream wrong, please check it"), QMessageBox::Yes);
+		return;
+	}
+
+	QString filename = QFileDialog::getSaveFileName(nullptr, QString::fromLocal8Bit("save Files"), QString::fromLocal8Bit("./CalibLeadReport"), QString::fromLocal8Bit("Calibration Report (*.html)"));
+	if (filename.size() <= 0)
+		return;
+
+	fstream report_html(filename.toLocal8Bit().constData(), ios::out | ios::trunc);
+	if (ispix == 0) {
+		int index = -1;
+
+		report_html << "<head>";
+		report_html << "<meta http-equiv=\"Content-type\" content=\"text/css;charset=GB2312\"/>";
+		report_html << setiosflags(ios::fixed) << setprecision(4);       //保留小数点后四位
+
+		report_html << "<table style=\"font-size:28px;font-family:SimHei\">";
+		report_html << "<tr>";
+		report_html << "<td width=\"1300px\" align=\"center\">" << "CALIBRATION SUCCEED" << "</td>";
+		report_html << "</tr>";
+		report_html << "</table>";
+		report_html << "<br>";
+
+		report_html << "<table style=\"font-size:28px;font-family:SimHei\">";
+		report_html << "<tr>";
+		report_html << "<td width=\"1300px\" align=\"center\">" << "CALIBRATION SUMMARY REPORT" << "</td>";
+		report_html << "</tr>";
+		report_html << "</table>";
+		report_html << "<br>";
+
+		report_html << "<table style=\"font-size:22px;font-family:SimHei\">";
+		report_html << "<tr align=\"left\">";
+		report_html << "<td width=\"200px\">" << "Report Type:" << "</td>";
+		report_html << "<th width=\"200px\">" << "Calibration Data" << "</th>";
+		report_html << "</tr>";
+
+		report_html << "<tr align=\"left\">";
+		report_html << "<td width=\"200px\">" << "Report Station:" << "</td>";
+		report_html << "<th width=\"200px\">" << "Lead3D5S" << "</th>";
+		report_html << "</tr>";
+
+		report_html << "<tr align=\"left\">";
+		report_html << "<td width=\"200px\">" << "Date Time:" << "</td>";
+		report_html << "<th width=\"200px\">" << QDateTime::currentDateTime().toString("yy/MM/dd_HH:mm").toLocal8Bit().constData() << "</th>";
+		report_html << "</tr>";
+		report_html << "</table>";
+		report_html << "<br>" << "<br>" << "<br>";
+
+		report_html << "<table border=\"1\" style=\"font-size:20px;font-family:SimHei; border-collapse:collapse;\">";
+		//首行参数指标
+		report_html << "<tr  align=\"center\" bgcolor=\"#AAAAAA\">";
+		report_html << "<td width=\"300px\">" << "Measurement" << "</td>";
+		report_html << "<td width=\"150px\">" << "Left" << "</td>";
+		report_html << "<td width=\"150px\">" << "Right" << "</td>";
+		report_html << "<td width=\"150px\">" << "Up" << "</td>";
+		report_html << "<td width=\"150px\">" << "Down" << "</td>";
+		report_html << "<td width=\"150px\">" << "Middle" << "</td>";
+		report_html << "<td width=\"250px\">" << "Unit" << "</td>";
+		report_html << "</tr>";
+
+		index++;
+
+		report_html << "<tr>";
+		report_html << "<td align=\"left\">" << "Pixel Size" << "</td>";
+		for (int i = 0; i < 4; i++)
+			report_html << "<td align=\"right\">" << p_calibInfo->at(++index) << "</td>";
+		report_html << "<td align=\"right\">" << p_calibInfo->at(0) << "</td>";
+		report_html << "<td align=\"left\">" << "MillimeterPerPixel" << "</td>";
+		report_html << "</tr>";
+
+		report_html << "<tr>";
+		report_html << "<td align=\"left\">" << "Base Angle" << "</td>";
+		for (int i = 0; i < 4; i++)
+			report_html << "<td align=\"right\">" << p_calibInfo->at(++index) << "</td>";
+		report_html << "<td align=\"right\">" << "&nbsp" << "</td>";
+		report_html << "<td align=\"left\">" << "Degree" << "</td>";
+		report_html << "</tr>";
+
+		report_html << "<tr>";
+		report_html << "<td align=\"left\">" << "Ratio" << "</td>";
+		for (int i = 0; i < 4; i++)
+			report_html << "<td align=\"right\">" << p_calibInfo->at(++index) << "</td>";
+		report_html << "<td align=\"right\">" << "&nbsp" << "</td>";
+		report_html << "<td align=\"left\">" << "&nbsp" << "</td>";
+		report_html << "</tr>";
+
+		report_html << "<tr>";
+		report_html << "<td align=\"left\">" << "Actual Depth" << "</td>";
+		for (int i = 0; i < 4; i++)
+			report_html << "<td align=\"right\">" << p_calibInfo->at(++index) << "</td>";
+		report_html << "<td align=\"right\">" << "&nbsp" << "</td>";
+		report_html << "<td align=\"left\">" << "Millimeter" << "</td>";
+		report_html << "</tr>";
+		report_html << "</table>";
+	}
+	else if (ispix == 1)
+	{
+		int index = -1;
+		report_html << "<head>";
+		report_html << "<meta http-equiv=\"Content-type\" content=\"text/css;charset=GB2312\"/>";
+
+		report_html << "<table border=\"1\">";
+		report_html << "<tr>";
+		report_html << "<th>" << "Report Type:" << "</th>";
+		report_html << "<th>" << "Calibration Data" << "</th>";
+		report_html << "</tr>";
+
+		report_html << "<tr>";
+		report_html << "<th>" << "Report Station:" << "</th>";
+		report_html << "<th>" << "LeadPixelSize" << "</th>";
+		report_html << "</tr>";
+
+		report_html << "<tr>";
+		report_html << "<th>" << "Date Time:" << "</th>";
+		report_html << "<th>" << QDateTime::currentDateTime().toString("MM/dd_HH:mm").toLocal8Bit().constData() << "</th>";
+		report_html << "</tr>";
+		report_html << "</table>";
+
+		report_html << "<table border=\"1\">";
+		report_html << "<tr>";
+		report_html << "<th>" << "Measurement" << "</th>";
+		report_html << "<th>" << "Value" << "</th>";
+		report_html << "<th>" << "Min" << "</th>";
+		report_html << "<th>" << "Max" << "</th>";
+		report_html << "<th>" << "Unit" << "</th>";
+		report_html << "</tr>";
+
+		index++;
+
+		// 				report_html << "<tr>";
+		// 				report_html << "<th>" << "Actual Size" << "</th>";
+		// 				report_html << "<td align=\"center\">" << outtuple[0].D() << "</td>";
+		// 				report_html << "<td align=\"center\">" << "&nbsp" << "</td>";
+		// 				report_html << "<td align=\"center\">" << "&nbsp" << "</td>";
+		// 				report_html << "<td align=\"center\">" << "Millimeter" << "</td>";
+		// 				report_html << "</tr>";
+		// 
+		// 				report_html << "<tr>";
+		// 				report_html << "<th>" << "Test Value" << "</th>";
+		// 				report_html << "<td align=\"center\">" << outtuple[1].D() << "</td>";
+		// 				report_html << "<td align=\"center\">" << outtuple[1].D() << "</td>";
+		// 				report_html << "<td align=\"center\">" << outtuple[1].D() << "</td>";
+		// 				report_html << "<td align=\"center\">" << "Pixel" << "</td>";
+		// 				report_html << "</tr>";
+		// 
+		// 				report_html << "<tr>";
+		// 				report_html << "<th>" << "Pixel Size" << "</th>";
+		// 				report_html << "<td align=\"center\">" << outtuple[2].D() << "</td>";
+		// 				report_html << "<td align=\"center\">" << "&nbsp" << "</td>";
+		// 				report_html << "<td align=\"center\">" << "&nbsp" << "</td>";
+		// 				report_html << "<td align=\"center\">" << "MillimeterPerPixel" << "</td>";
+		// 				report_html << "</tr>";
+
+		report_html << "<tr>";
+		report_html << "<th>" << "Pixel Size" << "</th>";
+		report_html << "<td align=\"center\">" << p_calibInfo->at(0) << "</td>";
+		report_html << "<td align=\"center\">" << "&nbsp" << "</td>";
+		report_html << "<td align=\"center\">" << "&nbsp" << "</td>";
+		report_html << "<td align=\"center\">" << "Millimeter/Pixel" << "</td>";
+		report_html << "</tr>";
+		report_html << "</table>";
+	}
+	report_html.close();
+}
+
+void calibReportMod::genCalibReport_xlsx(int ispix)
+{
+	if ((m_is3D&&p_calibInfo->size() != 17) || (!m_is3D&&p_calibInfo->size() != 1))
+	{
+		QMessageBox::warning(nullptr, tr("Warning!"), tr(" Data Stream wrong, please check it"), QMessageBox::Yes);
+		return;
+	}
+
+	QString filename = QFileDialog::getSaveFileName(nullptr, QString::fromLocal8Bit("save Files"), QString::fromLocal8Bit("./CalibLeadReport"), QString::fromLocal8Bit("Calibration Report (*.csv)"));
+	if (filename.size() <= 0)
+		return;
+
+	QFile file(filename);
+	int index = -1;
+	if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		QTextStream textstream(&file);
+		if (ispix == 0)
+		{
+			textstream << "Calibration Success!\n\n";
+			textstream << "Report Type:" << ", " << "Calibration Data\n\n";
+			textstream << "Report Station:" << ", " << "Lead3D5S\n";
+			textstream << "Date Time:" << ", " << QDateTime::currentDateTime().toString("MM/dd_HH:mm").toLocal8Bit().constData() << "\n";/*<<", , "<<"Distance Unit:"<<", "<<"MilliMeter\n"*/
+
+			textstream << "Measurement" << "," << "Left" << "," << "Right" << "," << "Up" << "," << "Down" << "," << "Middle" << "," << "Unit" << "\n";
+			textstream << "Pixel Size " << ", ";
+			index++;
+			for (int i = 0; i < 4; i++) {
+				textstream << QString::number(p_calibInfo->at(++index), 'f', 6) << ", ";
+			}
+			textstream << QString::number(p_calibInfo->at(0), 'f', 6) << ", ";
+			textstream << "MillimeterPerPixel" << "\n";
+
+			textstream << "Base Angle " << ", ";
+			for (int i = 0; i < 4; i++) {
+				textstream << QString::number(p_calibInfo->at(++index), 'f', 6) << ", ";
+			}
+			textstream << ", ";
+			textstream << "degree" << "\n";
+
+			textstream << "Ratio " << ", ";
+			for (int i = 0; i < 4; i++) {
+				textstream << QString::number(p_calibInfo->at(++index), 'f', 6) << ", ";
+			}
+			textstream << "\n";
+
+			textstream << "Actual Depth" << ", ";
+			for (int i = 0; i < 4; i++) {
+				textstream << QString::number(p_calibInfo->at(++index), 'f', 6) << ", ";
+			}
+			textstream << ", ";
+			textstream << "Millimeter" << "\n";
+		}
+		else
+		{
+			textstream << "Calibration Success!\n\n";
+			textstream << "Report Type:" << ", " << "Calibration Data\n\n";
+			textstream << "Report Station:" << ", " << "LeadPixelSize\n";
+			textstream << "Date Time:" << ", " << QDateTime::currentDateTime().toString("MM/dd_HH:mm").toLocal8Bit().constData() << "\n";/*<<", , "<<"Distance Unit:"<<", "<<"MilliMeter\n"*/
+
+			textstream << "Measurement" << "," << "value" << "," << "min" << "," << "max" << "," << "Unit" << "\n";
+
+			// 						textstream << "Actual Size " << ", ";
+			// 						textstream << QString::number(outtuple[0].D(), 'f', 6) << ", " << ", " << ", ";
+			// 						textstream << "Millimeter" << "\n";
+			// 
+			// 						textstream << "Test Value" << ", ";
+			// 						textstream << QString::number(outtuple[1].D(), 'f', 6) << ", " << QString::number(outtuple[1].D(), 'f', 6) << ", "
+			// 							<< QString::number(outtuple[1].D(), 'f', 6) << ", ";
+			// 						textstream << "pixel " << "\n";
+			// 
+			// 						textstream << " Pixel Size " << ", ";
+			// 						textstream << QString::number(outtuple[2].D(), 'f', 6) << ", " << ", " << ", ";
+			// 						textstream << "MillimeterPerPixel" << "\n";
+			textstream << " Pixel Size " << ", ";
+			textstream << QString::number(p_calibInfo->at(0), 'f', 6) << ", " << ", " << ", ";
+			textstream << "MillimeterPerPixel" << "\n";
+		}
+		file.close();
+	}
+}
