@@ -56,8 +56,7 @@ private:
 private:
 	UnitInputPin<cv::Mat> p_im;
 
-	UnitOutputPin<QList<double>> p_row;			//用于后续中间模块检测管脚长度的边界,最后的四边形的4个点，左上角顺时针
-	UnitOutputPin<QList<double>> p_col;
+	UnitOutputPin<QList<cv::Point2d>> p_corners;//用于后续中间模块检测管脚长度的边界,最后的四边形的4个点，左上角顺时针
 	UnitOutputPin<QList<double>> p_edgeRowBeg;	//四个棱镜上的边缘,用于传出给后续模块使用
 	UnitOutputPin<QList<double>> p_edgeRowEnd;
 	UnitOutputPin<QList<double>> p_edgeColBeg;

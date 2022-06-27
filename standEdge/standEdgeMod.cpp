@@ -77,8 +77,7 @@ void standEdgeMod::load(const QString &dirPath, QvsParamLevel level)
 
 int standEdgeMod::run(const QString &funName)
 {
-	p_row->clear();
-	p_col->clear();
+	p_corners->clear();
 	p_edgeRowBeg->clear();
 	p_edgeRowEnd->clear();
 	p_edgeColBeg->clear();
@@ -181,7 +180,7 @@ int standEdgeMod::run(const QString &funName)
 			if (polynum > 0)
 			{
 				area_center(openobj, &areaval, &rowval, &colval);
-				if (areaval > 10);
+				if (areaval > 10)
 				{
 					isempty = false;
 				}
@@ -499,7 +498,6 @@ int standEdgeMod::run(const QString &funName)
 	long totalNum = 0;
 	for (int i = 0;i < 4;i++) {
 		if (roiFound[i]) {
-			double Rowval, Colval;
 			int num = m_rowEdge[i].Num();
 			for (int j = 0;j < num;j++) {
 				rows[totalNum] = m_rowEdge[i][j];
@@ -741,15 +739,13 @@ int standEdgeMod::run(const QString &funName)
 // 		outColBegin[i] = ColBegin11[i][0].D();
 // 		outColEnd[i] = ColEnd11[i][0].D();
 
-		p_row->push_back(finalPointRow[i]);
-		p_col->push_back(finalPointCol[i]);
+		p_corners->push_back(cv::Point2d(finalPointCol[i], finalPointRow[i]));
 		p_edgeRowBeg->push_back(RowBegin11[i][0].D());
 		p_edgeRowEnd->push_back(RowEnd11[i][0].D());
 		p_edgeColBeg->push_back(ColBegin11[i][0].D());
 		p_edgeColEnd->push_back(ColEnd11[i][0].D());
 	}
-	p_row->push_back(finalPointRow[0]);
-	p_col->push_back(finalPointCol[0]);
+	p_corners->push_back(cv::Point2d(finalPointCol[0], finalPointRow[0]));
 
 	//fnalRow[4] = fnalRow[0].D();
 	//fnalCol[4] = fnalCol[0].D();
@@ -987,10 +983,10 @@ void standEdgeMod::viewResult(ImageView *iv, const QString &funName, int)
 	HTuple polyRow, polyCol;
 	//getDispOutData(FinalRow, polyRow);
 	//getDispOutData(FinalCol, polyCol);
-	for (auto i = 0;i < p_row->size();++i)
+	for (auto i = 0;i < p_corners->size();++i)
 	{
-		polyRow[i] = p_row->at(i);
-		polyCol[i] = p_col->at(i);
+		polyRow[i] = p_corners->at(i).y;
+		polyCol[i] = p_corners->at(i).x;
 	}
 	polyRow[4] = polyRow[0];
 	polyCol[4] = polyCol[0];
@@ -1132,8 +1128,7 @@ void standEdgeMod::createPins()
 {
 	addPin(&p_im, "im");
 
-	addPin(&p_row, "row");
-	addPin(&p_col, "col");
+	addPin(&p_corners, "corners");
 	addPin(&p_edgeRowBeg, "outRowB");
 	addPin(&p_edgeRowEnd, "outRowE");
 	addPin(&p_edgeColBeg, "outColB");

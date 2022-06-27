@@ -74,7 +74,6 @@ void GRRreportWdg::sp_valueChanged(int val)
 	if (sp == ui->sp_inputUnits)
 	{
 		m_param->InputUnits = val;
-		ui->lb_reportMode->setText(val == 1 ? QString("SPC") : QString("GRR"));
 	}
 	else if (sp == ui->sp_num)
 	{
@@ -96,12 +95,27 @@ void GRRreportWdg::dsp_valueChanged(double val)
 {
 	QDoubleSpinBox *dsp = qobject_cast<QDoubleSpinBox *>(sender());
 
+	bool isBreak = false;
 	for (auto i = 0; i < m_param->modNum; ++i)
+	{
 		for (auto k = 0; k < m_param->itemNum[i]; ++k)
 			if (sp_USL[i][k] == dsp)
+			{
 				m_param->USL[i][k] = val;
+				isBreak = true;
+				break;
+			}
 			else if (sp_LSL[i][k] == dsp)
+			{
 				m_param->LSL[i][k] = val;
+				isBreak = true;
+				break;
+			}
+		if (isBreak)
+			break;
+	}
+
+
 
 	m_module->setParamChanged(ProductLevel);
 }
@@ -382,10 +396,11 @@ void GRRreportWdg::setSubItem()
 			m_subItem[i][idx]->setCheckState(1, m_param->enable[i][idx] ? Qt::Checked : Qt::Unchecked);
 			m_subItem[i][idx]->setText(2, m_param->itText[i][idx]);
 
-			sp_LSL[i][idx]->setValue(m_param->LSL[i][idx]);
-			sp_USL[i][idx]->setValue(m_param->USL[i][idx]);
 			ui->tree_item->setItemWidget(m_subItem[i][idx], 3, sp_LSL[i][idx]);
 			ui->tree_item->setItemWidget(m_subItem[i][idx], 4, sp_USL[i][idx]);
+
+			sp_LSL[i][idx]->setValue(m_param->LSL[i][idx]);
+			sp_USL[i][idx]->setValue(m_param->USL[i][idx]);
 		}
 	}
 }

@@ -46,6 +46,7 @@ private:
 	UnitInputPin<int> p_inputIdx;
 	UnitInputPin<QList<cv::Point2d>> p_searchCorners;
 
+	UnitOutputPin<QList<double>> p_outLen;
 	UnitOutputPin<QMap<QString, QVariant>> p_item;
 
 // 	UnitOutputPin<bool> p_resultOk;

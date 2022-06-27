@@ -121,6 +121,8 @@ int pinLength1Mod::run(const QString &funName)
 // 	p_outLenDiff->clear();
 // 	p_outCount->clear();
 
+	p_outLen->clear();
+
 	for (int i = 0;i < MAX_TESTITEMS_NUM;i++) {
 		m_testItemsStatus[i] = 1;
 	}
@@ -1345,6 +1347,10 @@ int pinLength1Mod::run(const QString &funName)
 			HTuple offout;
 			tuple_concat(Outputlength[0], Outputlength[1], &offout);
 			p_item->insert(LENGTH, toQList(offout));
+			QList<double> outLen;
+			for (auto i = 0; i < offout.Num(); ++i)
+				outLen.push_back(offout[i].D());
+			*p_outLen = outLen;
 			//setDetectOutData(OutLength, offout);
 		}
 		if (m_param->errWidthValid) {
@@ -1853,6 +1859,7 @@ void pinLength1Mod::createPins()
 	addPin(&p_searchHomMat2D, "searchHm2d");
 	addPin(&p_searchCorners, "searchCor");
 
+	addPin(&p_outLen, "outLen");
 	addPin(&p_item, "item");
 
 // 	addPin(&p_resultOk, "resultOk");
