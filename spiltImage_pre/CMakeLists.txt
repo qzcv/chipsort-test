@@ -79,6 +79,7 @@ if(SRC_FILES)
 		add_executable(${targetName} ${SRC_FILES} ${Generated_Files} ${QM_FILES} ${TS_FILES}  ${versionFile}       "subDirConfig.cmake")
 #设置vs的调试包含路径，相当于在vs属性页->调试->环境中PATH=xxx
 		set_target_properties(${targetName} PROPERTIES VS_DEBUGGER_ENVIRONMENT "PATH=${OpenCV_bin_path};${qt_bin_path};$(PATH)")
+		set_target_properties(${targetName} PROPERTIES VS_DEBUGGER_COMMAND_ARGUMENTS "-develop")
 #如果生成的是动态库
 	elseif(targetType STREQUAL  "lib")
 #生成的路径在Bin目录下
@@ -116,7 +117,11 @@ if(SRC_FILES)
 else()
 #如果该路径下没有源代码文件，就查找子目录,递归进行同样的操作
 	message(STATUS "${CURRENT_FOLDER} is a parent dir without source files")
-	set(parentDirName ${CURRENT_FOLDER})
+	if(parentDirName)
+		set(parentDirName "${parentDirName}/${CURRENT_FOLDER}")
+	else()
+		set(parentDirName ${CURRENT_FOLDER})
+	endif()
 	SUBDIRLIST(children ${CMAKE_CURRENT_SOURCE_DIR})
 	foreach(child ${children})
 		if(${child} STREQUAL   ".git")

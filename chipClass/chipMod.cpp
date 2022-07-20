@@ -157,10 +157,27 @@ void ChipMod::toHtuple(const UnitInputPin<QList<double>>& p, HTuple &htuple)
 		htuple[i] = p->at(i);
 }
 
-QList<QVariant> ChipMod::toQList(const HTuple & htuple)
+void ChipMod::toHtuple(const UnitInputPin<QList<cv::Point2d>> &p, HTuple &hRow, HTuple &hCol)
 {
-	QList<QVariant> p;
+	hRow.Reset();
+	hCol.Reset();
+	for (auto i = 0; i < p->size(); ++i)
+	{
+		hRow[i] = p->at(i).y;
+		hCol[i] = p->at(i).x;
+	}
+}
+
+void ChipMod::toQList(const HTuple & htuple, QList<QVariant>& data)
+{
+	data.clear();
 	for (auto i = 0; i < htuple.Num(); ++i)
-		p.push_back(htuple[i].D());
-	return p;
+		data.push_back(htuple[i].D());
+}
+
+void ChipMod::toQList(const HTuple &htuple, QList<double> &data)
+{
+	data.clear();
+	for (auto i = 0; i < htuple.Num(); ++i)
+		data.push_back(htuple[i].D());
 }

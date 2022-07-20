@@ -3,6 +3,8 @@
 #include <imageModule.h>
 #include "composeND_preParam.h"
 
+#define ENT_DISPIMG "dispImg"
+
 using namespace qzcv;
 
 class composeND_preModule : public UnitModule
@@ -23,6 +25,8 @@ protected:
 private:
 	void iniData();
 	void createPins();
+	void createEvents();
+	void changePinsNum(int imNum);
 private:
 	composeND_preParam* m_param;
 	friend class composeND_preWidget;
@@ -30,7 +34,7 @@ private:
 	Res m_res;
 	int m_emptyIdx;
 private:
-	UnitInputPin<cv::Mat> p_inIm[MAX_REGION + 1];
+	QList<UnitInputPin<cv::Mat>*> p_inIm;
 	UnitOutputPin<cv::Mat> p_outIm;
 };
 

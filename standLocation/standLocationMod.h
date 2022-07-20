@@ -61,10 +61,8 @@ private:
 	UnitInputPin<QList<double>> p_lAng;
 	UnitInputPin<QList<double>> p_aDepth;
 	UnitInputPin<QList<double>> p_ratio;
-	UnitInputPin<QList<double>> p_edgeRowBeg;
-	UnitInputPin<QList<double>> p_edgeRowEnd;
-	UnitInputPin<QList<double>> p_edgeColBeg;
-	UnitInputPin<QList<double>> p_edgeColEnd;
+	UnitInputPin<QList<cv::Point2d>> p_edgeBeg;
+	UnitInputPin<QList<cv::Point2d>> p_edgeEnd;
 	UnitInputPin<QList<double>> p_leadLen;
 
 	UnitOutputPin<QMap<QString, QVariant>> p_item;

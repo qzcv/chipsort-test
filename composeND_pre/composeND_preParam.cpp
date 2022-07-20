@@ -16,40 +16,53 @@ void composeND_preParam::readWriteParam(bool r, const QString& dirPath, int leve
 {
 	SETTING_INIT(dirPath + "/composeND_pre.ini");
 
-	if (r&&level != ProductLevel)
-		return;
+	if (!r || (r&&level == StructLevel))
+		RW_VALUE(r, imNum);
 
-	for (auto i = 0;i < MAX_REGION;i++)
+	if (!r || (r&&level == MachineLevel))
 	{
-		for (auto j = 0;j < ROI_MAX_NUM;j++)
+		if (r)
 		{
-			RW_VALUE2(r, regRow0[i][j], i, j);
-			RW_VALUE2(r, regCol0[i][j], i, j);
-			RW_VALUE2(r, regRow1[i][j], i, j);
-			RW_VALUE2(r, regCol1[i][j], i, j);
+			roiNum = QVector<int>(imNum, 1);
+			regRow0.clear();
+			regCol0.clear();
+			regRow1.clear();
+			regCol1.clear();
 		}
-		RW_VALUE1(r, imageIndex[i], i);
-		RW_VALUE1(r, roiNum[i], i);
+
+		for (auto i = 0; i < imNum; ++i)
+		{
+			RW_VALUE1(r, roiNum[i], i);
+
+			if (r)
+			{
+				regRow0.append(QVector<double>(roiNum[i], 100));
+				regCol0.append(QVector<double>(roiNum[i], 100));
+				regRow1.append(QVector<double>(roiNum[i], 200));
+				regCol1.append(QVector<double>(roiNum[i], 200));
+			}
+			for (auto j = 0; j < roiNum[i]; ++j)
+			{
+				RW_VALUE2(r, regRow0[i][j], i, j);
+				RW_VALUE2(r, regCol0[i][j], i, j);
+				RW_VALUE2(r, regRow1[i][j], i, j);
+				RW_VALUE2(r, regCol1[i][j], i, j);
+			}
+		}
 	}
-	RW_VALUE(r, allRegNum);
-	RW_VALUE(r, baseImgIdx);
 }
 
 void composeND_preParam::iniData()
 {
-	for (auto i = 0;i < MAX_REGION;i++)
+	imNum = 1;
+	roiNum = QVector<int>(imNum, 1);
+	
+	for (auto i = 0; i < imNum; i++)
 	{
-		for (auto j = 0;j < ROI_MAX_NUM;j++)
-		{
-			regRow0[i][j] = 50 + i * 10;
-			regCol0[i][j] = 50 + i * 10;
-			regRow1[i][j] = 100 + i * 10;
-			regCol1[i][j] = 120 + i * 10;
-		}
-		imageIndex[i] = 1;
-		roiNum[i] = 2;
+		regRow0.append(QVector<double>(roiNum[i], 100));
+		regCol0.append(QVector<double>(roiNum[i], 100));
+		regRow1.append(QVector<double>(roiNum[i], 200));
+		regCol1.append(QVector<double>(roiNum[i], 200));
 	}
-	allRegNum = MAX_REGION;
-	baseImgIdx = 0;
 }
 

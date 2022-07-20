@@ -28,6 +28,7 @@ private slots:
 	void comboBox_currentIndexChanged(int index);
 	void tabWidget_indexChange(int index);
 	void on_bt_highLevel_toggled(bool val);
+	void on_bt_helpRect_toggled(bool val);
 private:
 	void connectSlots(bool link);
 	void iniUi();
@@ -39,7 +40,7 @@ private:
 	standEdgeParam* m_param;
 	standEdgeMod* m_module;
 	int m_widgetType;
-	int m_layIdex;
+	int m_layerIdx;
 
 	Hobject *m_image;
 };

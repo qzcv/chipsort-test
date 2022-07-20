@@ -64,6 +64,7 @@ private:
 	QVector<QVector<QVector<double>>> m_GRR;						//可重复性&再现性
 	QVector<QVector<QVector<double>>> m_perGRR;						//可重复性&再现性
 private:
+	UnitInputPin<bool> p_auto;
 	QList<UnitInputPin<int> *> p_ok;
 	QList<UnitInputPin<QMap<QString, QVariant>> *> p_it;
 };

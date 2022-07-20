@@ -1408,7 +1408,9 @@ int pinDetect1Mod::run(const QString &funName)
 // 		setDetectOutData(OutLeadRow, outLeadRow);
 // 		setDetectOutData(OutLeadCol, outLeadCol);
 		//*p_outLenEn = enable;
-		p_item->insert(LENGTH, toQList(outLength));
+		QList<QVariant> data;
+		toQList(outLength, data);
+		p_item->insert(LENGTH, data);
 		for (auto i = 0;i < outLeadCol.Num();++i)
 		{
 			double x = outLeadCol[i].D();

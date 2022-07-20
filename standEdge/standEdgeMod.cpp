@@ -78,10 +78,8 @@ void standEdgeMod::load(const QString &dirPath, QvsParamLevel level)
 int standEdgeMod::run(const QString &funName)
 {
 	p_corners->clear();
-	p_edgeRowBeg->clear();
-	p_edgeRowEnd->clear();
-	p_edgeColBeg->clear();
-	p_edgeColEnd->clear();
+	p_edgeBeg->clear();
+	p_edgeEnd->clear();
 	for (int i = 0;i < MAX_TESTITEMS_NUM;i++) {
 		m_testItemsStatus[i] = 1;
 	}
@@ -740,10 +738,8 @@ int standEdgeMod::run(const QString &funName)
 // 		outColEnd[i] = ColEnd11[i][0].D();
 
 		p_corners->push_back(cv::Point2d(finalPointCol[i], finalPointRow[i]));
-		p_edgeRowBeg->push_back(RowBegin11[i][0].D());
-		p_edgeRowEnd->push_back(RowEnd11[i][0].D());
-		p_edgeColBeg->push_back(ColBegin11[i][0].D());
-		p_edgeColEnd->push_back(ColEnd11[i][0].D());
+		p_edgeBeg->push_back(cv::Point2d(ColBegin11[i][0].D(), RowBegin11[i][0].D()));
+		p_edgeEnd->push_back(cv::Point2d(ColEnd11[i][0].D(), RowEnd11[i][0].D()));
 	}
 	p_corners->push_back(cv::Point2d(finalPointCol[0], finalPointRow[0]));
 
@@ -1129,10 +1125,8 @@ void standEdgeMod::createPins()
 	addPin(&p_im, "im");
 
 	addPin(&p_corners, "corners");
-	addPin(&p_edgeRowBeg, "outRowB");
-	addPin(&p_edgeRowEnd, "outRowE");
-	addPin(&p_edgeColBeg, "outColB");
-	addPin(&p_edgeColEnd, "outColE");
+	addPin(&p_edgeBeg, "edgeBeg");
+	addPin(&p_edgeEnd, "edgeEnd");
 }
 
 bool standEdgeMod::IsPointInRegion(const Hobject * InputReg, double row, double col, int larger)

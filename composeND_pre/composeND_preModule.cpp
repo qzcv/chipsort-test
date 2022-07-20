@@ -4,6 +4,8 @@
 #include <ImageView.h>
 #include <resultText.h>
 
+#define PIN_IM "im"
+
 composeND_preModule::composeND_preModule()
 {
 	iniData();
@@ -39,11 +41,17 @@ void composeND_preModule::save(const QString &dirPath)
 void composeND_preModule::load(const QString &dirPath)
 {
 	m_param->readWriteParam(true,dirPath,StructLevel);
+	changePinsNum(m_param->imNum);
 }
 
 void composeND_preModule::load(const QString &dirPath, QvsParamLevel level)
 {
-	m_param->readWriteParam(true,dirPath,level);
+	m_param->readWriteParam(true, dirPath, level);
+
+	if (level == StructLevel)
+	{
+		changePinsNum(m_param->imNum);
+	}
 }
 
 int composeND_preModule::run(const QString &funName)
@@ -52,17 +60,13 @@ int composeND_preModule::run(const QString &funName)
 	m_res = noDet;
 	m_emptyIdx = -1;
 
-	bool isEmpty = p_inIm[m_param->baseImgIdx]->empty();
-	m_emptyIdx = m_param->baseImgIdx;
-	if (!isEmpty)
+	bool isEmpty = true;
+	for (auto i = 0; i < p_inIm.size(); ++i)
 	{
-		for (auto i = 0;i < m_param->allRegNum;++i)
-		{
-			isEmpty = p_inIm[m_param->imageIndex[i]]->empty();
-			m_emptyIdx = m_param->imageIndex[i];
-			if (isEmpty)
-				break;
-		}
+		isEmpty = (*p_inIm[i])->empty();
+		m_emptyIdx = i;
+		if (isEmpty)
+			break;
 	}
 	if (isEmpty)
 	{
@@ -70,18 +74,18 @@ int composeND_preModule::run(const QString &funName)
 		return -1;
 	}
 
-	cv::Size sz = p_inIm[m_param->baseImgIdx]->size();
-	for (auto i = 0;i < m_param->allRegNum;++i)
+	cv::Size sz = (*p_inIm[0])->size();
+	for (auto i = 1; i < p_inIm.size(); ++i)
 	{
-		if (sz != p_inIm[m_param->imageIndex[i]]->size())
+		if (sz != (*p_inIm[i])->size())
 		{
 			m_res = wrongSize;
 			return -1;
 		}
 	}
 
-	*p_outIm = p_inIm[m_param->baseImgIdx]->clone();
-	for (auto i = 0;i < m_param->allRegNum;++i)
+	*p_outIm = (*p_inIm[0])->clone();
+	for (auto i = 0;i < m_param->imNum;++i)
 	{
 		for (auto k = 0;k < m_param->roiNum[i];++k)
 		{
@@ -90,8 +94,13 @@ int composeND_preModule::run(const QString &funName)
 			int wid = m_param->regCol1[i][k] - m_param->regCol0[i][k];
 			int hei = m_param->regRow1[i][k] - m_param->regRow0[i][k];
  			cv::Rect rec(x, y, wid, hei);
+			if (p_outIm->size().height < y + hei || p_outIm->size().width < x + wid)
+			{
+				*p_outIm = cv::Mat(0, 0, CV_8UC1);
+				return - 1;
+			}
 			cv::Mat segImg(*p_outIm, rec);
-			(**p_inIm[m_param->imageIndex[i]])(rec).copyTo(segImg);
+			(***p_inIm[i])(rec).copyTo(segImg);
 		}
 	}
 	m_res = composeSucceed;
@@ -129,6 +138,7 @@ void composeND_preModule::iniData()
 {
 	m_param = new composeND_preParam;
 	createPins();
+	createEvents();
 
 	m_res = noDet;
 	m_emptyIdx = -1;
@@ -136,9 +146,25 @@ void composeND_preModule::iniData()
 
 void composeND_preModule::createPins()
 {
-	for (auto i = 0;i < MAX_REGION + 1;++i)
-	{
-		addPin(&p_inIm[i], QString("im%1").arg(i + 1));
-	}
 	addPin(&p_outIm, QString("im"));
+}
+
+void composeND_preModule::createEvents()
+{
+	addEvent(ENT_DISPIMG);
+}
+
+void composeND_preModule::changePinsNum(int imNum)
+{
+	while (p_inIm.size() > imNum)
+	{
+		removePin(PIN_IM + QString("%1").arg(p_inIm.size()), true);
+		p_inIm.pop_back();
+	}
+	while (p_inIm.size() < imNum)
+	{
+		UnitInputPin<cv::Mat> *im = new UnitInputPin<cv::Mat>;
+		addPin(im, PIN_IM + QString("%1").arg(p_inIm.size() + 1));
+		p_inIm.push_back(im);
+	}
 }

@@ -47,22 +47,19 @@ void composeND_preWidget::connectSlots(bool link)
 		return;
 	m_hasConnect=link;
 
-	connectOrNot(link, ui->sp_allRegNum, SIGNAL(valueChanged(int)), SLOT(sp_valueChanged(int)));
-	connectOrNot(link, ui->cb_baseImg, SIGNAL(currentIndexChanged(int)), SLOT(cb_currentIndexChanged(int)));
+	connectOrNot(link, ui->sp_imNum, SIGNAL(valueChanged(int)), SLOT(sp_valueChanged(int)));
+	connectOrNot(link, ui->sp_roiNum, SIGNAL(valueChanged(int)), SLOT(sp_valueChanged(int)));
 
-	for (auto i = 0;i < MAX_REGION;++i)
-	{
-		connectOrNot(link, bt_Sel[i], SIGNAL(clicked()), SLOT(bt_clicked()));
-		connectOrNot(link, bt_Ok[i], SIGNAL(clicked()), SLOT(bt_clicked()));
-		connectOrNot(link, bt_Cancle[i], SIGNAL(clicked()), SLOT(bt_clicked()));
-		connectOrNot(link, sp_roiNum[i], SIGNAL(valueChanged(int)), SLOT(sp_valueChanged(int)));
-		connectOrNot(link, cb_imgIdx[i], SIGNAL(currentIndexChanged(int)), SLOT(cb_currentIndexChanged(int)));
-	}
+	connectOrNot(link, ui->cob_imIdx, SIGNAL(currentIndexChanged(int)), SLOT(cb_currentIndexChanged(int)));
+
+	connectOrNot(link, ui->bt_select, SIGNAL(clicked()), SLOT(bt_clicked()));
+	connectOrNot(link, ui->bt_ensure, SIGNAL(clicked()), SLOT(bt_clicked()));
+	connectOrNot(link, ui->bt_cancel, SIGNAL(clicked()), SLOT(bt_clicked()));
 }
 
 void composeND_preWidget::iniUi()
 {
-	iniQtObject();
+	ui->sp_roiNum->setMaximum(ROI_MAX_NUM);
 }
 
 void composeND_preWidget::setUiValue()
@@ -70,87 +67,74 @@ void composeND_preWidget::setUiValue()
 	if(!m_param)
 		return;
 
-	for (auto i = 0;i < MAX_REGION;++i)
-	{
-		gb_block[i]->setVisible(m_param->allRegNum > i);
-		bt_Ok[i]->setEnabled(!bt_Sel[i]->isEnabled());
-		bt_Cancle[i]->setEnabled(!bt_Sel[i]->isEnabled());
-		sp_roiNum[i]->setMaximum(ROI_MAX_NUM);
-		sp_roiNum[i]->setValue(m_param->roiNum[i]);
-		cb_imgIdx[i]->setCurrentIndex(m_param->imageIndex[i]);
-	}
-	ui->sp_allRegNum->setValue(m_param->allRegNum);
-	ui->cb_baseImg->setCurrentIndex(m_param->baseImgIdx);
-}
+	ui->lb_imNum->setVisible(m_widgetType != 1);
+	ui->sp_imNum->setVisible(m_widgetType != 1);
 
-void composeND_preWidget::iniQtObject()
-{
-	for (int i = 0;i < MAX_REGION;i++)
-	{
-		cb_imgIdx[i] = findChild<QComboBox*>(QString("cb_image%1").arg(i));
-		bt_Sel[i] = findChild<QPushButton*>(QString("bt_select%1").arg(i));
-		bt_Ok[i] = findChild<QPushButton*>(QString("bt_ok%1").arg(i));
-		bt_Cancle[i] = findChild<QPushButton*>(QString("bt_cancel%1").arg(i));
-		sp_roiNum[i] = findChild<QSpinBox*>(QString("sp_roiNum_%1").arg(i));
-		gb_block[i] = findChild<QGroupBox*>(QString("gb_block%1").arg(i));
+	ui->sp_imNum->setValue(m_param->imNum);
+	changeImNum(m_param->imNum);
 
-		cb_imgIdx[i]->clear();
-		for (auto j = 0;j < 4;++j)
-			cb_imgIdx[i]->addItem(tr("img%1").arg(j + 1));
-	}
-	for (auto j = 0;j < 4;++j)
-		ui->cb_baseImg->addItem(tr("img%1").arg(j + 1));
+	int idx = ui->cob_imIdx->currentIndex();
+	ui->sp_roiNum->setValue(m_param->roiNum[idx]);
+	ui->gb_block->setTitle(tr("img%1").arg(idx + 1));
+	
+// 	ui->bt_ensure->setEnabled(!ui->bt_select->isEnabled());
+// 	ui->bt_cancel->setEnabled(!ui->bt_select->isEnabled());
 }
 
 void composeND_preWidget::bt_clicked()
 {
 	QPushButton *bt = qobject_cast<QPushButton *>(sender());
 
-	m_module->setParamChanged(ProductLevel);
+	m_module->setParamChanged(MachineLevel);
 
-	QString logStr = QString();
-	for (auto i = 0;i < MAX_REGION;++i)
+	if (bt == ui->bt_select || bt == ui->bt_ensure || bt == ui->bt_cancel)
 	{
-		if (bt == bt_Sel[i])
+		bool isEn = (bt != ui->bt_select);
+		ui->bt_select->setEnabled(isEn);
+		ui->bt_ensure->setEnabled(!isEn);
+		ui->bt_cancel->setEnabled(!isEn);
+		ui->sp_roiNum->setEnabled(isEn);
+		ui->sp_imNum->setEnabled(isEn);
+		ui->cob_imIdx->setEnabled(isEn);
+
+		int i = ui->cob_imIdx->currentIndex();
+
+		if (bt == ui->bt_select)
 		{
-			logStr = tr("%1 select ROI").arg(gb_block[i]->title());
-
-			bt_Sel[i]->setEnabled(false);
-			bt_Ok[i]->setEnabled(true);
-			bt_Cancle[i]->setEnabled(true);
-			sp_roiNum[i]->setEnabled(false);
-
-			QStringList textList;
-			for (auto k = 0;k < m_param->roiNum[i];++k)
-				textList << tr("ROI%1_%2").arg(i).arg(k + 1);
-
-			//currentView()->clear();
-			currentView()->clearLayer(m_layerIdx);
-			currentView()->drawRects1(m_param->roiNum[i],
-				m_param->regRow0[i], m_param->regCol0[i],
-				m_param->regRow1[i], m_param->regCol1[i], textList);
-			currentView()->update();
-		}
-		else if (bt == bt_Ok[i])
-		{
-			logStr = tr("%1 ROI ok").arg(gb_block[i]->title());
-
-			bt_Sel[i]->setEnabled(true);
-			bt_Ok[i]->setEnabled(false);
-			bt_Cancle[i]->setEnabled(false);
-			sp_roiNum[i]->setEnabled(true);
+			double row1[ROI_MAX_NUM], col1[ROI_MAX_NUM];
+			double row2[ROI_MAX_NUM], col2[ROI_MAX_NUM];
+			QStringList titles;
+			for (auto k = 0; k < m_param->roiNum[i]; ++k)
+			{
+				row1[k] = m_param->regRow0[i][k];
+				col1[k] = m_param->regCol0[i][k];
+				row2[k] = m_param->regRow1[i][k];
+				col2[k] = m_param->regCol1[i][k];
+				titles << tr("ROI%1_%2").arg(i).arg(k + 1);
+			}
 
 			currentView()->finishDraw();
-			currentView()->getDrawRects1(m_param->roiNum[i],
-				m_param->regRow0[i], m_param->regCol0[i],
-				m_param->regRow1[i], m_param->regCol1[i]);
-			checkROI(m_param->roiNum[i],
-				m_param->regRow0[i], m_param->regCol0[i],
-				m_param->regRow1[i], m_param->regCol1[i]);
-			//currentView()->clear();
+			currentView()->clearLayer(m_layerIdx);
+			currentView()->drawRects1(m_param->roiNum[i], row1, col1, row2, col2, titles);
+			currentView()->update();
+		}
+		else if (bt == ui->bt_ensure)
+		{
+			double row1[ROI_MAX_NUM], col1[ROI_MAX_NUM];
+			double row2[ROI_MAX_NUM], col2[ROI_MAX_NUM];
+			currentView()->finishDraw();
+			currentView()->getDrawRects1(m_param->roiNum[i], row1, col1, row2, col2);
+			checkROI(m_param->roiNum[i], row1, col1, row2, col2);
+			for (auto k = 0; k < m_param->roiNum[i]; ++k)
+			{
+				m_param->regRow0[i][k] = row1[k];
+				m_param->regCol0[i][k] = col1[k];
+				m_param->regRow1[i][k] = row2[k];
+				m_param->regCol1[i][k] = col2[k];
+			}
 			currentView()->clearLayer(m_layerIdx);
 			currentView()->setColor(Qt::green);
-			for (auto k = 0;k < m_param->roiNum[i];++k)
+			for (auto k = 0; k < m_param->roiNum[i]; ++k)
 			{
 				currentView()->dispRect1(
 					m_param->regRow0[i][k], m_param->regCol0[i][k],
@@ -158,16 +142,8 @@ void composeND_preWidget::bt_clicked()
 			}
 			currentView()->update();
 		}
-		else if (bt == bt_Cancle[i])
+		else if (bt == ui->bt_cancel)
 		{
-			logStr = tr("%1 ROI cancel").arg(gb_block[i]->title());
-
-			bt_Sel[i]->setEnabled(true);
-			bt_Ok[i]->setEnabled(false);
-			bt_Cancle[i]->setEnabled(false);
-			sp_roiNum[i]->setEnabled(true);
-
-			//currentView()->clear();
 			currentView()->clearLayer(m_layerIdx);
 			currentView()->finishDraw();
 			currentView()->update();
@@ -177,28 +153,16 @@ void composeND_preWidget::bt_clicked()
 
 void composeND_preWidget::cb_currentIndexChanged(int idx)
 {
-	QComboBox *cb = qobject_cast<QComboBox *>(sender());
+	QComboBox *cob = qobject_cast<QComboBox *>(sender());
 
-	m_module->setParamChanged(ProductLevel);
+	m_module->setParamChanged(MachineLevel);
 
-	QString logStr = QString();
-	if (cb == ui->cb_baseImg)
+	if (cob == ui->cob_imIdx)
 	{
-		logStr = tr("%1 val changed from %2 to %3").arg(ui->label_8->text())
-			.arg(ui->cb_baseImg->itemText(m_param->baseImgIdx)).arg(ui->cb_baseImg->itemText(idx));
-		m_param->baseImgIdx = idx;
-	}
-	else
-	{
-		for (auto i = 0;i < MAX_REGION;++i)
-		{
-			if (cb_imgIdx[i] == cb)
-			{
-				logStr = tr("%1 val changed from %2 to %3").arg(gb_block[i]->title()+tr(" img"))
-					.arg(ui->cb_baseImg->itemText(m_param->baseImgIdx)).arg(ui->cb_baseImg->itemText(idx));
-				m_param->imageIndex[i] = idx;
-			}
-		}
+		*m_module->p_outIm = **m_module->p_inIm[idx];
+		ui->sp_roiNum->setValue(m_param->roiNum[idx]);
+		ui->gb_block->setTitle(tr("img%1").arg(idx + 1));
+		m_module->triggerEvent(ENT_DISPIMG);
 	}
 }
 
@@ -208,27 +172,52 @@ void composeND_preWidget::sp_valueChanged(int val)
 
 	m_module->setParamChanged(ProductLevel);
 
-	QString logStr = QString();
-	if (ui->sp_allRegNum == sp)
+	if (ui->sp_imNum == sp)
 	{
-		for (auto i = 0;i < MAX_REGION;++i)
-			gb_block[i]->setVisible(val > i);
-		logStr = tr("%1 val changed from %2 to %3").arg(ui->label_4->text())
-			.arg(m_param->allRegNum).arg(val);
-		m_param->allRegNum = val;
-	}
-	else
-	{
-		for (auto i = 0;i < MAX_REGION;++i)
-		{
-			if (sp_roiNum[i] == sp)
-			{
-				logStr = tr("%1 val changed from %2 to %3").arg(gb_block[i]->title() + ui->label_7->text())
-					.arg(m_param->roiNum[i]).arg(val);
+		m_param->imNum = val;
+		m_module->changePinsNum(val);
+		changeImNum(val);
 
-				m_param->roiNum[i] = val;
-			}
+		while (m_param->roiNum.size() < m_param->imNum)
+		{
+			m_param->roiNum.push_back(1);
+			m_param->regRow0.push_back(QVector<double>(1, 100));
+			m_param->regCol0.push_back(QVector<double>(1, 100));
+			m_param->regRow1.push_back(QVector<double>(1, 200));
+			m_param->regCol1.push_back(QVector<double>(1, 200));
 		}
+		while (m_param->roiNum.size() > m_param->imNum)
+		{
+			m_param->roiNum.pop_back();
+			m_param->regRow0.pop_back();
+			m_param->regCol0.pop_back();
+			m_param->regRow1.pop_back();
+			m_param->regCol1.pop_back();
+		}
+
+		m_module->setParamChanged(StructLevel);
+		m_module->setParamChanged(MachineLevel);
+	}
+	else if (sp == ui->sp_roiNum)
+	{
+		int i = ui->cob_imIdx->currentIndex();
+		m_param->roiNum[i] = val;
+
+		while (m_param->regRow0[i].size() < m_param->roiNum[i])
+		{
+			m_param->regRow0[i].push_back(100);
+			m_param->regCol0[i].push_back(100);
+			m_param->regRow1[i].push_back(200);
+			m_param->regCol1[i].push_back(200);
+		}
+		while (m_param->regRow0[i].size() > m_param->roiNum[i])
+		{
+			m_param->regRow0[i].pop_back();
+			m_param->regCol0[i].pop_back();
+			m_param->regRow1[i].pop_back();
+			m_param->regCol1[i].pop_back();
+		}
+		m_module->setParamChanged(MachineLevel);
 	}
 }
 
@@ -241,4 +230,12 @@ void composeND_preWidget::checkROI(int num, double * row0, double * col0, double
 		if (col0[i] > col1[i])
 			std::swap(col0[i], col1[i]);
 	}
+}
+
+void composeND_preWidget::changeImNum(int imNum)
+{
+	while (ui->cob_imIdx->count() < imNum)
+		ui->cob_imIdx->addItem(tr("img%1").arg(ui->cob_imIdx->count() + 1));
+	while (ui->cob_imIdx->count() > imNum)
+		ui->cob_imIdx->removeItem(ui->cob_imIdx->count() - 1);
 }

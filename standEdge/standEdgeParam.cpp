@@ -83,6 +83,13 @@ void standEdgeParam::readWriteParam(bool r, const QString& dirPath, int level)
 			RW_VALUE1(r, RoiRegionVector[i].col2, i);
 		}
 	}
+
+	RW_VALUE(r, helpRectRow0);
+	RW_VALUE(r, helpRectCol0);
+	RW_VALUE(r, helpRectRow1);
+	RW_VALUE(r, helpRectCol1);
+	helpRectCol0 = 50;
+	helpRectCol1 = 100;
 }
 
 void standEdgeParam::iniData()
@@ -138,5 +145,10 @@ void standEdgeParam::iniData()
 		seg.col2 += 10;
 		RoiRegionVector.push_back(seg);
 	}
+
+	helpRectRow0 = 50;
+	helpRectRow1 = 100;
+	helpRectCol0 = 50;
+	helpRectCol1 = 100;
 }
 

@@ -58,6 +58,9 @@ void GRRreportMod::load(const QString &dirPath, QvsParamLevel level)
 
 int GRRreportMod::run(const QString &funName)
 {
+	if (!*p_auto)
+		return 0;
+
 	m_detRes = NoRun;
 	if (!m_ready)
 	{
@@ -140,6 +143,9 @@ void GRRreportMod::viewResult(ImageView *iv, const QString &funName, int) {}
 
 void GRRreportMod::textResult(ResultText *text, const QString &funName)
 {
+	if (!*p_auto)
+		return;
+
 	if (!m_count)
 		return;
 
@@ -176,7 +182,7 @@ void GRRreportMod::iniData()
 
 void GRRreportMod::createPins()
 {
-
+	addPin(&p_auto, "auto");
 }
 
 void GRRreportMod::reset()
@@ -371,7 +377,7 @@ void GRRreportMod::genGrrReport_xlsx()
 				if (m_size[i][k] != 1)
 					sprintf_s(idx, "%d", l + 1);
 				textstream 
-					<< m_param->itText[i][k] << idx << ","
+					<< m_param->subText[i][k] << idx << ","
 					<< QString::number(m_Xbardiff[i][k][l], 'f', 4) << ","
 					<< QString::number(m_Rbar[i][k][l], 'f', 4) << ","
 					<< QString::number(m_Rp[i][k][l], 'f', 4) << ","
@@ -394,50 +400,54 @@ void GRRreportMod::genGrrReport_xlsx()
 				char idx[256] = "";
 				if (m_size[i][k] != 1)
 					sprintf_s(idx, "%d", l + 1);
-				textstream << m_param->itText[i][k] << idx << "\n";
+				textstream << m_param->subText[i][k] << idx << "\n";
 				textstream << ","
-					<< "Operator1" << "," << "," << "," << ","
-					<< "Operator2" << "," << "," << "," << ","
-					<< "Operator3" << "," << "," << "," << "\n";
-				textstream << " , " 
-					<< "Cycle 1" << ", " << "Cycle 2" << ", " << "Cycle 3" << ", " << "Range" << ", "
-					<< "Cycle 1" << ", " << "Cycle 2" << ", " << "Cycle 3" << ", " << "Range" << ", "
-					<< "Cycle 1" << ", " << "Cycle 2" << ", " << "Cycle 3" << ", " << "Range" << "," 
-					<< "Avg" << "\n";
+					<< "Operator1" << "," << "," << "," << "," << ","
+					<< "Operator2" << "," << "," << "," << "," << ","
+					<< "Operator3" << "," << "," << "," << "," << "\n";
+				textstream << " , ";
+				for (auto m = 0; m < 3; ++m)
+				{
+					textstream
+						<< "Cycle 1" << ", "
+						<< "Cycle 2" << ", "
+						<< "Cycle 3" << ", "
+						<< tr("Range") << ", "
+						<< tr("Avge") << ", ";
+				}
+				textstream << tr("Mean") << "\n";
 				for (auto j = 0; j < m_param->InputUnits; ++j)
 				{
 					textstream << "C" << j + 1 << ",";
-					textstream
-						<< QString::number(m_data[i][k][l][j + m_param->InputUnits * 0], 'f', 4) << ","
-						<< QString::number(m_data[i][k][l][j + m_param->InputUnits * 1], 'f', 4) << ","
-						<< QString::number(m_data[i][k][l][j + m_param->InputUnits * 2], 'f', 4) << ","
-						<< QString::number(m_R[i][k][l][j + m_param->InputUnits * 0], 'f', 4) << ",";
-					textstream
-						<< QString::number(m_data[i][k][l][j + m_param->InputUnits * 3], 'f', 4) << ","
-						<< QString::number(m_data[i][k][l][j + m_param->InputUnits * 4], 'f', 4) << ","
-						<< QString::number(m_data[i][k][l][j + m_param->InputUnits * 5], 'f', 4) << ","
-						<< QString::number(m_R[i][k][l][j + m_param->InputUnits * 1], 'f', 4) << ",";
-					textstream
-						<< QString::number(m_data[i][k][l][j + m_param->InputUnits * 6], 'f', 4) << ","
-						<< QString::number(m_data[i][k][l][j + m_param->InputUnits * 7], 'f', 4) << ","
-						<< QString::number(m_data[i][k][l][j + m_param->InputUnits * 8], 'f', 4) << ","
-						<< QString::number(m_R[i][k][l][j + m_param->InputUnits * 2], 'f', 4) << ",";
+					for (auto m = 0; m < 3; ++m)
+					{
+						textstream
+							<< QString::number(m_data[i][k][l][j + m_param->InputUnits * (3 * m + 0)], 'f', 4) << ","
+							<< QString::number(m_data[i][k][l][j + m_param->InputUnits * (3 * m + 1)], 'f', 4) << ","
+							<< QString::number(m_data[i][k][l][j + m_param->InputUnits * (3 * m + 2)], 'f', 4) << ","
+							<< QString::number(m_R[i][k][l][j + m_param->InputUnits * m], 'f', 4) << ","
+							<< QString::number(m_cycle1Mean[i][k][l][j + m_param->InputUnits * m], 'f', 4) << ",";
+					}
 					textstream << QString::number(m_cycle3Mean[i][k][l][j], 'f', 4) << "\n";
 				}
-				textstream << "Rbar" << ", " 
-					<< ", , , " << QString::number(m_Rabar[i][k][l][0], 'f', 4) << ", "
-					<< ", , , " << QString::number(m_Rabar[i][k][l][1], 'f', 4) << ", "
-					<< ", , , " << QString::number(m_Rabar[i][k][l][2], 'f', 4) << "\n\n";
+				textstream << tr("Mean") << ", ";
+				for (auto m = 0; m < 3; ++m)
+				{
+					textstream
+						<< ", , , "
+						<< QString::number(m_Rabar[i][k][l][0], 'f', 4) << ", "
+						<< QString::number(m_Xabar[i][k][l][0], 'f', 4) << ", ";
+				}
+				textstream << "\n\n";
 				textstream << "Summary" << "\n";
 				textstream << "Xbardiff" << ", " << QString::number(m_Xbardiff[i][k][l], 'f', 4) << "\n";
 				textstream << "Avg.Rbar" << ", " << QString::number(m_Rbar[i][k][l], 'f', 4) << "\n";
 				textstream << "Rp" << ", " << QString::number(m_Rp[i][k][l], 'f', 4) << "\n";
 				textstream << "GRR" << ", " << QString::number(m_GRR[i][k][l], 'f', 4) << "\n";
 				textstream << "GRR%" << ", " << QString::number(m_perGRR[i][k][l], 'f', 4) << "\n";
+				textstream << "\n\n";
 			}
-			textstream << "\n\n";
 		}
-
 }
 
 void GRRreportMod::genGrrReport_html()
@@ -511,7 +521,7 @@ void GRRreportMod::genGrrReport_html()
 					sprintf_s(idx, "%d", l + 1);
 
 				report_html << "<tr>";
-				report_html << "<td align=\"left\">" << m_param->itText[i][k].toLocal8Bit().constData() << idx << "</td>";
+				report_html << "<td align=\"left\">" << m_param->subText[i][k].toLocal8Bit().constData() << idx << "</td>";
 				report_html << "<td align=\"right\">" << m_Xbardiff[i][k][l] << "</td>";
 				report_html << "<td align=\"right\">" << m_Rbar[i][k][l] << "</td>";
 				report_html << "<td align=\"right\">" << m_Rp[i][k][l] << "</td>";
@@ -558,26 +568,32 @@ void GRRreportMod::genGrrReport_html()
 
 					report_html << "<table style=\"font-size:24px;font-family:SimHei; border-collapse:collapse;\">";
 					report_html << "<tr>";
-					report_html << "<th width=\"1380px\">" << m_param->itText[i][k].toLocal8Bit().constData() << idx << "</th>";      //400*3+80+100
+					report_html << "<th width=\"1380px\">" << m_param->subText[i][k].toLocal8Bit().constData() << idx << "</th>";      //400*3+80+100
 					report_html << "</tr>";
 					report_html << "</table>";
 
 					report_html << "<table border=\"1\" style=\"font-size:18px;font-family:SimHei; border-collapse:collapse;\">";
 
-					report_html << "<tr align=\"center\"  bgcolor=\"#AAAAAA\">";
+					report_html << "<tr align=\"center\">";
 					report_html << "<td width=\"80px\">" << "&nbsp" << "</td>";
-					report_html << "<td width=\"400px\" colspan=\"4\">" << "Operator1" << "</td>";       //100px*4
-					report_html << "<td width=\"400px\" colspan=\"4\">" << "Operator2" << "</td>";
-					report_html << "<td width=\"400px\" colspan=\"4\">" << "Operator3" << "</td>";
+					report_html << "<td width=\"400px\" colspan=\"5\">" << "Operator1" << "</td>";       //100px*4
+					report_html << "<td width=\"400px\" colspan=\"5\">" << "Operator2" << "</td>";
+					report_html << "<td width=\"400px\" colspan=\"5\">" << "Operator3" << "</td>";
 					report_html << "<td width=\"100px\">" << "&nbsp" << "</td>";
 					report_html << "</tr>";
 
-					report_html << "<tr align=\"center\" bgcolor=\"#AAAAAA\">";
+					report_html << "<tr align=\"center\">";
 					report_html << "<td>" << "&nbsp" << "</td>";
-					report_html << "<td>" << "Cycle1" << "</td>" << "<td>" << "Cycle2" << "</td>" << "<td>" << "Cycle3" << "</td>" << "<td>" << "Range" << "</td>";
-					report_html << "<td>" << "Cycle1" << "</td>" << "<td>" << "Cycle2" << "</td>" << "<td>" << "Cycle3" << "</td>" << "<td>" << "Range" << "</td>";
-					report_html << "<td>" << "Cycle1" << "</td>" << "<td>" << "Cycle2" << "</td>" << "<td>" << "Cycle3" << "</td>" << "<td>" << "Range" << "</td>";
-					report_html << "<td>" << "Avg" << "</td>";
+					for (auto i = 0; i < 3; ++i)
+					{
+						report_html 
+							<< "<td>" << "Cycle1" << "</td>" 
+							<< "<td>" << "Cycle2" << "</td>" 
+							<< "<td>" << "Cycle3" << "</td>" 
+							<< "<td>" << tr("Range").toLocal8Bit().constData() << "</td>"
+							<< "<td>" << tr("Avge").toLocal8Bit().constData() << "</td>";
+					}
+					report_html << "<td>" << tr("Mean").toLocal8Bit().constData() << "</td>";
 					report_html << "</tr>";
 
 					for (auto j = 0; j < m_param->InputUnits; ++j)
@@ -585,40 +601,28 @@ void GRRreportMod::genGrrReport_html()
 						report_html << "<tr align=\"right\">";
 						report_html << "<td align=\"left\">" << "C" << j + 1 << "</td>";
 
-						report_html << "<td>" << m_data[i][k][l][j + m_param->InputUnits * 0] << "</td>";
-						report_html << "<td>" << m_data[i][k][l][j + m_param->InputUnits * 1] << "</td>";
-						report_html << "<td>" << m_data[i][k][l][j + m_param->InputUnits * 2] << "</td>";
-						report_html << "<td>" << m_R[i][k][l][j + m_param->InputUnits * 0] << "</td>";
-
-						report_html << "<td>" << m_data[i][k][l][j + m_param->InputUnits * 3] << "</td>";
-						report_html << "<td>" << m_data[i][k][l][j + m_param->InputUnits * 4] << "</td>";
-						report_html << "<td>" << m_data[i][k][l][j + m_param->InputUnits * 5] << "</td>";
-						report_html << "<td>" << m_R[i][k][l][j + m_param->InputUnits * 1] << "</td>";
-
-						report_html << "<td>" << m_data[i][k][l][j + m_param->InputUnits * 6] << "</td>";
-						report_html << "<td>" << m_data[i][k][l][j + m_param->InputUnits * 7] << "</td>";
-						report_html << "<td>" << m_data[i][k][l][j + m_param->InputUnits * 8] << "</td>";
-						report_html << "<td>" << m_R[i][k][l][j + m_param->InputUnits * 2] << "</td>";
+						for (auto m = 0; m < 3; ++m)
+						{
+							report_html << "<td bgcolor=\"#AAAAAA\">" << m_data[i][k][l][j + m_param->InputUnits * (3 * m + 0)] << "</td>";
+							report_html << "<td bgcolor=\"#AAAAAA\">" << m_data[i][k][l][j + m_param->InputUnits * (3 * m + 1)] << "</td>";
+							report_html << "<td bgcolor=\"#AAAAAA\">" << m_data[i][k][l][j + m_param->InputUnits * (3 * m + 2)] << "</td>";
+							report_html << "<td>" << m_R[i][k][l][j + m_param->InputUnits * m] << "</td>";
+							report_html << "<td>" << m_cycle1Mean[i][k][l][j + m_param->InputUnits * m] << "</td>";
+						}
 
 						report_html << "<td>" << m_cycle3Mean[i][k][l][j] << "</td>";
 						report_html << "</tr>";
 					}
 					report_html << "<tr align=\"right\">";
-					report_html << "<td align=\"left\">" << "Rbar" << "</td>";
-					report_html << "<td>" << "-" << "</td>";
-					report_html << "<td>" << "-" << "</td>";
-					report_html << "<td>" << "-" << "</td>";
-					report_html << "<td>" << m_Rabar[i][k][l][0] << "</td>";
-
-					report_html << "<td>" << "-" << "</td>";
-					report_html << "<td>" << "-" << "</td>";
-					report_html << "<td>" << "-" << "</td>";
-					report_html << "<td>" << m_Rabar[i][k][l][1] << "</td>";
-
-					report_html << "<td>" << "-" << "</td>";
-					report_html << "<td>" << "-" << "</td>";
-					report_html << "<td>" << "-" << "</td>";
-					report_html << "<td>" << m_Rabar[i][k][l][2] << "</td>";
+					report_html << "<td align=\"left\">" << tr("Mean").toLocal8Bit().constData() << "</td>";
+					for (auto m = 0; m < 3; ++m)
+					{
+						report_html << "<td>" << "-" << "</td>";
+						report_html << "<td>" << "-" << "</td>";
+						report_html << "<td>" << "-" << "</td>";
+						report_html << "<td>" << m_Rabar[i][k][l][m] << "</td>";
+						report_html << "<td>" << m_Xabar[i][k][l][m] << "</td>";
+					}
 					report_html << "</tr>";
 					report_html << "</table>";
 

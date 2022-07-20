@@ -99,6 +99,11 @@ int mark1Mod::afterSetProperty(MetaProperty*)
 	return 0;
 }
 
+void mark1Mod::resetOutput()
+{
+	*p_charReg = RlRegion();
+}
+
 void mark1Mod::save(const QString &dirPath)
 {
 	m_param->readWriteParam(false, dirPath, StructLevel);

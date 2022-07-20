@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>standLocationNew_zh.qm</file>
+        <file>standLocationNew_en.qm</file>
+    </qresource>
+    <qresource prefix="/info">
+        <file>standLocationNew.ini</file>
+        <file>standLocationNew.ver</file>
+    </qresource>
+</RCC>

@@ -13,12 +13,16 @@ using namespace Halcon;
 
 class mark1Mod : public ChipMod
 {
+	Q_OBJECT
 public:
 	explicit mark1Mod();
 	explicit mark1Mod(const QString&);
 	~mark1Mod();
 	int command(int cmdID, void* dataIn, void* dataOut);
 	virtual int afterSetProperty(MetaProperty*);
+
+	public slots:
+	void resetOutput();
 protected:
 	virtual void save(const QString& dirPath);
 	virtual void load(const QString& dirPath, QvsParamLevel level);

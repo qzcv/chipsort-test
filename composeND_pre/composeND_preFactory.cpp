@@ -27,7 +27,7 @@ qzcv::UnitModule* composeND_preFactory::createModule(const QString& dirPath)
 QStringList composeND_preFactory::getModSetWidgetStyles()
 {
 	m_styleList.clear();
-
+	m_styleList << "normal" << "simple";
 	return m_styleList;
 }
 

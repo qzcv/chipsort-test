@@ -130,10 +130,8 @@ int standLocationMod::run(const QString &funName)
 	HTuple RowBegin[4], ColBegin[4], RowEnd[4], ColEnd[4];  //上下左右的顺序
 	HTuple RowBegin11[4], ColBegin11[4], RowEnd11[4], ColEnd11[4];  //用于储存没有偏移之前的边界点
 	HTuple RowB, RowE, ColB, ColE;
-	toHtuple(p_edgeRowBeg, RowB);
-	toHtuple(p_edgeRowEnd, RowE);
-	toHtuple(p_edgeColBeg, ColB);
-	toHtuple(p_edgeColEnd, ColE);
+	toHtuple(p_edgeBeg, RowB, ColB);
+	toHtuple(p_edgeEnd, RowE, ColE);
 	//getDetectInData(InEdgeRowBegin, RowB);
 	//getDetectInData(InEdgeRowEnd, RowE);
 	//getDetectInData(InEdgeColBegin, ColB);
@@ -765,28 +763,36 @@ int standLocationMod::run(const QString &funName)
 				OutStandoffdiff[index[1]] = 0;
 			}
 			tuple_concat(OutStandoffdiff[index[0]], OutStandoffdiff[index[1]], &diffout);
-			p_item->insert(STANDDIFF, toQList(diffout));
+			QList<QVariant> data;
+			toQList(diffout, data);
+			p_item->insert(STANDDIFF, data);
 			//toQList(diffout, p_StandOffDiffOut);
 			//setDetectOutData(StandOffDiffOut, diffout);
 		}
 		if (m_param->errPinStandOffValid) {
 			HTuple offout;
 			tuple_concat(OutStandoff[index[0]], OutStandoff[index[1]], &offout);
-			p_item->insert(STANDOFF, toQList(offout));
+			QList<QVariant> data;
+			toQList(offout, data);
+			p_item->insert(STANDOFF, data);
 			//toQList(offout, p_StandOffOut);
 			//setDetectOutData(StandOffOut, offout);
 		}
 		if (m_param->errPinWidthValid) {
 			HTuple widout;
 			tuple_concat(OutPinwidth[index[0]], OutPinwidth[index[1]], &widout);
-			p_item->insert(WIDTH, toQList(widout));
+			QList<QVariant> data;
+			toQList(widout, data);
+			p_item->insert(WIDTH, data);
 			//toQList(widout, p_PinWidthOut);
 			//setDetectOutData(PinWidthOut, widout);
 		}
 		if (m_param->errPinGapValid) {
 			HTuple interout;
 			tuple_concat(OutPininterval[index[0]], OutPininterval[index[1]], &interout);
-			p_item->insert(PITCH, toQList(interout));
+			QList<QVariant> data;
+			toQList(interout, data);
+			p_item->insert(PITCH, data);
 			//toQList(interout, p_PinInterValOut);
 			//setDetectOutData(PinInterValOut, interout);
 		}
@@ -807,7 +813,7 @@ int standLocationMod::run(const QString &funName)
 		//setDetectOutData(PinCountOut, pincount);
 	}
 
-	return allok;
+	return allok ? 0 : -1;
 }
 
 void standLocationMod::viewResult(ImageView *iv, const QString &funName, int)
@@ -1078,10 +1084,8 @@ void standLocationMod::createPins()
 	addPin(&p_lAng, "lAng");
 	addPin(&p_aDepth, "aDepth");
 	addPin(&p_ratio, "ratio");
-	addPin(&p_edgeRowBeg, "edgeRowB");
-	addPin(&p_edgeColBeg, "edgeColB");
-	addPin(&p_edgeRowEnd, "edgeRowE");
-	addPin(&p_edgeColEnd, "edgeColE");
+	addPin(&p_edgeBeg, "edgeBeg");
+	addPin(&p_edgeEnd, "edgeEnd");
 	addPin(&p_leadLen, "leadLen");
 
 	addPin(&p_item, "item");

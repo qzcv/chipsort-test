@@ -569,6 +569,9 @@ void surfaceMultMod::createPins()
 	p_inReg.setVisible(false);
 	for (auto i = 0;i < 3;++i)
 		p_delReg[i].setVisible(false);
+	p_changeMode.setVisible(false);
+	p_delHomMat2D.setVisible(false);
+	p_dirIdx.setVisible(false);
 	p_outReg.setVisible(false);
 }
 

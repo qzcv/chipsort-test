@@ -63,6 +63,9 @@ public:
 
 	int NowGrp;  //上下左右，当前的组数
 
+	int helpRectRow0, helpRectRow1;
+	int helpRectCol0, helpRectCol1;
+
 private:
 	void iniData();
 };

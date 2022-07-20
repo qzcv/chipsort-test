@@ -15,7 +15,7 @@ standEdgeWdg::standEdgeWdg(int i) :
 	m_param = nullptr;
 	m_module = nullptr;
 	m_image = nullptr;
-	m_layIdex = 0;
+	m_layerIdx = 0;
 }
 
 standEdgeWdg::~standEdgeWdg()
@@ -27,6 +27,7 @@ void standEdgeWdg::setModule(UnitModule *module)
 {
 	m_module=dynamic_cast<standEdgeMod*>(module);
 	m_param = m_module->m_param;
+	m_image = m_module->m_image;
 	//currentView()->setLayer(m_layIdex);
 	//connectSlots(false);
 	//setUiValue();
@@ -216,7 +217,7 @@ void standEdgeWdg::spinBox_valueChanged(int val)
 		//currentView()->dispRect1(m_param->RoiRegionVector[m_param->NowGrp+1].row1,m_param->RoiRegionVector[m_param->NowGrp+1].col1,
 		//	m_param->RoiRegionVector[m_param->NowGrp+1].row2,m_param->RoiRegionVector[m_param->NowGrp+1].col2);
 		HalOpenCV::cv2halImg(*m_module->p_im, m_image, false);
-		currentView()->clearLayer(m_layIdex);
+		currentView()->clearLayer(m_layerIdx);
 		currentView()->setFilled(false);
 		currentView()->setColor(255, 255, 0);
 		currentView()->dispRect1(
@@ -259,7 +260,7 @@ void standEdgeWdg::spinBox_valueChanged(int val)
 		}
 		else {
 			//currentView()->clear();
-			currentView()->clearLayer(m_layIdex);
+			currentView()->clearLayer(m_layerIdx);
 			currentView()->update();
 		}
 	}
@@ -270,7 +271,7 @@ void standEdgeWdg::spinBox_valueChanged(int val)
 
 		//currentView()->clear();
 		HalOpenCV::cv2halImg(*m_module->p_im, m_image, false);
-		currentView()->clearLayer(m_layIdex);
+		currentView()->clearLayer(m_layerIdx);
 		currentView()->setFilled(false);
 		currentView()->setColor(255, 255, 0);
 		currentView()->dispRect1(
@@ -313,7 +314,7 @@ void standEdgeWdg::spinBox_valueChanged(int val)
 		}
 		else {
 			//currentView()->clear();
-			currentView()->clearLayer(m_layIdex);
+			currentView()->clearLayer(m_layerIdx);
 			currentView()->update();
 		}
 	}
@@ -329,7 +330,7 @@ void standEdgeWdg::spinBox_valueChanged(int val)
 void standEdgeWdg::on_bt_selectRoi_toggled(bool check)
 {
 	if (check) {
-		currentView()->clearLayer(m_layIdex);
+		currentView()->clearLayer(m_layerIdx);
 		//currentView()->clear();
 		double row1[5], col1[5], row2[5], col2[5];
 		QStringList title = { "Search ROI" ,"Up" ,"Down" ,"Left" ,"Right" };
@@ -357,7 +358,7 @@ void standEdgeWdg::on_bt_selectRoi_toggled(bool check)
 			m_param->RoiRegionVector[i].col2 = col2[i];
 		}
 		//currentView()->clear();
-		currentView()->clearLayer(m_layIdex);
+		currentView()->clearLayer(m_layerIdx);
 		currentView()->setColor(0, 255, 0);
 		currentView()->setFilled(false);
 		for (int i = 0;i < 5;i++) {
@@ -384,6 +385,90 @@ void standEdgeWdg::tabWidget_indexChange(int index)
 void standEdgeWdg::on_bt_highLevel_toggled(bool val)
 {
 	ui->grp_high->setVisible(val);
+}
+
+void standEdgeWdg::on_bt_helpRect_toggled(bool checked)
+{
+	if (checked) {
+		if (ui->bt_selectRoi->isChecked())
+			ui->bt_selectRoi->setChecked(false);
+
+		double row1 = m_param->helpRectRow0;
+		double col1 = m_param->helpRectCol0;
+		double row2 = m_param->helpRectRow1;
+		double col2 = m_param->helpRectCol1;
+		//currentView()->clear();
+		currentView()->clearLayer(m_layerIdx);
+		currentView()->setColor(255, 0, 128);
+		currentView()->drawRect1(row1, col1, row2, col2, tr("HelpRect"));
+		currentView()->update();
+	}
+	else {
+		HalOpenCV::cv2halImg(*m_module->p_im, m_image, false);
+
+		double row[2], col[2];
+		currentView()->finishDraw();
+		currentView()->getDrawRect1(row[0], col[0], row[1], col[1]);
+		//currentView()->clear();
+		currentView()->clearLayer(m_layerIdx);
+		currentView()->setColor(0, 255, 0);
+		currentView()->setFilled(false);
+		currentView()->dispRect1(row[0], col[0], row[1], col[1]);
+
+		//生成四个位置的框
+		HTuple imgH, imgW;
+		get_image_size(*m_image, &imgW, &imgH);
+		int imgh = imgH[0].I();
+		int imgw = imgW[0].I();
+
+		int wid = (col[1] - col[0]) / 20;         //ROI区域的宽
+		wid = std::max(wid, 10);
+		for (size_t i = 0; i < 4; ++i)
+		{
+			double totalRow1, totalCol1, totalRow2, totalCol2;
+			if (i == 0 || i == 1)       //0:up 1:down
+			{
+				totalRow1 = row[i] - wid;
+				totalRow2 = row[i] + wid;
+				//totalCol1 = m_param->RoiRegionVector[i + 1].col1;//col1 + 1 * (col2 - col1) / 4;
+				//totalCol2 = m_param->RoiRegionVector[i + 1].col2;//col2 - 1 * (col2 - col1) / 4;
+
+				if (i == 0)//up
+					totalRow1 = std::max(totalRow1, 0.0);
+				else if (i == 1)//down
+					totalRow2 = std::min(totalRow2, (double)imgh);
+
+				m_param->RoiRegionVector[i + 1].row1 = totalRow1;
+				m_param->RoiRegionVector[i + 1].row2 = totalRow2;
+				//m_param->RoiRegionVector[i + 1].col1 = totalCol1;
+				//m_param->RoiRegionVector[i + 1].col2 = totalCol2;
+			}
+			else if (i == 2 || i == 3)  //3:right 2:left
+			{
+				//totalRow1 = m_param->RoiRegionVector[i + 1].row1;//row1 + 1 * (row2 - row1) / 4;
+				//totalRow2 = m_param->RoiRegionVector[i + 1].row2;//row2 - 1 * (row2 - row1) / 4;
+				totalCol1 = col[i - 2] - wid;
+				totalCol2 = col[i - 2] + wid;
+
+				if (i == 2)//left
+					totalCol1 = std::max(totalCol1, 0.0);
+				else if (i == 3)//right
+					totalCol2 = std::min(totalCol2, (double)imgw);
+
+				//m_param->RoiRegionVector[i + 1].row1 = totalRow1;
+				//m_param->RoiRegionVector[i + 1].row2 = totalRow2;
+				m_param->RoiRegionVector[i + 1].col1 = totalCol1;
+				m_param->RoiRegionVector[i + 1].col2 = totalCol2;
+			}
+		}
+		int expand = 15;
+		m_param->RoiRegionVector[0].row1 = std::max(m_param->RoiRegionVector[1].row1 - expand, 0.0f);
+		m_param->RoiRegionVector[0].col1 = std::max(m_param->RoiRegionVector[3].col1 - expand, 0.0f);
+		m_param->RoiRegionVector[0].row2 = std::min(m_param->RoiRegionVector[2].row2 + expand, (float)imgh);
+		m_param->RoiRegionVector[0].col2 = std::min(m_param->RoiRegionVector[4].col2 + expand, (float)imgw);
+
+		ui->bt_selectRoi->setChecked(true);
+	}
 }
 
 void standEdgeWdg::connectSlots(bool link)

@@ -1340,13 +1340,17 @@ int pinLength1Mod::run(const QString &funName)
 				Outputlengthdiff[1] = 0;
 			}
 			tuple_concat(Outputlengthdiff[0], Outputlengthdiff[1], &diffout);
-			p_item->insert(LENGTHDIFF, toQList(diffout));
+			QList<QVariant> data;
+			toQList(diffout, data);
+			p_item->insert(LENGTHDIFF, data);
 			//setDetectOutData(LeadOutDiff, diffout);
 		}
 		if (m_param->errLengthValid) {
 			HTuple offout;
 			tuple_concat(Outputlength[0], Outputlength[1], &offout);
-			p_item->insert(LENGTH, toQList(offout));
+			QList<QVariant> data;
+			toQList(offout, data);
+			p_item->insert(LENGTH, data);
 			QList<double> outLen;
 			for (auto i = 0; i < offout.Num(); ++i)
 				outLen.push_back(offout[i].D());
@@ -1356,13 +1360,17 @@ int pinLength1Mod::run(const QString &funName)
 		if (m_param->errWidthValid) {
 			HTuple offout;
 			tuple_concat(OutputPinwidth[0], OutputPinwidth[1], &offout);
-			p_item->insert(WIDTH, toQList(offout));
+			QList<QVariant> data;
+			toQList(offout, data);
+			p_item->insert(WIDTH, data);
 			//setDetectOutData(LeadOutWidth, offout);
 		}
 		if (m_param->errInterValid) {
 			HTuple offout;
 			tuple_concat(OutputPininterval[0], OutputPininterval[1], &offout);
-			p_item->insert(PITCH, toQList(offout));
+			QList<QVariant> data;
+			toQList(offout, data);
+			p_item->insert(PITCH, data);
 			//setDetectOutData(LeadOutPitch, offout);
 		}
 // 		*p_lenEnable = m_param->errLengthValid[0] && m_param->errLengthValid[1];

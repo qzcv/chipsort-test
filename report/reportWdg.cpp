@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QInputDialog>
 
-#define TOP_ITEM "Part"
+#define TOP_ITEM "mod"
 
 #define IDLE "idle"
 #define LOGGING "logging"
@@ -82,9 +82,15 @@ void GRRreportWdg::sp_valueChanged(int val)
 		m_module->setParamChanged(StructLevel);
 
 		while (m_param->itemNum.size() < m_param->modNum)
+		{
 			m_param->itemNum.push_back(0);
+			m_param->topText.push_back(TOP_ITEM + QString("%1").arg(m_param->itemNum.size()));
+		}
 		while (m_param->itemNum.size() > m_param->modNum)
+		{
 			m_param->itemNum.pop_back();
+			m_param->topText.pop_back();
+		}
 
 		setTopItem();
 	}
@@ -95,27 +101,12 @@ void GRRreportWdg::dsp_valueChanged(double val)
 {
 	QDoubleSpinBox *dsp = qobject_cast<QDoubleSpinBox *>(sender());
 
-	bool isBreak = false;
 	for (auto i = 0; i < m_param->modNum; ++i)
-	{
 		for (auto k = 0; k < m_param->itemNum[i]; ++k)
 			if (sp_USL[i][k] == dsp)
-			{
 				m_param->USL[i][k] = val;
-				isBreak = true;
-				break;
-			}
 			else if (sp_LSL[i][k] == dsp)
-			{
 				m_param->LSL[i][k] = val;
-				isBreak = true;
-				break;
-			}
-		if (isBreak)
-			break;
-	}
-
-
 
 	m_module->setParamChanged(ProductLevel);
 }
@@ -188,32 +179,39 @@ void GRRreportWdg::tree_itemChanged(QTreeWidgetItem *item, int colnum)
 
 void GRRreportWdg::tree_itemDoubleClicked(QTreeWidgetItem *item, int colnum)
 {
-	if (colnum != 2 || m_topItem.contains(item))
+	if (m_widgetType != 1)
 		return;
 
-	int i = -1, j = -1;
-	for (auto k = 0; k < m_subItem.size(); ++k)
+	if (colnum == 0)	
 	{
-		int idx = m_subItem[k].indexOf(item);
-		if (idx != -1)
-		{
-			i = k;
-			j = idx;
-			break;
-		}
-	}
+		for (auto i = 0; i < m_topItem.size(); ++i)		//topItem
+			if (item == m_topItem[i])
+			{
+				QString text = item->text(0);
+				bool ok = false;
+				text = QInputDialog::getText(this, tr("Set Text"), tr("Text:"), QLineEdit::Normal, text, &ok);
+				if (ok && !text.isEmpty())
+				{
+					item->setText(0, text);
+					m_param->topText[i] = text;
+					m_module->setParamChanged(ProductLevel);
+				}
+			}
 
-	if (i != -1 && j != -1)
-	{
-		QString text = item->text(2);
-		bool ok = false;
-		text = QInputDialog::getText(this, tr("Set Text"), tr("Text:"), QLineEdit::Normal, text, &ok);
-		if (ok&& !text.isEmpty())
-		{
-			item->setText(2, text);
-			m_param->itText[i][j] = text;
-			m_module->setParamChanged(ProductLevel);
-		}
+		for (auto i = 0; i < m_param->modNum; ++i)		//subItem
+			for (auto j = 0; j < m_param->itemNum[i]; ++j)
+				if (item == m_subItem[i][j])
+				{
+					QString text = item->text(2);
+					bool ok = false;
+					text = QInputDialog::getText(this, tr("Set Text"), tr("Text:"), QLineEdit::Normal, text, &ok);
+					if (ok && !text.isEmpty())
+					{
+						item->setText(0, text);
+						m_param->subText[i][j] = text;
+						m_module->setParamChanged(ProductLevel);
+					} 
+				}
 	}
 }
 
@@ -244,7 +242,7 @@ void GRRreportWdg::iniUi()
 	ui->sp_num->installEventFilter(this);
 	ui->sp_inputUnits->installEventFilter(this);
 
-	QStringList titles = { tr("Item"),tr("Enable"),tr("Text"),tr("LSL"),tr("USL") };
+	QStringList titles = { tr("Text"),tr("Enable"),tr("Item"),tr("LSL"),tr("USL") };
 	ui->tree_item->setHeaderLabels(titles);
 	ui->tree_item->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 	ui->tree_item->header()->setStretchLastSection(false);
@@ -254,6 +252,8 @@ void GRRreportWdg::iniUi()
 void GRRreportWdg::setUiValue()
 {
 	if(!m_param)
+		return;
+	if (!m_param->isLoadFinished)
 		return;
 
 	ui->sp_num->setVisible(m_widgetType != 0);
@@ -278,6 +278,11 @@ void GRRreportWdg::setUiValue()
 	setSubItem();
 	ui->tree_item->setColumnHidden(4, !m_param->IsGrrByTol);
 	ui->tree_item->setColumnHidden(3, !m_param->IsGrrByTol);
+	ui->tree_item->setColumnHidden(2, m_widgetType == 0);
+	ui->tree_item->setColumnHidden(1, m_widgetType == 0);
+	for (auto i = 0; i < m_param->modNum; ++i)
+		for (auto j = 0; j < m_param->itemNum[i]; ++j)
+			m_subItem[i][j]->setHidden((m_widgetType == 0)&&(!m_param->enable[i][j]));
 }
 
 void GRRreportWdg::setTopItem()
@@ -304,11 +309,12 @@ void GRRreportWdg::setTopItem()
 		}
 		delete m_topItem.back();
 		m_topItem.pop_back();
+		m_param->topText.pop_back();
 	}
 	while (m_topItem.size() < m_param->modNum)
 	{
 		QTreeWidgetItem *topIt = new QTreeWidgetItem;
-		topIt->setText(0, QString("%1%2").arg(TOP_ITEM).arg(m_topItem.size()));
+		topIt->setText(0, m_param->topText[m_topItem.size()]);
 		m_topItem.push_back(topIt);
 		ui->tree_item->addTopLevelItem(topIt);
 
@@ -320,14 +326,14 @@ void GRRreportWdg::setTopItem()
 	while (m_param->enable.size() > m_param->modNum)
 	{
 		m_param->enable.pop_back();
-		m_param->itText.pop_back();
+		m_param->subText.pop_back();
 		m_param->LSL.pop_back();
 		m_param->USL.pop_back();
 	}
 	while (m_param->enable.size() < m_param->modNum)
 	{
 		m_param->enable.push_back(QVector<bool>());
-		m_param->itText.push_back(QVector<QString>());
+		m_param->subText.push_back(QVector<QString>());
 		m_param->LSL.push_back(QVector<double>());
 		m_param->USL.push_back(QVector<double>());
 	}
@@ -381,26 +387,30 @@ void GRRreportWdg::setSubItem()
 		if (m_param->enable[i].size() != m_param->itemNum[i])
 		{
 			m_param->enable[i] = QVector<bool>(m_param->itemNum[i], 1);
-			m_param->itText[i] = QVector<QString>(m_param->itemNum[i], QString(""));
+			m_param->subText[i] = QVector<QString>(m_param->itemNum[i], QString(""));
 			m_param->LSL[i] = QVector<double>(m_param->itemNum[i], 0.0);
 			m_param->USL[i] = QVector<double>(m_param->itemNum[i], 1.0);
 			int idx = 0;
 			for (auto it = map->constBegin(); it != map->constEnd(); ++it, ++idx)
-				m_param->itText[i][idx] = it.key();
+				m_param->subText[i][idx] = it.key();
 		}
 
 		int idx = 0;
 		for (auto it = map->constBegin(); it != map->constEnd(); ++it, ++idx)
 		{
-			m_subItem[i][idx]->setText(0, it.key());
+			m_subItem[i][idx]->setText(0, m_param->subText[i][idx]);
 			m_subItem[i][idx]->setCheckState(1, m_param->enable[i][idx] ? Qt::Checked : Qt::Unchecked);
-			m_subItem[i][idx]->setText(2, m_param->itText[i][idx]);
+			m_subItem[i][idx]->setText(2, it.key());
 
 			ui->tree_item->setItemWidget(m_subItem[i][idx], 3, sp_LSL[i][idx]);
 			ui->tree_item->setItemWidget(m_subItem[i][idx], 4, sp_USL[i][idx]);
 
+			disconnect(sp_LSL[i][idx], SIGNAL(valueChanged(double)), this, SLOT(dsp_valueChanged(double)));
+			disconnect(sp_USL[i][idx], SIGNAL(valueChanged(double)), this, SLOT(dsp_valueChanged(double)));
 			sp_LSL[i][idx]->setValue(m_param->LSL[i][idx]);
 			sp_USL[i][idx]->setValue(m_param->USL[i][idx]);
+			connect(sp_LSL[i][idx], SIGNAL(valueChanged(double)), SLOT(dsp_valueChanged(double)));
+			connect(sp_USL[i][idx], SIGNAL(valueChanged(double)), SLOT(dsp_valueChanged(double)));
 		}
 	}
 }

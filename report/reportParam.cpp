@@ -28,18 +28,24 @@ void GRRreportParam::readWriteParam(bool r, const QString& dirPath, int level)
 		RW_VALUE(r, IsGrrByTol);
 
 		if (r)
+		{
 			itemNum = QVector<int>(modNum, 0);
+			topText = QVector<QString>(modNum, "");
+		}
 		for (auto i = 0; i < modNum; i++)
-			RW_VALUE(r, itemNum[i]);
+		{
+			RW_VALUE1(r, itemNum[i], i);
+			RW_VALUE1(r, topText[i], i);
+		}
 		
 		if (r)
 		{
 			enable.clear();
-			itText.clear();
+			subText.clear();
 			for (auto i = 0; i < modNum; ++i)
 			{
 				enable.append(QVector<bool>(itemNum[i], true));
-				itText.append(QVector<QString>(itemNum[i], ""));
+				subText.append(QVector<QString>(itemNum[i], ""));
 				USL.append(QVector<double>(itemNum[i], 1.0));
 				LSL.append(QVector<double>(itemNum[i], 0.0));
 			}
@@ -48,13 +54,14 @@ void GRRreportParam::readWriteParam(bool r, const QString& dirPath, int level)
 			for (auto j = 0; j < itemNum[i]; ++j)
 			{
 				RW_VALUE2(r, enable[i][j], i, j);
-				RW_VALUE2(r, itText[i][j], i, j);
+				RW_VALUE2(r, subText[i][j], i, j);
 				RW_VALUE2(r, USL[i][j], i, j);
 				RW_VALUE2(r, LSL[i][j], i, j);
 			}
 	}
 
-
+	if (r)
+		isLoadFinished = level == ProductLevel;
 }
 
 void GRRreportParam::iniData()
@@ -67,8 +74,9 @@ void GRRreportParam::iniData()
 	IsGrrByTol = false;
 
 	itemNum.clear();
+	topText.clear();
 	enable.clear();
-	itText.clear();
+	subText.clear();
 	USL.clear();
 	LSL.clear();
 }

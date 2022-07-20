@@ -2,9 +2,19 @@
 #include <moduleClass.h>
 #include "HalconCpp.h"
 #include "inclu.h"
+#include "cv.h"
 
 using namespace qzcv;
 using namespace Halcon;
+
+inline QTextStream& operator<<(QTextStream& ts, const QList<cv::Point2d>& data) {
+	ts << ARRAY_TEXT_HEAD << "QList size=" << data.size();
+	int size = data.size();
+	for (int i = 0; i < size; i++) {
+		ts << ARRAY_TEXT_ITEM_SEPARATOR << data[i].x << ARRAY_TEXT_ITEM_SEPARATOR << data[i].y;
+	}
+	return ts;
+}
 
 class EXPORTS ChipMod : public UnitModule
 {
@@ -14,8 +24,10 @@ public:
 
 protected:
 	void toHtuple(const UnitInputPin<QList<double>> &p, HTuple &htuple);
+	void toHtuple(const UnitInputPin<QList<cv::Point2d>> &p, HTuple &hRow, HTuple &hCol);
 
-	QList<QVariant> toQList(const HTuple &htuple);
+	void toQList(const HTuple &htuple, QList<QVariant> &data);
+	void toQList(const HTuple &htuple, QList<double> &data);
 
 	void setDetectOutData(const QString &key, const HTuple& val);
 	void setDetectOutData(const QString &key, const HTuple& val, int index);
@@ -38,6 +50,4 @@ protected:
 private:
 	QMap<QString, HTuple> m_mapHtup;
 	QMap<QString, Hobject> m_mapHobj;
-
-
 };
